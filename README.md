@@ -1,4 +1,4 @@
-# Team3
+# Playpal v2
 
 | Team members | Role |
 | ------------- | ------------- |
