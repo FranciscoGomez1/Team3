@@ -1,6 +1,6 @@
 # Team3
 Team Members
-| Team members | Second Header |
+| Team members | Role |
 | ------------- | ------------- |
 | Francisco Gomez  | Android developer   |
 | Agustin Valadez  | Android developer  |
