@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal">
         <activity
-            android:name="com.example.Playpalv2.Services"
+            android:name=".Services"
             android:exported="true" />
         <activity
-            android:name="com.example.Playpalv2.Messages"
+            android:name=".Messages"
             android:exported="true" />
         <activity
-            android:name="com.example.Playpalv2.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_profile"
+            android:title="Your profile"/>
+        <item android:id="@+id/nav_dog_profile"
+            android:title="Your Doggo profile"/>
+        <item android:id="@+id/nav_walking_history"
+            android:title="Walking History"/>
+        <item android:id="@+id/nav_sitting_history"
+            android:title="Sitting History"/>
+        <item android:id="@+id/nav_settings"
+            android:title="Settings"/>
+        <item android:id="@+id/nav_services"
+            android:title="Become a service provider"/>
+    </group>
+</menu>
