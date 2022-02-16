@@ -5,4 +5,5 @@
     <string name="nav_walker">Walker</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dummy_text">Hello, how are you?</string>
 </resources>
