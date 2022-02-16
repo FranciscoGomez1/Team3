@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal" >
         <activity
-            android:name=".PlaypalRegistration"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".Services"
@@ -19,7 +19,7 @@
             android:name=".Messages"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
+            android:name=".PlaypalRegistration"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
