@@ -24,12 +24,16 @@ public class CardFrontFragment1 extends Fragment {
     }
     private void setCard(View view) {
         dogViewModel = new ViewModelProvider(requireActivity()).get(DogViewModel.class);
-        dogName = view.findViewById(R.id.dog_name);
-        dogBio = view.findViewById(R.id.dog_bio);
 
-        dogName.setText(dogViewModel.getDogName().getValue().getName());
-        dogBio.setText(dogViewModel.getDogName().getValue().getBio());
-        //dogName.setText("Dog2");
+        dogViewModel.getDog1().observe(requireActivity(), DogViewModel -> {
+            if(dogViewModel.getDog1().getValue() != null) {
+                dogName = view.findViewById(R.id.dog_name);
+                dogBio = view.findViewById(R.id.dog_bio);
+
+                dogName.setText(dogViewModel.getDog1().getValue().getName());
+                dogBio.setText(dogViewModel.getDog1().getValue().getBio());
+            }
+        });
 
     }
     @Override

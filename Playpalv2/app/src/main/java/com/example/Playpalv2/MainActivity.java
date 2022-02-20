@@ -2,24 +2,18 @@
 package com.example.Playpalv2;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,13 +22,14 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.LinkedList;
 import java.util.Queue;
-import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
     //For dragging card
     boolean showingBack = false;
     private float dx;
     private float dy;
+    private float ogX;
+    private float ogY;
     private int lastAction;
     private Boolean right = false;
     private Boolean left = false;
@@ -49,13 +44,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     private DogModel dog1;
 
     FragmentManager manager;
-    Queue<DogModel> qDogs =new LinkedList<>();
 
     // FOR TOOLBAR NAVIGATION
     MaterialToolbar toolbar;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     FrameLayout myframeLayout;
+
+    Queue<DogModel> qDogs =new LinkedList<>();
 
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
 
@@ -66,20 +62,25 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         qDogs.add(new DogModel("Dog1", "Dog1 bio" + getString(R.string.dummy_dog_bio)));
         qDogs.add(new DogModel("Dog2", "Dog2 bio" + getString(R.string.dummy_dog_bio)));
+        qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
+        qDogs.add(new DogModel("Dog4", "Dog4 bio" + getString(R.string.dummy_dog_bio)));
+
 
         dog = qDogs.poll();
         dog1 = qDogs.poll();
 
-        //Make new viewmodel Object
         dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
         dogViewModel.init();
-        dogViewModel.updateDogName(dog);
+
 
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         int id2 = getResources().getIdentifier(cont2, "id", getPackageName());
 
         View frameLayoutView = findViewById(id);
         View frameLayoutView2 = findViewById(id2);
+
+        // Initialize the queue of dog cards
+        intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);
 
         //FOR BOTTOM NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -118,12 +119,30 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     .commit();
         }
 
+        ogX = frameLayoutView.getX();
+        ogY = frameLayoutView.getY();
+    }
+
+    private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dog, DogModel dog1) {
+
+        dogViewModel.updateDog(dog);
+        dogViewModel.updateDog1(dog1);
+
+        if( dog == null) {
+            frameLayoutView.setVisibility(View.INVISIBLE);
+            frameLayoutView2.setVisibility(View.INVISIBLE);
+        }else if(dog1 == null){
+            frameLayoutView2.setVisibility(View.INVISIBLE);
+        }
+        else{
+            dogViewModel.updateDog1(dog1);
+        }
     }
 
     @Override // This function registers the input of the user on the screen
     public boolean onTouch(View view, MotionEvent motionEvent) {
         View v1 = findViewById(R.id.container);
-        View v2 = findViewById(R.id.container);
+        View v2 = findViewById(R.id.container1);
         switch (motionEvent.getAction()){
             case MotionEvent.ACTION_DOWN:
                 lastAction = MotionEvent.ACTION_DOWN;
@@ -145,59 +164,24 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                 //Toast.makeText(this,"Works", Toast.LENGTH_SHORT ).show();
                 break;
             case MotionEvent.ACTION_UP:
-                view.setVisibility(View.INVISIBLE);
+                //view.setVisibility(View.INVISIBLE);
 
                 if (right) {
+                    //Reset stack
                     Log.i("Should Be deleted:", String.valueOf(view));
                     right = false;
-                    if(cont == cont1){
-
-                        v2.setElevation(0);
-                        v1.setElevation(-1);
-                        cont = cont2;
-
-                    }else{
-                        cont = cont1;
-                        v2.setElevation(-1);
-                        v1.setElevation(0);
-                    }
-                    Log.i("View elevation:", String.valueOf(view.getElevation()));
-                    //view.setVisibility(View.GONE); // this is to show it
-                    Log.i("Should Be deleted:", String.valueOf(view));
-                    Log.i("Should Be deleted:", "RIGHT SWIPE");
-
-                    if(showingBack){
-                        showingBack = false;
-                        clearBackStack();
-                    }
+                    dog = qDogs.poll();
+                    resetCards(v1, v2, view, dog);
                 }else if(left){
 
                     Log.i("Should Be deleted:", String.valueOf(view));
                     left = false;
-                    if(cont == cont1){
-
-                        v2.setElevation(0);
-                        v1.setElevation(-1);
-                        cont = cont2;
-                    }else{
-                        cont = cont1;
-                        v2.setElevation(-1);
-                        v1.setElevation(0);
-                    }
-                    Log.i("View elevation:", String.valueOf(view.getElevation()));
-                    //view.setVisibility(View.GONE); // this is to show it
-                    Log.i("Should Be deleted:", String.valueOf(view));
-                    Log.i("Should Be deleted:", "RIGHT SWIPE");
-
-                    if(showingBack){
-                        showingBack = false;
-                        clearBackStack();
-                    }
-
+                    dog = qDogs.poll();
+                    resetCards(v1, v2, view, dog);
                 }
-                view.setX(0);
-                view.setY(0);
-                view.setVisibility(View.VISIBLE);
+                view.setX(ogX);
+                view.setY(ogY);
+                //view.setVisibility(View.VISIBLE);
                 if(lastAction == MotionEvent.ACTION_DOWN){
                     flipCard();
                 }
@@ -206,6 +190,43 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         return true;
     }
+
+    private void resetCards(View v1, View v2, View view, DogModel dog) {
+
+        if(cont == cont1){
+
+            v2.setElevation(0);
+            v1.setElevation(-1);
+            cont = cont2;
+            if(dog != null){
+                dogViewModel.updateDog(dog);
+            }else {
+                v1.setVisibility(View.INVISIBLE);
+            }
+
+        }else{
+            cont = cont1;
+            v2.setElevation(-1);
+            v1.setElevation(0);
+            if(dog != null) {
+                dogViewModel.updateDog1(dog);
+            }else {
+                v2.setVisibility(View.INVISIBLE);
+            }
+        }
+        /*
+        Log.i("View elevation:", String.valueOf(view.getElevation()));
+        Log.i("Should Be deleted:", String.valueOf(view));
+        Log.i("Should Be deleted:", "RIGHT SWIPE");
+        */
+
+
+        if(showingBack){
+            showingBack = false;
+            clearBackStack();
+        }
+    }
+
     //This functions flips the card with an turning animation
     void flipCard() {
         int id = getResources().getIdentifier(cont, "id", getPackageName());
