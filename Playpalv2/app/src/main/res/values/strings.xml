@@ -13,6 +13,10 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string name="dummy_dog_bio">
+       Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
+    </string>
+
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 </resources>
