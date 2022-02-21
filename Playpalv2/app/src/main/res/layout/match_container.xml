@@ -8,33 +8,49 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/image"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:src="@drawable/rocky"/>
+            android:src="@drawable/rocky" />
 
         <TextView
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@+id/image"
             android:textColor="#fc6d00"
             android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/textTitle"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="3dp"
+            android:layout_toEndOf="@+id/image"
             android:textColor="#fc6d00"
             android:textSize="16sp"/>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="300dp"
+            android:text="8:45pm"
+            android:textAlignment="center"
+            android:textColor="#fc6d00"/>
+
+    </RelativeLayout>
 
 
 </androidx.cardview.widget.CardView>
