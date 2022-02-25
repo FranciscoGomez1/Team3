@@ -22,11 +22,11 @@ public class NewMatchesAdapter extends RecyclerView.Adapter<NewMatchesAdapter.Ne
     @Override
     public NewMatchesViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new NewMatchesViewHolder(
-            LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.match_container,
-                    parent,
-                    false
-            )
+                LayoutInflater.from(parent.getContext()).inflate(
+                        R.layout.match_container,
+                        parent,
+                        false
+                )
         );
     }
 

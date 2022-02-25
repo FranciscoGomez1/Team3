@@ -36,6 +36,21 @@ public class Messages extends AppCompatActivity {
 
         newRecyclerView.setAdapter(new NewMatchesAdapter(newMatches));
 
+        //RecyclerView for NewChat
+        RecyclerView newMatchesRecyclerView = findViewById(R.id.newMatchesRecyclerView);
+        List<NewChat> newChats = new ArrayList<>();
+
+        for(int i = 0; i < 15; i++){
+            newChats.add(
+                    new NewChat(
+                            "Rocky ".concat(String.valueOf(i))
+                            //getResources().getString(R.string.dummy_text)
+                    )
+            );
+        }
+
+        newMatchesRecyclerView.setAdapter(new NewChatAdapter(newChats));
+
 
         //FOR NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
