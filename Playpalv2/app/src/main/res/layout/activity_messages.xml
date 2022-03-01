@@ -6,54 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".Messages">
 
-    <RelativeLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/newMatches"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="New Matches"
-                android:textColor="#fc6d00"
-                android:textSize="15sp"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/newMatchesRecyclerView"
+        <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/newMatches"
-            android:clipToPadding="false"
-            android:orientation="horizontal"
-            android:paddingStart="0dp"
-            android:paddingTop="10dp"
-            android:paddingEnd="10dp"
-            android:paddingBottom="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/newChats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/newMatchesRecyclerView"
-                android:padding="10dp"
-                android:text="Messages"
-                android:textColor="#fc6d00"
-                android:textSize="15sp"/>
+                <TextView
+                    android:id="@+id/newMatches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="New Matches"
+                    android:textColor="#fc6d00"
+                    android:textSize="15sp"/>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/newRecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@+id/newChats"
+                android:id="@+id/newMatchesRecyclerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newMatches"
                 android:clipToPadding="false"
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:paddingStart="0dp"
                 android:paddingTop="10dp"
                 android:paddingEnd="10dp"
+                android:paddingBottom="10dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-    </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/newChats"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/newMatchesRecyclerView"
+                    android:padding="10dp"
+                    android:text="Messages"
+                    android:textColor="#fc6d00"
+                    android:textSize="15sp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/newRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/newChats"
+                    android:clipToPadding="false"
+                    android:orientation="vertical"
+                    android:paddingStart="0dp"
+                    android:paddingTop="10dp"
+                    android:paddingEnd="10dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"

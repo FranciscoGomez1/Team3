@@ -3,6 +3,7 @@ package com.example.Playpalv2;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,7 @@ public class NewChatAdapter extends RecyclerView.Adapter<NewChatAdapter.NewChatV
         NewChatViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
+            //image = itemView.findViewById(R.id.image);
             //textDescription = itemView.findViewById(R.id.textDescription);
         }
     }
