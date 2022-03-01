@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -35,6 +36,23 @@ public class Messages extends AppCompatActivity {
         }
 
         newRecyclerView.setAdapter(new NewMatchesAdapter(newMatches));
+
+        //RecyclerView for NewChat
+        RecyclerView newMatchesRecyclerView = findViewById(R.id.newMatchesRecyclerView);
+        List<NewChat> newChats = new ArrayList<>();
+
+        //ImageView myImageView = (ImageView) findViewById(R.id.image);
+
+        for(int i = 0; i < 15; i++){
+            newChats.add(
+                    new NewChat(
+                            "Benny ".concat(String.valueOf(i))
+                            //getResources().getString(R.string.dummy_text)
+                    )
+            );
+        }
+
+        newMatchesRecyclerView.setAdapter(new NewChatAdapter(newChats));
 
 
         //FOR NAVIGATION BAR
