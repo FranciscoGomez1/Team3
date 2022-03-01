@@ -22,7 +22,7 @@
 
 
     <EditText
-        android:id="@+id/firstName"
+        android:id="@+id/first_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -35,13 +35,13 @@
         android:padding="10dp"
         android:textColorHint="#78909C"
         android:textSize="20sp"
-        app:layout_constraintEnd_toStartOf="@+id/lastName"
+        app:layout_constraintEnd_toStartOf="@+id/last_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomePlaypal2"
         android:autofillHints="" />
 
     <EditText
-        android:id="@+id/lastName"
+        android:id="@+id/last_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -55,13 +55,13 @@
         android:textColorHint="#78909C"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/firstName"
+        app:layout_constraintStart_toEndOf="@+id/first_name"
         app:layout_constraintTop_toBottomOf="@+id/welcomePlaypal2"
         android:autofillHints="" />
 
 
     <EditText
-        android:id="@+id/emailAddress"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -77,11 +77,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstName"
+        app:layout_constraintTop_toBottomOf="@+id/first_name"
         android:autofillHints="" />
 
     <EditText
-        android:id="@+id/areaCode"
+        android:id="@+id/area_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -95,10 +95,10 @@
         android:textColorHint="#78909C"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/mobileNumber"
+        android:id="@+id/mobile_number"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -113,11 +113,11 @@
         android:textSize="20sp"
         android:textColorHint="#78909C"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/areaCode"
-        app:layout_constraintTop_toBottomOf="@+id/emailAddress" />
+        app:layout_constraintStart_toEndOf="@+id/area_code"
+        app:layout_constraintTop_toBottomOf="@+id/email" />
 
     <EditText
-        android:id="@+id/enterPassword"
+        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -133,11 +133,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/areaCode"
+        app:layout_constraintTop_toBottomOf="@+id/area_code"
         android:autofillHints="" />
 
     <EditText
-        android:id="@+id/confirmPassword"
+        android:id="@+id/confirm_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="30dp"
@@ -153,7 +153,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/enterPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/password" />
 
     <Button
         android:id="@+id/btn_register"
@@ -165,7 +165,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPassword" />
+        app:layout_constraintTop_toBottomOf="@+id/confirm_password" />
 
     <ImageView
         android:id="@+id/lineTop"

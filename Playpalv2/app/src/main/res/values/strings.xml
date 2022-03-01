@@ -41,4 +41,5 @@
     <string name="twittersignup">twitterSignUp</string>
     <string name="githubsignup">githubSignUp</string>
     <string name="facebooksignup">facebookSignUp</string>
+    <string name="reg2">Tells us about your</string>
 </resources>
