@@ -9,19 +9,24 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+import com.example.Playpalv2.databinding.ActivityMessagesBinding;
+import com.example.Playpalv2.databinding.ActivityServicesBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Messages extends AppCompatActivity {
+public class Messages extends DrawerBase {
+    ActivityMessagesBinding activityMessagesBinding; //For services
+
 
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        activityMessagesBinding = ActivityMessagesBinding.inflate(getLayoutInflater());
+        setContentView(activityMessagesBinding.getRoot());
 
         RecyclerView newRecyclerView = findViewById(R.id.newRecyclerView);
         List<NewMatches> newMatches = new ArrayList<>();
@@ -59,23 +64,20 @@ public class Messages extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.messages);
 
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.home:
-                        startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.messages:
-                        return true;
-                    case R.id.services:
-                        startActivity(new Intent(getApplicationContext(),Services.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.messages) {
+                return true;
+            } else if (itemId == R.id.services) {
+                startActivity(new Intent(getApplicationContext(), Services.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return false;
         });
     }
 }

@@ -6,7 +6,7 @@
     tools:context=".DogProfile">
 
 
-
+    <include layout="@layout/secondary_tool_bar" />
 
 
 

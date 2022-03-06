@@ -25,6 +25,10 @@ public class DogOwnerProfile extends AppCompatActivity {
         // Enable the Up button
         assert ab != null;
         ab.setDisplayHomeAsUpEnabled(true);
+        ab.setTitle(R.string.title_activity_dog_owner_profile);
+
+
+
 
     }
 

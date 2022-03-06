@@ -9,6 +9,7 @@
         android:id="@+id/tool_bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         app:layout_constraintTop_toTopOf="parent"
         >
 
@@ -18,7 +19,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/orange_500"
             app:titleTextColor="@color/white"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
 
             />

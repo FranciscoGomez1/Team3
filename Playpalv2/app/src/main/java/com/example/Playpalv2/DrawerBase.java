@@ -56,9 +56,6 @@ public class DrawerBase extends AppCompatActivity implements NavigationView.OnNa
             startActivity(new Intent(this, DogProfile.class));
             overridePendingTransition(0, 0);
 
-
-            startActivity(new Intent(this, DogOwnerProfile.class));
-            overridePendingTransition(0, 0);
         } else if (itemId == R.id.nav_owner_profile) {
             startActivity(new Intent(this, DogOwnerProfile.class));
             overridePendingTransition(0, 0);
@@ -66,8 +63,6 @@ public class DrawerBase extends AppCompatActivity implements NavigationView.OnNa
         return false;
 
     }
-
-
 
     protected void allocateActivityTitle(String titleSring){
         if(getSupportActionBar() != null){

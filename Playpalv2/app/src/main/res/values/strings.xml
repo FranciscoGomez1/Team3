@@ -56,8 +56,11 @@
     <string name="menu_drawer_close">Drawer Close</string>
 
 
+
     <string name="playpal_services">Playpal Services</string>
-    <string name="title_activity_dog_owner_profile">DogOwnerProfile</string>
+    <string name="title_activity_dog_owner_profile">Dog Owner Profile</string>
+    <string name="title_activity_dog_profile">Dog Profile</string>
+
 
 
 </resources>
