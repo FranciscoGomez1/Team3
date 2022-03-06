@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.flipCards;
 
 public class DogModel {
     private String name;

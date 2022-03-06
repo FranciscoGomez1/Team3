@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.flipCards;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

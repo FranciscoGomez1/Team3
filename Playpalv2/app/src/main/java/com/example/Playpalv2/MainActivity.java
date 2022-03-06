@@ -15,6 +15,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.example.Playpalv2.databinding.ActivityMainBinding;
+import com.example.Playpalv2.databinding.ActivityServicesBinding;
+import com.example.Playpalv2.flipCards.CardBackFragment;
+import com.example.Playpalv2.flipCards.CardFrontFragment;
+import com.example.Playpalv2.flipCards.CardFrontFragment1;
+import com.example.Playpalv2.flipCards.DogModel;
+import com.example.Playpalv2.flipCards.DogViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -23,7 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class MainActivity extends AppCompatActivity implements View.OnTouchListener {
+public class MainActivity extends DrawerBase implements View.OnTouchListener {
     //For dragging card
     boolean showingBack = false;
     private float dx;
@@ -40,6 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     DogViewModel dogViewModel;
 
+    ActivityMainBinding activityMainBinding; //This is for the top navigation bar
+
+
     private DogModel dog;
     private DogModel dog1;
 
@@ -47,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     // FOR TOOLBAR NAVIGATION
     MaterialToolbar toolbar;
-    DrawerLayout drawerLayout;
+    // -->DrawerLayout drawerLayout;
     NavigationView navigationView;
     FrameLayout myframeLayout;
 
@@ -58,7 +68,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(activityMainBinding.getRoot());
 
         qDogs.add(new DogModel("Dog1", "Dog1 bio" + getString(R.string.dummy_dog_bio)));
         qDogs.add(new DogModel("Dog2", "Dog2 bio" + getString(R.string.dummy_dog_bio)));
@@ -85,23 +96,20 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         //FOR BOTTOM NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.home);
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch(item.getItemId()){
-                    case R.id.home:
-                        return true;
-                    case R.id.messages:
-                        startActivity(new Intent(getApplicationContext(),Messages.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                    case R.id.services:
-                        startActivity(new Intent(getApplicationContext(),Services.class));
-                        overridePendingTransition(0,0);
-                        return true;
-                }
-                return false;
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.home) {
+                return true;
+            } else if (itemId == R.id.messages) {
+                startActivity(new Intent(getApplicationContext(), Messages.class));
+                overridePendingTransition(0, 0);
+                return true;
+            } else if (itemId == R.id.services) {
+                startActivity(new Intent(getApplicationContext(), Services.class));
+                overridePendingTransition(0, 0);
+                return true;
             }
+            return false;
         });
 
         frameLayoutView.setOnTouchListener(this);
@@ -186,6 +194,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     flipCard();
                 }
                 break;
+            default:
+                break;
+
         }
 
         return true;
@@ -193,7 +204,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     private void resetCards(View v1, View v2, View view, DogModel dog) {
 
-        if(cont == cont1){
+        if(cont.equals(cont1)){
 
             v2.setElevation(0);
             v1.setElevation(-1);

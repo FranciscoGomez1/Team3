@@ -42,4 +42,20 @@
     <string name="githubsignup">githubSignUp</string>
     <string name="facebooksignup">facebookSignUp</string>
     <string name="reg2">Tells us about your</string>
+
+    <string name="owner_profile">Dog Owner Profile</string>
+    <string name="dog_profile">Dog Profile</string>
+
+
+    <string name="logo">Logo</string>
+
+
+    //Navigation Bar
+    <string name="menu_drawer_open">Drawer Open</string>
+    <string name="menu_drawer_close">Drawer Close</string>
+
+
+
+
+
 </resources>

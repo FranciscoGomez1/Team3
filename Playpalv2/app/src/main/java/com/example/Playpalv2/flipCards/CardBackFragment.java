@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.flipCards;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,26 +7,23 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
-public class CardBackFragment1 extends Fragment {
+import com.example.Playpalv2.MainActivity;
+import com.example.Playpalv2.R;
 
-    DogViewModel dogViewModel;
-    private TextView dogName;
-    private TextView dogBio;
-
+public class CardBackFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_card_back_1, container, false);
-        setCard(v);
+
+        View v = inflater.inflate(R.layout.fragment_card_back, container, false);
+        setCard();
         return v;
     }
 
-    private void setCard(View view) {
-
-
+    private void setCard() {
     }
 
     @Override
