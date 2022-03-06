@@ -1,32 +1,25 @@
 package com.example.Playpalv2;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.view.View;
 
-import com.example.Playpalv2.databinding.ActivityServicesBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
-public class Services extends DrawerBase {
+public class DogProfile extends AppCompatActivity {
 
-    ActivityServicesBinding activityServicesBinding;
+    private BottomNavigationView bottomNavigationView; //FOR NAVIGATION BAR
 
-
-    private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        activityServicesBinding = ActivityServicesBinding.inflate(getLayoutInflater());
-        setContentView(activityServicesBinding.getRoot());
+        setContentView(R.layout.activity_dog_profile);
 
         //FOR NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setSelectedItemId(R.id.services);
+        //bottomNavigationView.setSelectedItemId(R.id.services);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.home) {
@@ -37,9 +30,19 @@ public class Services extends DrawerBase {
                 startActivity(new Intent(getApplicationContext(), Messages.class));
                 overridePendingTransition(0, 0);
                 return true;
-            } else return itemId == R.id.services;
+            } else
+                startActivity(new Intent(getApplicationContext(), Services.class));
+                overridePendingTransition(0, 0);
+                return true;
+
         });
 
 
+
     }
+
+
+
+
+
 }

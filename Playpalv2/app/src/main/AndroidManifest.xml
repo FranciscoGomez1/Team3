@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal" >
         <activity
+            android:name=".DogOwnerProfile"
+            android:exported="false" />
+        <activity
+            android:name=".DogProfile"
+            android:exported="false" />
+        <activity
             android:name=".DrawerBase"
             android:exported="false" />
         <activity

@@ -5,8 +5,10 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
+
+import java.security.acl.Owner;
 
 public class DrawerBase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -42,10 +46,29 @@ public class DrawerBase extends AppCompatActivity implements NavigationView.OnNa
 
     }
 
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        drawerLayout.closeDrawer(GravityCompat.START);
+
+        int itemId = item.getItemId();
+        if (itemId == R.id.nav_dog_profile) {
+            startActivity(new Intent(this, DogProfile.class));
+            overridePendingTransition(0, 0);
+
+
+            startActivity(new Intent(this, DogOwnerProfile.class));
+            overridePendingTransition(0, 0);
+        } else if (itemId == R.id.nav_owner_profile) {
+            startActivity(new Intent(this, DogOwnerProfile.class));
+            overridePendingTransition(0, 0);
+        }
         return false;
+
     }
+
+
+
     protected void allocateActivityTitle(String titleSring){
         if(getSupportActionBar() != null){
             getSupportActionBar().setTitle(titleSring);

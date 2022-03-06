@@ -16,7 +16,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.Playpalv2.databinding.ActivityMainBinding;
-import com.example.Playpalv2.databinding.ActivityServicesBinding;
+
 import com.example.Playpalv2.flipCards.CardBackFragment;
 import com.example.Playpalv2.flipCards.CardFrontFragment;
 import com.example.Playpalv2.flipCards.CardFrontFragment1;
@@ -238,7 +238,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         }
     }
 
-    //This functions flips the card with an turning animation
+    //This functions flips the card with a turning animation
     void flipCard() {
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         if (showingBack) {

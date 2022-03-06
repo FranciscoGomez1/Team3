@@ -13,6 +13,7 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+
     <string name="dummy_dog_bio">
        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
     </string>
@@ -55,7 +56,8 @@
     <string name="menu_drawer_close">Drawer Close</string>
 
 
-
+    <string name="playpal_services">Playpal Services</string>
+    <string name="title_activity_dog_owner_profile">DogOwnerProfile</string>
 
 
 </resources>
