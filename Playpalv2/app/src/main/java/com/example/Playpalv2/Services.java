@@ -1,15 +1,11 @@
 package com.example.Playpalv2;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
+import com.example.Playpalv2.flipCards.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
 
 public class Services extends DrawerBase {
 

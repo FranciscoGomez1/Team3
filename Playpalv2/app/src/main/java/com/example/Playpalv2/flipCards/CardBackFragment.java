@@ -5,12 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
-import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.Playpalv2.MainActivity;
 import com.example.Playpalv2.R;
 
 public class CardBackFragment extends Fragment {

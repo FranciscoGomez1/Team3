@@ -60,7 +60,18 @@
     <string name="playpal_services">Playpal Services</string>
     <string name="title_activity_dog_owner_profile">Dog Owner Profile</string>
     <string name="title_activity_dog_profile">Dog Profile</string>
-
+    <string name="dog_owner">Dog Owner</string>
+    <string name="dog_owner_bio">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur</string>
+    <string name="dog_owner_1">Dog Owner</string>
+    <string name="dog_owner_bio_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur</string>
+    <string name="dog_name">Dog Name</string>
+    <string name="dog_name_bio">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</string>
+    <string name="dog_name_1">Dog Name</string>
+    <string name="dog_bio_1">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.</string>
+    <string name="dog_image_description">image of dog</string>
+    <string name="dog_owner_image">Dog Owner image</string>
+    <string name="dog_owner_image_1">dog owner image back 1</string>
+    <string name="dog_image_1">dog image description 1</string>
 
 
 </resources>

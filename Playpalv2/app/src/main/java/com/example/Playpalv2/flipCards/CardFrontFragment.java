@@ -9,7 +9,6 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.Playpalv2.MainActivity;
 import com.example.Playpalv2.R;
 
 public class CardFrontFragment extends Fragment {
