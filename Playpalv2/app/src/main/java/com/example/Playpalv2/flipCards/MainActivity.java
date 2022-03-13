@@ -2,18 +2,14 @@
 package com.example.Playpalv2.flipCards;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.Playpalv2.DrawerBase;
@@ -22,27 +18,27 @@ import com.example.Playpalv2.R;
 import com.example.Playpalv2.Services;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
 
-import com.example.Playpalv2.flipCards.CardBackFragment;
-import com.example.Playpalv2.flipCards.CardFrontFragment;
-import com.example.Playpalv2.flipCards.CardFrontFragment1;
-import com.example.Playpalv2.flipCards.DogModel;
-import com.example.Playpalv2.flipCards.DogViewModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import com.google.android.material.button.MaterialButton;
 
-import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.CollectionReference;
 
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.net.URI;
+import java.net.URL;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Queue;
 
 public class MainActivity extends DrawerBase implements View.OnTouchListener {
@@ -81,7 +77,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     NavigationView navigationView;
     FrameLayout myframeLayout;
 
-    Queue<DogModel> qDogs =new LinkedList<>();
+   Queue<DogModel> qDogs = new LinkedList<>();
 
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
 
@@ -95,23 +91,22 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         activityMainBinding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(activityMainBinding.getRoot());
+        FirebaseFirestore db;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
-        db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
-        CollectionReference docRef = db.collection("Dog Breeds");
+        //new waitForFirebase().execute();
 
-        Query query = docRef.whereEqualTo("Breed", "Bulldog");
-        query.get();
-        Log.i("Dogs", docRef.toString());
-
+/*
         qDogs.add(new DogModel("Dog1", "Dog1 bio" + getString(R.string.dummy_dog_bio)));
         qDogs.add(new DogModel("Dog2", "Dog2 bio" + getString(R.string.dummy_dog_bio)));
         qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
-        qDogs.add(new DogModel("Dog4", "Dog4 bio" + getString(R.string.dummy_dog_bio)));
+        qDogs.add(new DogModel("Dog4", "Dog4 bio" + getString(R.string.dummy_dog_bio)));*/
+       // qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
 
 
-        dog = qDogs.poll();
+       /* dog = qDogs.poll();
         dog1 = qDogs.poll();
-
+*/
         dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
         dogViewModel.init();
 
@@ -122,8 +117,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         View frameLayoutView = findViewById(id);
         View frameLayoutView2 = findViewById(id2);
 
-        // Initialize the queue of dog cards
-        intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);
+        getDogs(frameLayoutView, frameLayoutView2);
+       /* // Initialize the queue of dog cards
+        intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);*/
 
         likeBtn = findViewById(R.id.btn_like);
 
@@ -162,7 +158,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                     .add(R.id.container1, new CardFrontFragment1())
                     .commit();
         }
-
+ 
         Log.i("FRAMELAOUT CONTEXT", frameLayoutView.getContext().toString());
         ogX = frameLayoutView.getX();
         ogY = frameLayoutView.getY();
@@ -179,6 +175,44 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
 
     }
+
+
+
+    private void getDogs(View frameLayoutView, View frameLayoutView2){
+        //FirebaseFirestore db;
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        final String[] doc = new String[1];
+        final CollectionReference[] thisCollecRef = new CollectionReference[1];
+        db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
+        CollectionReference collecRef = db.collection("Dog Breeds").
+                document("Bulldog").collection("Dogs");
+
+        collecRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                Log.i("TAG","ONSUCESS: IT WORKS");
+                List<DocumentSnapshot> snapshotList = Objects.requireNonNull(task.getResult()).getDocuments();
+
+                try {
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
+                        qDogs.add(new DogModel(Objects.requireNonNull(snapshot.get("Name")).toString(),
+                                Objects.requireNonNull(snapshot.get("Bio")).toString(), (List<String>) snapshot.get("Images")));
+                    }
+                }catch(Exception e){
+                    Log.i("EXEPTION", e.getMessage());
+                }
+                dog = qDogs.poll();
+                dog1 = qDogs.poll();
+
+                // Initialize the queue of dog cards
+                intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);
+
+            }
+        });
+
+    }
+
 
     private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dog, DogModel dog1) {
 

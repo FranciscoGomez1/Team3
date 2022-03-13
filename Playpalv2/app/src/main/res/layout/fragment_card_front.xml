@@ -8,10 +8,10 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="25dp"
         android:layout_width="360dp"
-        android:layout_height="650dp"
-        android:elevation="50dp"
+        android:layout_height="665dp"
+        android:elevation="45dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="15dp">
 
@@ -20,8 +20,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
+                android:id="@+id/dog_front_image"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/card_front"
                 android:contentDescription="@string/dog_image_description" />
             <TextView
@@ -40,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:text="@string/dog_name_bio"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textColor="@color/black"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
