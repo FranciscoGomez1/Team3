@@ -94,6 +94,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         FirebaseFirestore db;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        //set title to top bar
+        allocateActivityTitle("Home");
         //new waitForFirebase().execute();
 
 /*

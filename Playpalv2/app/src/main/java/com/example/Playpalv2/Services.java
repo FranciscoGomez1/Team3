@@ -19,7 +19,8 @@ public class Services extends DrawerBase {
 
         activityServicesBinding = ActivityServicesBinding.inflate(getLayoutInflater());
         setContentView(activityServicesBinding.getRoot());
-
+        //set title to top bar
+        allocateActivityTitle("Services");
         //FOR NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.services);
