@@ -32,7 +32,6 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
     private static final String TAG= "PlaypalRegister2";
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +88,6 @@ public class PlaypalRegister2 extends AppCompatActivity {
                             Toast.LENGTH_LONG).show();
                 }
             }
-
         });
     }
 }

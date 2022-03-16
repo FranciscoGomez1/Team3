@@ -74,7 +74,13 @@ public class PlaypalRegistration extends AppCompatActivity {
 
         // Set a clickListner
         btnSignIn.setOnClickListener(view -> { // When clicked it takes user to the main activity
-            startActivity(new Intent(PlaypalRegistration.this, MainActivity.class));
+            // firebaseUser.sendEmailVerification();
+            Intent intent = new Intent(PlaypalRegistration.this, LogIn.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
+            finish();
         });
     }
 
