@@ -43,11 +43,14 @@ public class CardFrontFragment1 extends Fragment {
                 dogName.setText(dogViewModel.getDog1().getValue().getName());
                 dogBio.setText(dogViewModel.getDog1().getValue().getBio());
 
-                String onlineImg = Objects.requireNonNull(dogViewModel.getDog().getValue()).getAlbum().get(1);
+                String onlineImg = Objects.requireNonNull(dogViewModel.getDog1().getValue()).getAlbum().get(0);
 
-
-                Glide.with(this).load(onlineImg).into(profilePic);
-
+                if(onlineImg != "") {
+                    Glide.with(this).load(onlineImg).into(profilePic);
+                }
+                else{
+                    profilePic.setImageResource(R.drawable.card_front);
+                }
             }
         });
 

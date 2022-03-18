@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
+import com.example.Playpalv2.PlaypalRegister2;
+import com.example.Playpalv2.R;
+import com.example.Playpalv2.registrationClasses.RegistrationPage1;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -33,6 +36,8 @@ public class PlaypalRegistration extends AppCompatActivity {
     private EditText mobile;
     private EditText password;
     private EditText confirmPassword;
+
+
 
     private String userID;
 
@@ -68,8 +73,12 @@ public class PlaypalRegistration extends AppCompatActivity {
             String inputPassword = password.getText().toString();
             String inputConfirmPassword = confirmPassword.getText().toString();
 
-            registerUser(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword );
-
+            RegistrationPage1 registrationPage1 = new RegistrationPage1(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword, inputConfirmPassword);
+            goToReg2Page();
+           /* if (registrationPage1.isRegisterInfoValid()){
+                registerToFirebase(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword);
+            };
+*/
         });
 
         // Set a clickListner
@@ -84,8 +93,17 @@ public class PlaypalRegistration extends AppCompatActivity {
         });
     }
 
+    /*private boolean registerUser(String inputFirtName, String inputLastName, String inputEmail, String inputMobile, String inputPassword) {
+
+        if(inputFirtName.isEmpty()  || inputLastName.isEmpty() ||inputEmail.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()
+            || inputMobile.isEmpty() || inputPassword.isEmpty()){
+            return false;
+        }
+        return true;
+    }*/
+
     // Function to register a user to firebase
-    private void registerUser(String inputFirtName, String inputLastName, String inputEmail,
+    private void registerToFirebase(String inputFirtName, String inputLastName, String inputEmail,
                               String inputMobile, String inputPassword) {
 
         mAuth.createUserWithEmailAndPassword(inputEmail, inputPassword).addOnCompleteListener(PlaypalRegistration.this,
@@ -118,13 +136,14 @@ public class PlaypalRegistration extends AppCompatActivity {
                         docRef.set(userInfo).addOnCompleteListener(task1 -> {
                             if(task1.isSuccessful()){
 
-                                // firebaseUser.sendEmailVerification();
+                                goToReg2Page();
+                               /* // firebaseUser.sendEmailVerification();
                                 Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                         | Intent.FLAG_ACTIVITY_NEW_TASK);
 
                                 startActivity(intent);
-                                finish();
+                                finish();*/
 
                             }else{
                                 try{
@@ -159,9 +178,17 @@ public class PlaypalRegistration extends AppCompatActivity {
                     }
 
                 }
-
         );
 
+    }
+
+    private void goToReg2Page() {
+        Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+        finish();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.franciscoClassesForRegistrationVersion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.flipCards.MainActivity;
 
 public class LogIn extends AppCompatActivity {

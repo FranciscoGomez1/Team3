@@ -10,9 +10,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal">
         <activity
-            android:name=".LogIn"
-            android:exported="false"/>
-
+            android:name=".Register3"
+            android:exported="false" />
+        <activity
+            android:name=".franciscoClassesForRegistrationVersion.LogIn"
+            android:exported="false" />
         <activity
             android:name=".DogOwnerProfile"
             android:exported="false" />
@@ -24,11 +26,12 @@
             android:exported="false" />
         <activity
             android:name=".PlaypalRegister2"
-            android:exported="false" />
+            android:exported="true" >
+
+    </activity>
         <activity
             android:name=".flipCards.MainActivity"
-            android:exported="true"/>
-
+            android:exported="true" />
         <activity
             android:name=".Services"
             android:exported="true" />
@@ -36,14 +39,15 @@
             android:name=".Messages"
             android:exported="true" />
         <activity
-            android:name=".PlaypalRegistration"
-            android:exported="true" >
+            android:name=".ui.PlaypalRegistration"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

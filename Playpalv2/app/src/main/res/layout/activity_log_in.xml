@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".LogIn">
+    tools:context=".franciscoClassesForRegistrationVersion.LogIn">
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="match_parent"

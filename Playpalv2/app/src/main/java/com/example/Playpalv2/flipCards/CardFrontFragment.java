@@ -51,8 +51,11 @@ public class CardFrontFragment extends Fragment {
                 onlineImg = dogViewModel.getDog().getValue().getAlbum().get(0);
                         //"https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/DogPhotesTest%2FPony.png?alt=media&token=a45c6b4b-1b42-4bf0-8db3-7baa45291771";
 
-
-                Glide.with(this).load(onlineImg).into(profilePic);
+                if(onlineImg != "") {
+                    Glide.with(this).load(onlineImg).into(profilePic);
+                } else{
+                    profilePic.setImageResource(R.drawable.card_front);
+                }
 
 
             }
