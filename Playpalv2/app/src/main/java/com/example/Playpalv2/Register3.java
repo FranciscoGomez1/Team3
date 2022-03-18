@@ -10,7 +10,6 @@ import android.widget.Button;
 
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
-import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.RegisterPage3;
 
 public class Register3 extends AppCompatActivity {
@@ -28,7 +27,7 @@ public class Register3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register3);
 
-        nextBtn = findViewById(R.id.btn_next);
+        nextBtn = findViewById(R.id.btn_next3);
 
         //Auto complete drop out menu for dog breeds
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
