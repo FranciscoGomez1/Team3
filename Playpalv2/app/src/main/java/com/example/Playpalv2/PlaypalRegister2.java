@@ -60,7 +60,13 @@ public class PlaypalRegister2 extends AppCompatActivity {
         registerButtomPage2.setOnClickListener( view ->{
 
             String inputDogOwnerBio = dogOwnerBio.getText().toString();
-            setDogOwnerBio(inputDogOwnerBio);
+          //  setDogOwnerBio(inputDogOwnerBio);
+            Intent intent = new Intent(PlaypalRegister2.this, Register3.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(intent);
+            finish();
 
         });
 
@@ -104,12 +110,7 @@ public class PlaypalRegister2 extends AppCompatActivity {
         docRef.update(userBio).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 // firebaseUser.sendEmailVerification();
-                Intent intent = new Intent(PlaypalRegister2.this, Register3.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        | Intent.FLAG_ACTIVITY_NEW_TASK);
 
-                startActivity(intent);
-                finish();
             } else {
                 try {
                     throw Objects.requireNonNull(task.getException());

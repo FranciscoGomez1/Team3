@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.Playpalv2.Reg4;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
 import com.example.Playpalv2.PlaypalRegister2;
 import com.example.Playpalv2.R;
@@ -84,7 +85,7 @@ public class PlaypalRegistration extends AppCompatActivity {
         // Set a clickListner
         btnSignIn.setOnClickListener(view -> { // When clicked it takes user to the main activity
             // firebaseUser.sendEmailVerification();
-            Intent intent = new Intent(PlaypalRegistration.this, LogIn.class);
+            Intent intent = new Intent(PlaypalRegistration.this, Reg4.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
 

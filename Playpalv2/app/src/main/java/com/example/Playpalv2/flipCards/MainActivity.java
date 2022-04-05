@@ -82,7 +82,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
 
     FirebaseFirestore db;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    //FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
 
     @Override

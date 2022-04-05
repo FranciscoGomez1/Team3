@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal">
         <activity
+            android:name=".Reg4"
+            android:exported="false" />
+        <activity
             android:name=".Register3"
             android:exported="false" />
         <activity
@@ -26,9 +29,7 @@
             android:exported="false" />
         <activity
             android:name=".PlaypalRegister2"
-            android:exported="true" >
-
-    </activity>
+            android:exported="true"/>
         <activity
             android:name=".flipCards.MainActivity"
             android:exported="true" />
@@ -47,7 +48,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
