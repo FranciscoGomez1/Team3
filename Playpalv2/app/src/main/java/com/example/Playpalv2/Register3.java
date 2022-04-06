@@ -58,7 +58,7 @@ public class Register3 extends AppCompatActivity {
         textViewWeight.setAdapter(weightAdapter);
 
         nextBtn.setOnClickListener(View -> {
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, Reg4.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
