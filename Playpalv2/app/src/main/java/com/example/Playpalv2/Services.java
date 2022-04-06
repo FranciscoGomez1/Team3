@@ -66,7 +66,6 @@ public class Services extends DrawerBase {
 
         }
 
-
 //on clicklistener
 //fragment mannager
     }
@@ -80,10 +79,7 @@ public class Services extends DrawerBase {
             showingWalking = true;
             getSupportFragmentManager()
                     .beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.card_flip_right_in,  //Servixes
-                            R.anim.card_flip_right_out) //Walking
-                    .replace(id, new CardBackFragment())
+                    .replace(id, new ServicesSitter())
                     .addToBackStack(null)
                     .commit();
         }
