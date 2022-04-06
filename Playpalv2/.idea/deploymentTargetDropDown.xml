@@ -7,12 +7,12 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\agust\.android\avd\Pixel_5_API_Tiramisu.avd" />
+            <value value="C:\Users\markr\.android\avd\Pixel_5_API_Tiramisu.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2022-04-06T01:12:36.938745500Z" />
+    <timeTargetWasSelectedWithDropDown value="2022-04-06T02:27:01.453594Z" />
     <targetsSelectedWithDialog>
       <Target>
         <type value="QUICK_BOOT_TARGET" />
