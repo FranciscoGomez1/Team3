@@ -88,6 +88,16 @@
     <string name="enter_email">Enter Email</string>
     <string name="enter_password">Enter Password</string>
     <string name="log_in">Log In</string>
+    <string name="dog_name_hint">Dog\'s Name</string>
+    <string name="dog_bio_hint">Dog\'s Bio</string>
+    <string name="dog_ower_bio_hint">Tells us about you</string>
+    <string name="tell_us_about_you">Tell Us About You</string>
+    <string name="march_17_2022">March 17 2022</string>
+    <string name="tell_us_about_your_doggo">Tell Us About Your Doggo</string>
+    <string name="dog_breed">Dog Breed</string>
+    <string name="age">Age</string>
+    <string name="sex">Sex</string>
+    <string name="weight">Weight</string>
 
 
 </resources>

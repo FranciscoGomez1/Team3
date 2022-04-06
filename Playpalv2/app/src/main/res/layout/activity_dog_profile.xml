@@ -6,8 +6,23 @@
     tools:context=".DogProfile">
 
 
-    <include layout="@layout/secondary_tool_bar" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/secondary_tool_bar" />
 
+    <!--<FrameLayout
+        android:id="@+id/dog_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />-->
 
+    <FrameLayout
+        android:id="@+id/container_dog_profile_edit"
+        android:layout_width="0dp"
+        android:layout_height="512dp"
+        android:layout_margin="0dp"
+
+        android:layout_marginTop="20dp"
+        tools:ignore="MissingConstraints"></FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

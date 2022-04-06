@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PlaypalRegistration">
+    tools:context=".ui.PlaypalRegistration">
 
     <TextView
         android:id="@+id/welcomePlaypal2"
