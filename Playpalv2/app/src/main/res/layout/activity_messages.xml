@@ -14,14 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/newMatches"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="New Matches"
-                    android:textColor="#fc6d00"
-                    android:textSize="15sp"/>
+            <TextView
+                android:id="@+id/newMatches"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="New Matches"
+                android:textColor="#fc6d00"
+                android:textSize="15sp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/newMatchesRecyclerView"

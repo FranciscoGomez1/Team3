@@ -15,34 +15,37 @@
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image"
+            android:id="@+id/images"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/rocky" />
 
         <TextView
-            android:id="@+id/textTitle"
+            android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="10dp"
-            android:layout_toRightOf="@+id/image"
+            android:layout_toRightOf="@+id/images"
             android:textColor="#fc6d00"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:text="TextView" />
 
         <TextView
-            android:id="@+id/textDescription"
+            android:id="@+id/bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textTitle"
+            android:layout_below="@+id/firstName"
             android:layout_marginStart="20dp"
             android:layout_marginTop="3dp"
-            android:layout_toEndOf="@+id/image"
+            android:layout_toEndOf="@+id/images"
             android:textColor="#fc6d00"
-            android:textSize="16sp"/>
+            android:textSize="16sp"
+            android:text="TextView" />
 
         <TextView
+            android:id="@+id/time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="300dp"

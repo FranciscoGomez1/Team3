@@ -15,16 +15,16 @@
         android:padding="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image"
+            android:id="@+id/images"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/rocky" />
 
         <TextView
-            android:id="@+id/textTitle"
+            android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
+            android:layout_below="@+id/images"
             android:layout_marginTop="10dp"
             android:text="Rocky"
             android:textAlignment="center"

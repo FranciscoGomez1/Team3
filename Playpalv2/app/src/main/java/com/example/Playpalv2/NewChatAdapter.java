@@ -31,7 +31,7 @@ public class NewChatAdapter extends RecyclerView.Adapter<NewChatAdapter.NewChatV
 
     @Override
     public void onBindViewHolder(@NonNull NewChatViewHolder holder, int position) {
-        holder.textTitle.setText(newChats.get(position).getTitle());
+        holder.textTitle.setText(newChats.get(position).getFirstName());
         //holder.textDescription.setText(newChats.get(position).getDescription());
     }
 
@@ -46,7 +46,7 @@ public class NewChatAdapter extends RecyclerView.Adapter<NewChatAdapter.NewChatV
 
         NewChatViewHolder(@NonNull View itemView) {
             super(itemView);
-            textTitle = itemView.findViewById(R.id.textTitle);
+            textTitle = itemView.findViewById(R.id.firstName);
             //image = itemView.findViewById(R.id.image);
             //textDescription = itemView.findViewById(R.id.textDescription);
         }

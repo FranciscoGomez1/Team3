@@ -32,8 +32,8 @@ public class NewMatchesAdapter extends RecyclerView.Adapter<NewMatchesAdapter.Ne
 
     @Override
     public void onBindViewHolder(@NonNull NewMatchesViewHolder holder, int position) {
-        holder.textTitle.setText(newMatches.get(position).getTitle());
-        holder.textDescription.setText(newMatches.get(position).getDescription());
+        holder.textTitle.setText(newMatches.get(position).getFirstName());
+        holder.textDescription.setText(newMatches.get(position).getBio());
     }
 
     @Override
@@ -47,8 +47,8 @@ public class NewMatchesAdapter extends RecyclerView.Adapter<NewMatchesAdapter.Ne
 
         NewMatchesViewHolder(@NonNull View itemView) {
             super(itemView);
-            textTitle = itemView.findViewById(R.id.textTitle);
-            textDescription = itemView.findViewById(R.id.textDescription);
+            textTitle = itemView.findViewById(R.id.firstName);
+            textDescription = itemView.findViewById(R.id.bio);
         }
     }
 }
