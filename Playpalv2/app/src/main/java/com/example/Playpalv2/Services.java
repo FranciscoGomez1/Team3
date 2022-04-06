@@ -10,6 +10,8 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
 import com.example.Playpalv2.flipCards.CardBackFragment;
+import com.example.Playpalv2.flipCards.CardFrontFragment;
+import com.example.Playpalv2.flipCards.CardFrontFragment1;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,10 +42,7 @@ public class Services extends DrawerBase {
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.services);
 
-        aSwitch.setOnClickListener(View ->{
-            flipCard();
-
-        });
+        aSwitch.setOnClickListener(View -> flipCard()); //
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
@@ -57,6 +56,15 @@ public class Services extends DrawerBase {
                 return true;
             } else return itemId == R.id.services;
         });
+
+        //Initialise the main cointainers with the card front fragments
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.containerService, new servicesWalking())
+                    .commit();
+
+        }
 
 
 //on clicklistener
@@ -73,8 +81,8 @@ public class Services extends DrawerBase {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setCustomAnimations(
-                            R.anim.services_walking,  //Servixes
-                            R.anim.services_sitter) //Walking
+                            R.anim.card_flip_right_in,  //Servixes
+                            R.anim.card_flip_right_out) //Walking
                     .replace(id, new CardBackFragment())
                     .addToBackStack(null)
                     .commit();
