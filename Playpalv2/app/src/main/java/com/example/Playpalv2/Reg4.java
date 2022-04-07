@@ -1,8 +1,5 @@
 package com.example.Playpalv2;
 
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,12 +10,11 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
 
-import com.example.Playpalv2.databinding.ActivityMainBinding;
 import com.example.Playpalv2.databinding.ActivityReg4Binding;
 import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.franciscoClassesForRegistrationVersion.ImagesToFirestore;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,26 +30,36 @@ public class Reg4 extends AppCompatActivity {
     final int maxNumPhotosAndVideos = 10;
 
     private Button pickBtn;
-    Uri[] dogImages = new Uri[4];
-
     private Button nextBtn;
 
+    ImagesToFirestore imagesToFirestore;
+    Uri[] dogImages = new Uri[4];
     ActivityReg4Binding binding;
+    private String[] urlsImages = new String[4];
 
-    private FirebaseStorage storage;
-    private StorageReference storageReference;
+
+
+
+    /*private FirebaseStorage storage;
+    private StorageReference storageReference;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding =  ActivityReg4Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        Intent mintent = getIntent();
+        String dogId = mintent.getExtras().getString("dogId");
+        String breed = mintent.getExtras().getString("breed");
+        Log.e("PLEASE GOD", dogId);
+        Log.e("PLEASE GOD", breed);
 
+        imagesToFirestore = new ImagesToFirestore(dogImages,breed,dogId);
         nextBtn = findViewById(R.id.btn_next4);
 
         pickBtn = findViewById(R.id.pick_photos_button);
 
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
+        /*storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();*/
 
         pickBtn.setOnClickListener(View -> {
 
@@ -73,6 +79,7 @@ public class Reg4 extends AppCompatActivity {
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
+            imagesToFirestore.addImagesOfDogToFirebase();
             finish();
         });
 
@@ -109,7 +116,9 @@ public class Reg4 extends AppCompatActivity {
 
                     // Do stuff with each photo/video URI.
                 }
-                uploadImages();
+                imagesToFirestore.uploadImages();
+
+                //uploadImages();
                 Log.e("THANK GOD IT WORKS", dogImages[1].toString());
                 return;
 
@@ -118,22 +127,24 @@ public class Reg4 extends AppCompatActivity {
     }
 
     private void uploadImages() {
-        for(Uri i: dogImages){
+      /*imagesToFirestore.setDogImages(dogImages);*/
+       /* for(Uri i: dogImages){
             uploadImage(i);
-        }
+        }*/
     }
-
-    private void uploadImage(Uri file) {
-
+/*
+    private void uploadImage(Uri dogImage) {
+                 String image;
                final String randomKey = UUID.randomUUID().toString();
-                StorageReference dogImages = storageReference.child("images/" + randomKey);
-                dogImages.putFile(file)
+                StorageReference file = storageReference.child("images/" + randomKey);
+                file.putFile(dogImage)
                         .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                //Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                                Log.e("WHAT HAPPEN:", "THANK GOD IT WENT TO FIRESTORE");
+                               file.getDownloadUrl().addOnSuccessListener(uri -> checkTest(uri.toString()));
                             }
+
+
                         })
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -146,5 +157,7 @@ public class Reg4 extends AppCompatActivity {
                 //getReference("images/"+fileName);
     }
 
-
+    void checkTest(String image){
+        Log.e("WHAT HAPPEN URI:", image );
+    }*/
 }

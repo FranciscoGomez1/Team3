@@ -59,8 +59,9 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
         registerButtomPage2.setOnClickListener( view ->{
 
+            String owerDOB = pickDateBtn.toString();
             String inputDogOwnerBio = dogOwnerBio.getText().toString();
-          //  setDogOwnerBio(inputDogOwnerBio);
+           //setDogOwnerBio(inputDogOwnerBio, owerDOB);
             Intent intent = new Intent(PlaypalRegister2.this, Register3.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -87,7 +88,7 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
     }
 
-    private void setDogOwnerBio(String inputDogOwnerBio) {
+    private void setDogOwnerBio(String inputDogOwnerBio, String DOB) {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
         if(firebaseUser != null){
@@ -104,7 +105,9 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
         //Set a hashmap to pass data to the database
         Map<String,Object> userBio = new HashMap<>();
+        Map<String,Object> userDob = new HashMap<>();
         userBio.put("Bio", inputDogOwnerBio);
+        userDob.put("DOB", inputDogOwnerBio);
 
 
         docRef.update(userBio).addOnCompleteListener(task -> {

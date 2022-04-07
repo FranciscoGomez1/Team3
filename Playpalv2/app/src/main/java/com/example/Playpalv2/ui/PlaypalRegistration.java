@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Playpalv2.Reg4;
+import com.example.Playpalv2.Register3;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
 import com.example.Playpalv2.PlaypalRegister2;
 import com.example.Playpalv2.R;
@@ -184,7 +185,8 @@ public class PlaypalRegistration extends AppCompatActivity {
     }
 
     private void goToReg2Page() {
-        Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
+        //Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
+        Intent intent = new Intent(PlaypalRegistration.this, Register3.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
 
