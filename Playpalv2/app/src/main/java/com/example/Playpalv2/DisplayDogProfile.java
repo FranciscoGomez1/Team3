@@ -8,10 +8,10 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 public class DisplayDogProfile extends Fragment {
-   /* @Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_display_dog_profile, container, false);
 
         return v;
-    }*/
+    }
 }
