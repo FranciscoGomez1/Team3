@@ -77,11 +77,10 @@ public class PlaypalRegistration extends AppCompatActivity {
             String inputConfirmPassword = confirmPassword.getText().toString();
 
             RegistrationPage1 registrationPage1 = new RegistrationPage1(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword, inputConfirmPassword);
-            goToReg2Page();
-           /* if (registrationPage1.isRegisterInfoValid()){
+           // goToReg2Page();
+            if (registrationPage1.isRegisterInfoValid()){
                 registerToFirebase(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword);
             };
-*/
         });
 
         // Set a clickListner

@@ -133,7 +133,8 @@ public class Register3 extends AppCompatActivity {
         dogInfo.put("Sex", DogSexInput);
         dogInfo.put("Weight", DogWeightInput);
         dogInfo.put("Bio", DogBioInput);
-       // dogInfo.put("Owner", userID);
+       // dogInfo.put("Images","");
+        dogInfo.put("Owner", userID);
 
 
         collecRef.add(dogInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

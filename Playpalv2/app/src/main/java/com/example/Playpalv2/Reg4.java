@@ -9,16 +9,24 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.Playpalv2.databinding.ActivityReg4Binding;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.ImagesToFirestore;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Reg4 extends AppCompatActivity {
@@ -32,12 +40,16 @@ public class Reg4 extends AppCompatActivity {
     private Button pickBtn;
     private Button nextBtn;
 
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    FirebaseFirestore db;
+    String userID;
+
     ImagesToFirestore imagesToFirestore;
     Uri[] dogImages = new Uri[4];
     ActivityReg4Binding binding;
     private String[] urlsImages = new String[4];
 
-
+    private static final String TAG= "Reg4";
 
 
     /*private FirebaseStorage storage;
@@ -80,6 +92,7 @@ public class Reg4 extends AppCompatActivity {
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             imagesToFirestore.addImagesOfDogToFirebase();
+            setDogReferenceToDogOwner(dogId, breed);
             finish();
         });
 
@@ -125,6 +138,43 @@ public class Reg4 extends AppCompatActivity {
 
         }
     }
+    void setDogReferenceToDogOwner(String dogId, String dogBreed){
+        FirebaseUser firebaseUser = auth.getCurrentUser();
+        if(firebaseUser != null){
+           userID = firebaseUser.getUid();
+        }else{
+            Toast.makeText(Reg4.this, "No user ID",
+                    Toast.LENGTH_LONG).show();
+        }
+
+        db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
+
+
+        DocumentReference docRef = db.collection("Dog Owners").document(userID);
+
+        //Set a hashmap to pass data to the database
+        Map<String,Object> dogOwner = new HashMap<>();
+        dogOwner.put("DogId", dogId);
+        dogOwner.put("DogsBreed", dogBreed);
+
+
+        docRef.update(dogOwner).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                // firebaseUser.sendEmailVerification();
+
+            } else {
+                try {
+                    throw Objects.requireNonNull(task.getException());
+                } catch (Exception e) {
+                    Log.e(TAG, e.getMessage());
+                    Toast.makeText(Reg4.this, e.getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+    };
+
 
     private void uploadImages() {
       /*imagesToFirestore.setDogImages(dogImages);*/

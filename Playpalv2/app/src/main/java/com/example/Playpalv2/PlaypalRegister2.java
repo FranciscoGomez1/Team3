@@ -61,7 +61,7 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
             String owerDOB = pickDateBtn.toString();
             String inputDogOwnerBio = dogOwnerBio.getText().toString();
-           //setDogOwnerBio(inputDogOwnerBio, owerDOB);
+            setDogOwnerBio(inputDogOwnerBio, owerDOB);
             Intent intent = new Intent(PlaypalRegister2.this, Register3.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
