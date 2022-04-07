@@ -65,6 +65,23 @@
             app:iconPadding="0dp"
             app:iconSize="55dp" />
 
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_show_profile"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/orange_500"
+            android:gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:padding="6dp"
+            app:cornerRadius="15dp"
+            android:text="@string/view_potential_match_profile"
+            />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_like"
             style="@style/Widget.MaterialComponents.Button.Icon"

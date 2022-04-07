@@ -1,6 +1,7 @@
 package com.example.Playpalv2.flipCards;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ public class CardFrontFragment1 extends Fragment {
     private TextView dogBio;
     private ImageView profilePic;
 
+    TextView profileBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
