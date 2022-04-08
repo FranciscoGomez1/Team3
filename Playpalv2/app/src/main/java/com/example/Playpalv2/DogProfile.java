@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
@@ -26,7 +27,7 @@ public class DogProfile extends AppCompatActivity {
 
     private  String cont = cont1;
     boolean showingWalking;
-
+    private Button editProfile;
 
     private BottomNavigationView bottomNavigationView; //FOR NAVIGATION BAR
 
@@ -36,6 +37,7 @@ public class DogProfile extends AppCompatActivity {
         setContentView(R.layout.activity_dog_profile);
 
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
+        editProfile = findViewById(R.id.editProfile);
         setSupportActionBar(myToolbar);
 
         // Get a support ActionBar corresponding to this toolbar
@@ -46,7 +48,7 @@ public class DogProfile extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(R.string.title_activity_dog_profile);
 
-
+        editProfile.setOnClickListener(View -> flipCard()); //
         //Initialise the main cointainers with the card front fragments
         if (savedInstanceState == null) {
             getSupportFragmentManager()
@@ -76,10 +78,7 @@ public class DogProfile extends AppCompatActivity {
             showingWalking = true;
             getSupportFragmentManager()
                     .beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.card_flip_right_in,  //Servixes
-                            R.anim.card_flip_right_out) //Walking
-                    .replace(id, new CardBackFragment())
+                    .replace(id, new EditDogProfile())
                     .addToBackStack(null)
                     .commit();
         }
