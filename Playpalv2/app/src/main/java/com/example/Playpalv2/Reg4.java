@@ -75,7 +75,6 @@ public class Reg4 extends AppCompatActivity {
 
         pickBtn.setOnClickListener(View -> {
 
-
             Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
             intent.putExtra(MediaStore.EXTRA_PICK_IMAGES_MAX, maxNumPhotosAndVideos);
             startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);
