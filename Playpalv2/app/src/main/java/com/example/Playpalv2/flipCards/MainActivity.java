@@ -185,9 +185,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         dislikeBtn.setOnClickListener(view -> {
             dog = qDogs.poll();
-            viewProfile();
-            canFlip = !canFlip;
-           // resetCards(frameLayoutView, frameLayoutView2, view, dog);
+            //viewProfile();
+            //canFlip = !canFlip;
+            resetCards(frameLayoutView, frameLayoutView2, view, dog);
         });
 
         showDogProfile.setOnClickListener(view -> {
@@ -220,8 +220,14 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 try {
                     for (DocumentSnapshot snapshot : snapshotList) {
                         Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
-                        qDogs.add(new DogModel(Objects.requireNonNull(snapshot.get("Name")).toString(),
-                                Objects.requireNonNull(snapshot.get("Bio")).toString(), (List<String>) snapshot.get("Images")));
+                        qDogs.add(new DogModel(Objects.requireNonNull(snapshot.get("Age")).toString(),
+                                Objects.requireNonNull(snapshot.get("Bio")).toString(),
+                                Objects.requireNonNull(snapshot.get("Breed")).toString(),
+                                (List<String>) snapshot.get("Images"),
+                                Objects.requireNonNull(snapshot.get("Name")).toString(),
+                                Objects.requireNonNull(snapshot.get("Owner")).toString(),
+                                Objects.requireNonNull(snapshot.get("Sex")).toString(),
+                                Objects.requireNonNull(snapshot.get("Weight")).toString()));
                     }
                 }catch(Exception e){
                     Log.i("EXEPTION", e.getMessage());
