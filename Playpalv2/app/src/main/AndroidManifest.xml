@@ -40,6 +40,9 @@
             android:name=".Messages"
             android:exported="true" />
         <activity
+            android:name=".ChatRoom"
+            android:exported="true" />
+        <activity
             android:name=".ui.PlaypalRegistration"
             android:exported="true">
             <intent-filter>

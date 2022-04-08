@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.nfc.Tag;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.databinding.ActivityMessagesBinding;
@@ -142,11 +146,12 @@ public class Messages extends DrawerBase {
 
     }
 
-    private class NewMatchesHolder extends RecyclerView.ViewHolder {
+    private class NewMatchesHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         private TextView firstName;
         private TextView bio;
         private CircleImageView images;
+        Context context;
         //private TextView time;
 
         public NewMatchesHolder(@NonNull View itemView) {
@@ -157,16 +162,15 @@ public class Messages extends DrawerBase {
             //images = (CircleImageView) findViewById(R.id.image);
             images = (CircleImageView) itemView.findViewById(R.id.images);
             //time = itemView.findViewById(R.id.time);
+            itemView.setOnClickListener(this);
 
-/*
-            itemView.setOnClickListener(new View.OnClickListener() {
+/*            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     mClickListener.onItemClick(v, getAbsoluteAdapterPosition());
 
                 }
-            });
-*/
+            });*/
 
             /*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -180,16 +184,33 @@ public class Messages extends DrawerBase {
 
         }
 
-        /*private NewMatchesHolder.ClickListener mClickListener;
+        @Override
+        public void onClick(View v) {
+            int position = getAbsoluteAdapterPosition();
+            Toast.makeText(firstName.getContext(), "position" + position, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(firstName.getContext(), ChatRoom.class);
+            //intent.putExtra("dogName",  NewMatches.get(position).getFirstName());
+            firstName.getContext().startActivity(intent);
+        }
 
-        public interface ClickListener {
-            void onItemClick(View view, int position);
+        /*public interface ClickListener {
+            public void onItemClick(View view, int position);
+            public void onItemLongClick(View view, int position);
+
         }
 
         public void setOnClickListener(NewMatchesHolder.ClickListener clickListener){
-            mClickListener = clickListener;
-        }*/
+            mClickListener = new mFirestoreList.RecyclerViewClickListener() {
+            @Override
+                public void onCLick(View view, int position){
+                Intent intent = new Intent(getApplicationContext(), ChatRoom.class);
+                intent.putExtra("username", usersList.get(position).getUSername());
+                startActivity(intent);
+            }
+        };*/
+
     }
+
 
     private void setUpRecyclerView1() {
         Query query = db.collection("Test");
