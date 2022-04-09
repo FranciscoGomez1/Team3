@@ -1,13 +1,19 @@
 package com.example.Playpalv2.franciscoClassesForRegistrationVersion;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.Playpalv2.Messages;
 import com.example.Playpalv2.PlaypalRegister2;
+import com.example.Playpalv2.Reg4;
 import com.example.Playpalv2.Register3;
+import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.progressDialog.CustomProgressDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,7 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ImagesToFirestore  {
+public class ImagesToFirestore extends Activity {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db;
@@ -36,12 +42,24 @@ public class ImagesToFirestore  {
     private FirebaseStorage storage = FirebaseStorage.getInstance();
     private StorageReference storageReference = storage.getReference();;
     private String[] urlsImages = new String[4];
-    int position = 0;
+    private boolean success = false;
+    private int position = 0;
+    private int numberofUploadImaes = 1;
+    private CustomProgressDialog customProgressDialog;
 
-    public ImagesToFirestore(Uri[] dogImages, String breed, String dogId) {
+    public void setReg4(Activity reg4) {
+        this.reg4 = reg4;
+    }
+
+    private Activity reg4;
+
+
+    public ImagesToFirestore(Uri[] dogImages, String breed, String dogId, Activity reg4) {
         this.dogImages = dogImages;
         this.breed = breed;
         this.dogId = dogId;
+        this.reg4 = reg4;
+        customProgressDialog = new CustomProgressDialog(reg4);
     }
 
     public void setDogImages(Uri[] dogImages) {
@@ -49,6 +67,7 @@ public class ImagesToFirestore  {
     }
 
     public void uploadImages() {
+        customProgressDialog.initializeProgressDialog();
         for(Uri i: dogImages){
             uploadImage(i);
         }
@@ -64,9 +83,14 @@ public class ImagesToFirestore  {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         file.getDownloadUrl().addOnSuccessListener(uri -> addUrl(uri.toString()));
+
+                        if(numberofUploadImaes == 4){
+                            customProgressDialog.disMiss();
+                            success = true;
+
+                        }
+                        numberofUploadImaes++;
                     }
-
-
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -82,6 +106,10 @@ public class ImagesToFirestore  {
     void addUrl(String image){
         urlsImages[position++] = image;
         Log.e("WHAT HAPPEN URI:", image );
+    }
+
+    public void imagesSuccessfullyUploadedtoFirebase(CustomProgressDialog pd){
+
     }
 
     public void addImagesOfDogToFirebase(){
@@ -121,5 +149,9 @@ public class ImagesToFirestore  {
                 }
             }
         });
+    }
+
+    public boolean isSucess() {
+        return success;
     }
 }

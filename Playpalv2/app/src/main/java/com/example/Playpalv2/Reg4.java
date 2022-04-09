@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.Playpalv2.databinding.ActivityReg4Binding;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.ImagesToFirestore;
+import com.example.Playpalv2.progressDialog.CustomProgressDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,6 +51,7 @@ public class Reg4 extends AppCompatActivity {
     private String[] urlsImages = new String[4];
 
     private static final String TAG= "Reg4";
+    private  boolean allImagesloaded = false;
 
 
     /*private FirebaseStorage storage;
@@ -65,10 +67,12 @@ public class Reg4 extends AppCompatActivity {
         Log.e("PLEASE GOD", dogId);
         Log.e("PLEASE GOD", breed);
 
-        imagesToFirestore = new ImagesToFirestore(dogImages,breed,dogId);
-        nextBtn = findViewById(R.id.btn_next4);
+        imagesToFirestore = new ImagesToFirestore(dogImages,breed,dogId,this);
+                nextBtn   = findViewById(R.id.btn_next4);
 
         pickBtn = findViewById(R.id.pick_photos_button);
+
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(Reg4.this);
 
         /*storage = FirebaseStorage.getInstance();
         storageReference = storage.getReference();*/
@@ -80,29 +84,42 @@ public class Reg4 extends AppCompatActivity {
             startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);
 
         });
-
+        // This sets the image the user pick from their phone gallery
         GridAdapter gridAdapter1 = new GridAdapter(Reg4.this,dogImages);
         binding.gridView.setAdapter(gridAdapter1);
 
 
         nextBtn.setOnClickListener(View -> {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+            // Upload images of dog to firestore.
+
             imagesToFirestore.addImagesOfDogToFirebase();
-            setDogReferenceToDogOwner(dogId, breed);
-            finish();
+            imagesToFirestore.setReg4(this);
+            // "Links the dog with its owner.
+          //-->  setDogReferenceToDogOwner(dogId, breed);
+
+            // Moves to the next activity
+            while(true) {
+                Log.e("IS LOOPING", "IT IS");
+
+                if(imagesToFirestore.isSucess()){
+                  Log.e("PLEASE WORK GOD", "IT DID");
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                    break;
+                }
+            }
         });
 
     }
     // onActivityResult() handles callbacks from the photo picker.
-
     @Override
-    protected void onActivityResult(
-            int requestCode, int resultCode, final Intent data) {
-
+    protected void onActivityResult( int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(Reg4.this);
+        customProgressDialog.initializeProgressDialog();
         if (resultCode != Reg4.RESULT_OK) {
             // Handle error
             return;
@@ -117,6 +134,7 @@ public class Reg4 extends AppCompatActivity {
                 return;
             case REQUEST_PHOTO_PICKER_MULTI_SELECT:
                 // Get photo picker response for multi select
+
                 for (int i = 0; i < data.getClipData().getItemCount(); i++) {
                     Uri currentUri2 = data.getClipData().getItemAt(i).getUri();
                     dogImages[i] = currentUri2;
@@ -128,6 +146,7 @@ public class Reg4 extends AppCompatActivity {
 
                     // Do stuff with each photo/video URI.
                 }
+                customProgressDialog.disMiss();
                 imagesToFirestore.uploadImages();
 
                 //uploadImages();
@@ -137,6 +156,7 @@ public class Reg4 extends AppCompatActivity {
 
         }
     }
+    // Links the dog owner and its dog. Set breed and dogId with the dogowner
     void setDogReferenceToDogOwner(String dogId, String dogBreed){
         FirebaseUser firebaseUser = auth.getCurrentUser();
         if(firebaseUser != null){
@@ -147,7 +167,6 @@ public class Reg4 extends AppCompatActivity {
         }
 
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
-
 
         DocumentReference docRef = db.collection("Dog Owners").document(userID);
 

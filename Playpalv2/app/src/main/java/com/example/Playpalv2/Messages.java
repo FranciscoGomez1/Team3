@@ -135,7 +135,8 @@ public class Messages extends DrawerBase {
                 //holder.time.setText(model.getTime());
                 //Picasso.get().load(model.getImage()).into(holder.images);
                 Glide.with(holder.itemView.getContext())
-                        .load(model.getImage())
+                        .load(model.getImages()) //this has to change
+                        //.load("https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/images%2F09b0f942-bc94-4ed1-a3b1-693c2530e506?alt=media&token=a2b4a0a1-1939-48a4-be60-dcc48adc90f4")
                         .into(holder.images);
             }
         };
