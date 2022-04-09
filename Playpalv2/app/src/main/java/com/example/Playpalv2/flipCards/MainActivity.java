@@ -180,26 +180,39 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         likeBtn.setOnClickListener(view -> {
             dog = qDogs.poll();
+            viewProfile();
+            resetBtnText();
+            canFlip = !canFlip;
+
+
             resetCards(frameLayoutView, frameLayoutView2, view, dog);
         });
 
         dislikeBtn.setOnClickListener(view -> {
             dog = qDogs.poll();
-            //viewProfile();
-            //canFlip = !canFlip;
+            viewProfile();
+            resetBtnText();
+
+            canFlip = !canFlip;
             resetCards(frameLayoutView, frameLayoutView2, view, dog);
+
         });
 
         showDogProfile.setOnClickListener(view -> {
             showDogProfile.setText(replaceTextForShoDogProfileBtn);
             viewProfile();
-            if(!canFlip){
-                showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
-            }
+            resetBtnText();
             canFlip = !canFlip;
         });
 
 
+    }
+
+
+    void resetBtnText(){
+        if(!canFlip){
+            showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
+        }
     }
 
     private void getDogs(View frameLayoutView, View frameLayoutView2){
