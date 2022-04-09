@@ -31,6 +31,8 @@ import com.google.firebase.firestore.Query;
 
 import org.w3c.dom.Text;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -135,9 +137,16 @@ public class Messages extends DrawerBase {
                 //holder.time.setText(model.getTime());
                 //Picasso.get().load(model.getImage()).into(holder.images);
                 Glide.with(holder.itemView.getContext())
-                        .load(model.getImage())
+                        .load(model.getImages())
                         .into(holder.images);
             }
+
+            /*private NewMatchesHolder setTimeText(RecyclerView.ViewHolder) {
+                val dateFormat = SimpleDateFormat
+                        .getDateTimeInstance(SimpleDateFormat.SHORT, SimpleDateFormat.SHORT)
+                        viewHolder.textView_message_ttime.text = dateFormat(message.time)
+            }*/
+
         };
 
         //mFirestoreList.setHasFixedSize(true);
@@ -150,6 +159,7 @@ public class Messages extends DrawerBase {
 
         private TextView firstName;
         private TextView bio;
+        private TextView time;
         private CircleImageView images;
         Context context;
         //private TextView time;
@@ -160,7 +170,9 @@ public class Messages extends DrawerBase {
             firstName = itemView.findViewById(R.id.firstName);
             bio = itemView.findViewById(R.id.bio);
             //images = (CircleImageView) findViewById(R.id.image);
+            //images = itemView.findViewById(R.id.images);
             images = (CircleImageView) itemView.findViewById(R.id.images);
+            //time = firebase.firestore.FieldValue.serverTimestamp();
             //time = itemView.findViewById(R.id.time);
             itemView.setOnClickListener(this);
 

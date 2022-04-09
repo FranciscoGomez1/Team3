@@ -6,6 +6,7 @@ import java.util.Date;
 
 public class NewMatches {
     private String firstName, bio, images; //time
+    //private Date mTimestamp;
 
     public NewMatches() {}
 
@@ -32,13 +33,18 @@ public class NewMatches {
         this.bio = bio;
     }
 
-    public String getImage() {
+    public String getImages() {
         return images;
     }
 
-    public void setImage(String images) {
+    public void setImages(String images) {
         this.images = images;
     }
+
+   /* @ServerTimestamp
+    public Date getTimestamp() { return mTimestamp; }
+
+    public void setTimestamp(Date timestamp) { mTimestamp = timestamp; }*/
 
 /*    public String getTime() {
         return time;

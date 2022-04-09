@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -51,6 +52,9 @@ public class ChatRoom extends AppCompatActivity {
 
         //Intent intent = getIntent();
 
+        db = FirebaseFirestore.getInstance();   //
+        adapterList = findViewById(R.id.chatRecyclerView);
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +88,87 @@ public class ChatRoom extends AppCompatActivity {
                 }
             }
         });*/
+        //setUpRecyclerView5();
     }
 
+   /* private void setUpRecyclerView5() {
+        Query query = db.collection("Test Msg");
+
+        FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>()
+                .setQuery(query, ChatRoomModel.class)
+                .build();
+
+        adapterChat = new FirestoreRecyclerAdapter<ChatRoomModel, ChatRoom.ChatRoomModelHolder>(options) {
+            @NonNull
+            @Override
+            public ChatRoom.ChatRoomModelHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_adapter_layout, parent, false);
+                return new ChatRoom.ChatRoomModelHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull ChatRoom.ChatRoomModelHolder holder, int position, @NonNull ChatRoomModel model) {
+
+                //ChatList list2 = chatLists.get(position);
+
+                if(list2.getSenderId().equals(userId)){
+                    holder.myLayout.setVisibility(View.VISIBLE);
+                    holder.oppoLayout.setVisibility(View.GONE);
+
+                    holder.myMSG.setText(list2.getMessage());
+                    holder.myTime.setText(list2.getDate()+" "+list2.getTime());
+                }else{
+                    holder.myLayout.setVisibility(View.GONE);
+                    holder.oppoLayout.setVisibility(View.VISIBLE);
+
+                    holder.oppoMSG.setText(list2.getMessage());
+                    holder.oppoTime.setText(list2.getDate()+" "+list2.getTime());
+                }
+
+
+                holder.oppoMSG.setText(model.getOppoMSG());
+                holder.myMSG.setText(model.getMyMSG());
+            }
+        };
+
+        //mFirestoreList.setHasFixedSize(true);
+        adapterList.setLayoutManager(new LinearLayoutManager(this));
+        adapterList.setAdapter(adapterChat);
+
+    }
+
+    private class ChatRoomModelHolder extends RecyclerView.ViewHolder {
+
+        private TextView oppoMSG;
+        private TextView myMSG;
+
+        private LinearLayout oppoLayout;
+        private LinearLayout myLayout;
+        Context context;
+        //private TextView time;
+
+        public ChatRoomModelHolder(@NonNull View itemView) {
+            super(itemView);
+
+            oppoMSG = itemView.findViewById(R.id.oppoMSG);
+            myMSG = itemView.findViewById(R.id.myMSG);
+            //images = (CircleImageView) findViewById(R.id.image);
+            //images = (CircleImageView) itemView.findViewById(R.id.images);
+            //time = itemView.findViewById(R.id.time);
+
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        adapterChat.startListening();
+    }
+
+    @Override
+    protected void onStop(){
+        super.onStop();
+        adapterChat.stopListening();
+    }*/
 }
 

@@ -187,7 +187,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             dog = qDogs.poll();
             viewProfile();
             canFlip = !canFlip;
-           // resetCards(frameLayoutView, frameLayoutView2, view, dog);
+            // resetCards(frameLayoutView, frameLayoutView2, view, dog);
         });
 
         showDogProfile.setOnClickListener(view -> {
