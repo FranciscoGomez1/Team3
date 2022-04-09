@@ -1,22 +1,32 @@
 package com.example.Playpalv2;
 
+import android.widget.LinearLayout;
+
 public class ChatRoomModel {
-    private String firstName;
-    //private String images;
+    private String oppoMSG;
+    private String myMSG;
 
     public ChatRoomModel() {}
 
-    public ChatRoomModel(String firstName) { //String senderId, String message, String date, String time
-        this.firstName = firstName;
-        //this.images = images;
+    public ChatRoomModel(String oppoMSG, String myMSG) { //String senderId, String message, String date, String time
+        this.oppoMSG = oppoMSG;
+        this.myMSG = myMSG;
 
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getOppoMSG() {
+        return oppoMSG;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setOppoMSG(String oppoMSG) {
+        this.oppoMSG = oppoMSG;
+    }
+
+    public String getMyMSG() {
+        return myMSG;
+    }
+
+    public void setMyMSG(String myMSG) {
+        this.myMSG = myMSG;
     }
 }
