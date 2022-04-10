@@ -10,18 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal">
         <activity
-            android:name=".registrationClasses.Reg4"
+            android:name=".registration.UserUploadsImages"
             android:exported="false" />
 
         <activity
-            android:name=".registrationClasses.Register3"
-            android:exported="false"/>
-          <!--  <intent-filter>
+            android:name=".registration.Register3"
+            android:exported="false" />
+        <activity
+            android:name=".registration.Reg4"
+            android:exported="false" />
+             <!--   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>-->
+
         <activity
             android:name=".franciscoClassesForRegistrationVersion.LogIn"
             android:exported="false" />
@@ -35,8 +38,17 @@
             android:name=".DrawerBase"
             android:exported="false" />
         <activity
-            android:name=".PlaypalRegister2"
-            android:exported="true"/>
+            android:name=".registration.PlaypalRegister2"
+            android:exported="true" />
+        <activity
+            android:name=".registration.PlaypalRegister"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".flipCards.MainActivity"
             android:exported="false" />
@@ -49,15 +61,6 @@
         <activity
             android:name=".ChatRoom"
             android:exported="true" />
-        <activity
-            android:name=".ui.PlaypalRegistration"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

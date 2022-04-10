@@ -1,6 +1,8 @@
-package com.example.Playpalv2.registrationClasses;
+package com.example.Playpalv2.classes;
 
 import static org.junit.Assert.*;
+
+import com.example.Playpalv2.registration.RegistrationPage1;
 
 import org.junit.Test;
 

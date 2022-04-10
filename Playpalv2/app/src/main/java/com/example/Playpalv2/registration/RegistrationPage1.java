@@ -1,4 +1,4 @@
-package com.example.Playpalv2.registrationClasses;
+package com.example.Playpalv2.registration;
 
 public class RegistrationPage1 {
 

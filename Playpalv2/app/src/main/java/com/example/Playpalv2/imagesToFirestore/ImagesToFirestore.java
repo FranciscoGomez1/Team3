@@ -10,57 +10,52 @@ import com.example.Playpalv2.progressDialog.CustomProgressDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.UUID;
 
 public class ImagesToFirestore extends Activity {
 
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseFirestore db;
-    private String dogId;
-    private String breed;
-    private Uri[] dogImages = new Uri[4];
+    /*private String dogId;
+    private String breed;*/
+    private Uri[] images = new Uri[4];
     private FirebaseStorage storage = FirebaseStorage.getInstance();
-    private StorageReference storageReference = storage.getReference();;
+    private StorageReference storageReference = storage.getReference();
     private String[] urlsImages = new String[4];
     private boolean success = false;
     private int position = 0;
     private int numberofUploadImaes = 1;
     private CustomProgressDialog customProgressDialog;
 
-    public void setReg4(Activity reg4) {
-        this.reg4 = reg4;
+    private Activity myActivity;
+
+    public void setMyActivity(Activity myActivity) {
+        this.myActivity = myActivity;
     }
 
-    private Activity reg4;
+    //private Activity reg4;
 
 
-    public ImagesToFirestore(Uri[] dogImages, String breed, String dogId, Activity reg4) {
-        this.dogImages = dogImages;
-        this.breed = breed;
-        this.dogId = dogId;
-        this.reg4 = reg4;
-        customProgressDialog = new CustomProgressDialog(reg4);
+    public ImagesToFirestore(Uri[] dogImages,  Activity acty) {
+        this.images = dogImages;
+       /* this.breed = breed;
+        this.dogId = dogId;*/
+        this.myActivity = acty;
+        customProgressDialog = new CustomProgressDialog(acty);
     }
 
-    public void setDogImages(Uri[] dogImages) {
-        this.dogImages = dogImages;
+    public void setImages(Uri[] images) {
+        this.images = images;
     }
 
     public void uploadImages() {
         customProgressDialog.initializeProgressDialog();
-        for(Uri i: dogImages){
+        for(Uri i: images){
             uploadImage(i);
         }
         Log.e("IS IS FASTER", ":(");
@@ -84,13 +79,7 @@ public class ImagesToFirestore extends Activity {
                         numberofUploadImaes++;
                     }
                 })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e("WHAT HAPPEN:", "FIRESTORE");
-
-                    }
-                });
+                .addOnFailureListener(e -> Log.e("WHAT HAPPEN:", "FIRESTORE"));
         Log.e("IMAGES TO BE UPLOADED", file.toString());
         //getReference("images/"+fileName);
     }
@@ -103,7 +92,7 @@ public class ImagesToFirestore extends Activity {
     public void imagesSuccessfullyUploadedtoFirebase(CustomProgressDialog pd){
 
     }
-
+/*
     public void addImagesOfDogToFirebase(){
         addImagesToDoggo();
     }
@@ -114,8 +103,8 @@ public class ImagesToFirestore extends Activity {
         if(firebaseUser != null){
             //userID = firebaseUser.getUid();
         }else{
-            /*Toast.makeText(Reg4.this, "No user ID",
-                    Toast.LENGTH_LONG).show();*/
+            *//*Toast.makeText(Reg4.this, "No user ID",
+                    Toast.LENGTH_LONG).show();*//*
         }
 
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
@@ -135,15 +124,19 @@ public class ImagesToFirestore extends Activity {
                 try {
                     throw Objects.requireNonNull(task.getException());
                 } catch (Exception e) {
-                   /* Log.e(TAG, e.getMessage());
+                   *//* Log.e(TAG, e.getMessage());
                     Toast.makeText(PlaypalRegister2.this, e.getMessage(),
-                            Toast.LENGTH_LONG).show();*/
+                            Toast.LENGTH_LONG).show();*//*
                 }
             }
         });
-    }
+    }*/
 
     public boolean isSucess() {
         return success;
+    }
+
+    public String[] getimagesUrls(){
+        return urlsImages;
     }
 }

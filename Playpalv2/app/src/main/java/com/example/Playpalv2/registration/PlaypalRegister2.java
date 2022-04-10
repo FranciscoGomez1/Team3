@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DOB;
-import com.example.Playpalv2.registrationClasses.Register3;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -62,7 +62,8 @@ public class PlaypalRegister2 extends AppCompatActivity {
             String owerDOB = pickDateBtn.toString();
             String inputDogOwnerBio = dogOwnerBio.getText().toString();
             setDogOwnerBio(inputDogOwnerBio, owerDOB);
-            Intent intent = new Intent(PlaypalRegister2.this, Register3.class);
+            Intent intent = new Intent(PlaypalRegister2.this, UserUploadsImages.class);
+            intent.putExtra("userId", userID);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
 

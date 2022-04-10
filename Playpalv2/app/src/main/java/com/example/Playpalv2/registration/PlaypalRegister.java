@@ -1,18 +1,17 @@
-package com.example.Playpalv2.ui;
+package com.example.Playpalv2.registration;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
-import com.example.Playpalv2.PlaypalRegister2;
 import com.example.Playpalv2.R;
-import com.example.Playpalv2.registrationClasses.RegistrationPage1;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -25,7 +24,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class PlaypalRegistration extends AppCompatActivity {
+public class PlaypalRegister extends AppCompatActivity {
 
     //Set the android widgets
     private Button btnRegister; //Sign up button
@@ -74,38 +73,30 @@ public class PlaypalRegistration extends AppCompatActivity {
             String inputConfirmPassword = confirmPassword.getText().toString();
 
             RegistrationPage1 registrationPage1 = new RegistrationPage1(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword, inputConfirmPassword);
-           // goToReg2Page();
+            //goToReg2Page();
             if (registrationPage1.isRegisterInfoValid()){
                 registerToFirebase(inputFirtName, inputLastName, inputEmail, inputMobile, inputPassword);
-            };
+            }
         });
 
         // Set a clickListner
         btnSignIn.setOnClickListener(view -> { // When clicked it takes user to the main activity
             // firebaseUser.sendEmailVerification();
-            Intent intent = new Intent(PlaypalRegistration.this, LogIn.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    | Intent.FLAG_ACTIVITY_NEW_TASK);
-
-            startActivity(intent);
-            finish();
+           goToLogIn();
         });
     }
 
-    /*private boolean registerUser(String inputFirtName, String inputLastName, String inputEmail, String inputMobile, String inputPassword) {
+    private boolean registerUser(String inputFirtName, String inputLastName, String inputEmail, String inputMobile, String inputPassword) {
 
-        if(inputFirtName.isEmpty()  || inputLastName.isEmpty() ||inputEmail.isEmpty() || Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()
-            || inputMobile.isEmpty() || inputPassword.isEmpty()){
-            return false;
-        }
-        return true;
-    }*/
+        return !inputFirtName.isEmpty() && !inputLastName.isEmpty() && !inputEmail.isEmpty() && !Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches()
+                && !inputMobile.isEmpty() && !inputPassword.isEmpty();
+    }
 
     // Function to register a user to firebase
     private void registerToFirebase(String inputFirtName, String inputLastName, String inputEmail,
-                              String inputMobile, String inputPassword) {
+                                    String inputMobile, String inputPassword) {
 
-        mAuth.createUserWithEmailAndPassword(inputEmail, inputPassword).addOnCompleteListener(PlaypalRegistration.this,
+        mAuth.createUserWithEmailAndPassword(inputEmail, inputPassword).addOnCompleteListener(PlaypalRegister.this,
                 task -> {
                     if(task.isSuccessful()){ // if the user authentication was a success no errors with the
                         // password or email
@@ -114,7 +105,7 @@ public class PlaypalRegistration extends AppCompatActivity {
                         if(firebaseUser != null){
                             userID = firebaseUser.getUid();
                         }else{
-                            Toast.makeText(PlaypalRegistration.this, "No user ID",
+                            Toast.makeText(PlaypalRegister.this, "No user ID",
                                     Toast.LENGTH_LONG).show();
                         }
 
@@ -136,8 +127,8 @@ public class PlaypalRegistration extends AppCompatActivity {
                             if(task1.isSuccessful()){
 
                                 goToReg2Page();
-                               /* // firebaseUser.sendEmailVerification();
-                                Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
+                                // firebaseUser.sendEmailVerification();
+                                /*Intent intent = new Intent(PlaypalRegister.this, PlaypalRegister2.class);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                                         | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -149,7 +140,7 @@ public class PlaypalRegistration extends AppCompatActivity {
                                     throw Objects.requireNonNull(task.getException());
                                 }catch (Exception e){
                                     Log.e(TAG, e.getMessage());
-                                    Toast.makeText(PlaypalRegistration.this, e.getMessage(),
+                                    Toast.makeText(PlaypalRegister.this, e.getMessage(),
                                             Toast.LENGTH_LONG).show();
                                 }
                             }
@@ -170,7 +161,7 @@ public class PlaypalRegistration extends AppCompatActivity {
                             email.requestFocus();
                         }catch (Exception e) {
                             Log.e(TAG, e.getMessage());
-                            Toast.makeText(PlaypalRegistration.this, e.getMessage(),
+                            Toast.makeText(PlaypalRegister.this, e.getMessage(),
                                     Toast.LENGTH_LONG).show();
                         }
 
@@ -180,10 +171,17 @@ public class PlaypalRegistration extends AppCompatActivity {
         );
 
     }
-
     private void goToReg2Page() {
         //Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
-        Intent intent = new Intent(PlaypalRegistration.this, PlaypalRegister2.class);
+        Intent intent = new Intent(PlaypalRegister.this, PlaypalRegister2.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        startActivity(intent);
+        finish();
+    }
+    private void goToLogIn(){
+        Intent intent = new Intent(PlaypalRegister.this, LogIn.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
 

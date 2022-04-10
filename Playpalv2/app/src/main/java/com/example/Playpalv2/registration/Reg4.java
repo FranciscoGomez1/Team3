@@ -1,5 +1,6 @@
-package com.example.Playpalv2.registrationClasses;
-
+package com.example.Playpalv2.registration;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,10 +21,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
 
 public class Reg4 extends AppCompatActivity {
 
@@ -40,7 +45,7 @@ public class Reg4 extends AppCompatActivity {
     FirebaseFirestore db;
     String userID;
 
-    ImagesToFirestore imagesToFirestore;
+    UploadDogImagesToFirebase uploadDogImagesToFirebase;
     Uri[] dogImages = new Uri[4];
     ActivityReg4Binding binding;
     private String[] urlsImages = new String[4];
@@ -49,8 +54,8 @@ public class Reg4 extends AppCompatActivity {
     private  boolean allImagesloaded = false;
 
 
-    /*private FirebaseStorage storage;
-    private StorageReference storageReference;*/
+    private FirebaseStorage storage;
+    private StorageReference storageReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +67,15 @@ public class Reg4 extends AppCompatActivity {
         Log.e("PLEASE GOD", dogId);
         Log.e("PLEASE GOD", breed);
 
-        imagesToFirestore = new ImagesToFirestore(dogImages,breed,dogId,this);
-                nextBtn   = findViewById(R.id.btn_next4);
+        uploadDogImagesToFirebase = new UploadDogImagesToFirebase(dogImages, breed, dogId, this);
+        nextBtn   = findViewById(R.id.btn_next4);
 
         pickBtn = findViewById(R.id.pick_photos_button);
 
         CustomProgressDialog customProgressDialog = new CustomProgressDialog(Reg4.this);
 
-        /*storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();*/
+        storage = FirebaseStorage.getInstance();
+        storageReference = storage.getReference();
 
         pickBtn.setOnClickListener(View -> {
             // Agustin needs to comment these out when pushing
@@ -85,24 +90,18 @@ public class Reg4 extends AppCompatActivity {
 
 
         nextBtn.setOnClickListener(View -> {
+
             // Upload images of dog to firestore.
 
-            imagesToFirestore.addImagesOfDogToFirebase();
-            imagesToFirestore.setReg4(this);
             // "Links the dog with its owner.
-            setDogReferenceToDogOwner(dogId, breed);
-
+             setDogReferenceToDogOwner(dogId, breed);
+            uploadDogImagesToFirebase.setUserImagesLinksUrls();
+            uploadDogImagesToFirebase.setMyActivity(this);
             // Moves to the next activity
             while(true) {
-                Log.e("IS LOOPING", "IT IS");
 
-                if(imagesToFirestore.isSucess()){
-                  Log.e("PLEASE WORK GOD", "IT DID");
-                    Intent intent = new Intent(this, MainActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            | Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(intent);
-                    finish();
+                if(uploadDogImagesToFirebase.isSucess()){
+                    goToMainActivity();
                     break;
                 }
             }
@@ -113,7 +112,7 @@ public class Reg4 extends AppCompatActivity {
     @Override
     protected void onActivityResult( int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        CustomProgressDialog customProgressDialog = new CustomProgressDialog(Reg4.this);
+        CustomProgressDialog customProgressDialog = new CustomProgressDialog(this);
         customProgressDialog.initializeProgressDialog();
         if (resultCode != Reg4.RESULT_OK) {
             // Handle error
@@ -133,7 +132,6 @@ public class Reg4 extends AppCompatActivity {
                 for (int i = 0; i < data.getClipData().getItemCount(); i++) {
                     Uri currentUri2 = data.getClipData().getItemAt(i).getUri();
                     dogImages[i] = currentUri2;
-                    Log.e("works", "workdssssssssssssssssssssssss");
 
                     GridAdapter gridAdapter = new GridAdapter(Reg4.this,dogImages);
                     binding.gridView.setAdapter(gridAdapter);
@@ -142,10 +140,9 @@ public class Reg4 extends AppCompatActivity {
                     // Do stuff with each photo/video URI.
                 }
                 customProgressDialog.disMiss();
-                imagesToFirestore.uploadImages();
+                uploadDogImagesToFirebase.uploadImages();
 
                 //uploadImages();
-                Log.e("THANK GOD IT WORKS", dogImages[1].toString());
                 return;
 
 
@@ -155,7 +152,7 @@ public class Reg4 extends AppCompatActivity {
     void setDogReferenceToDogOwner(String dogId, String dogBreed){
         FirebaseUser firebaseUser = auth.getCurrentUser();
         if(firebaseUser != null){
-           userID = firebaseUser.getUid();
+            userID = firebaseUser.getUid();
         }else{
             Toast.makeText(Reg4.this, "No user ID",
                     Toast.LENGTH_LONG).show();
@@ -186,41 +183,15 @@ public class Reg4 extends AppCompatActivity {
             }
         });
 
-    };
-
-
-    private void uploadImages() {
-      /*imagesToFirestore.setDogImages(dogImages);*/
-       /* for(Uri i: dogImages){
-            uploadImage(i);
-        }*/
-    }
-/*
-    private void uploadImage(Uri dogImage) {
-                 String image;
-               final String randomKey = UUID.randomUUID().toString();
-                StorageReference file = storageReference.child("images/" + randomKey);
-                file.putFile(dogImage)
-                        .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                               file.getDownloadUrl().addOnSuccessListener(uri -> checkTest(uri.toString()));
-                            }
-
-
-                        })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Log.e("WHAT HAPPEN:", "FIRESTORE");
-
-                            }
-                        });
-         Log.e("IMAGES TO BE UPLOADED", file.toString());
-                //getReference("images/"+fileName);
     }
 
-    void checkTest(String image){
-        Log.e("WHAT HAPPEN URI:", image );
-    }*/
+    void goToMainActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
+
 }

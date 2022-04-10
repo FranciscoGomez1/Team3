@@ -1,5 +1,4 @@
-package com.example.Playpalv2.registrationClasses;
-
+package com.example.Playpalv2.registration;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.Playpalv2.R;
+
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.RegisterPage3;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -58,36 +58,32 @@ public class Register3 extends AppCompatActivity {
         DogName = findViewById(R.id.dog_name);
         DogBreed = findViewById(R.id.breeds_list);
         DogAge = findViewById(R.id.dog_age_list);
-        DogSex = findViewById(R.id.dog_age_list);
+        DogSex = findViewById(R.id.dog_sex_list);
         DogWeight = findViewById(R.id.dog_weight_list);
         DogBio = findViewById(R.id.dog_bio);
 
         //Auto complete drop out menu for dog breeds
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dropOutMenusReg3.getBreeds());
-        AutoCompleteTextView textView = (AutoCompleteTextView)
-                findViewById(R.id.breeds_list);
+        AutoCompleteTextView textView =  DogBreed;
         textView.setAdapter(adapter);
 
         //Auto complete drop out menu for dog age
         ArrayAdapter<String> ageAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dropOutMenusReg3.getAgeList());
-        AutoCompleteTextView textViewAge = (AutoCompleteTextView)
-                findViewById(R.id.dog_age_list);
+        AutoCompleteTextView textViewAge =  DogAge;
         textViewAge.setAdapter(ageAdapter);
 
         //Auto complete drop out menu for dog sex
         ArrayAdapter<String> sexAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dropOutMenusReg3.getSexList());
-        AutoCompleteTextView textViewSex = (AutoCompleteTextView)
-                findViewById(R.id.dog_sex_list);
+        AutoCompleteTextView textViewSex =  DogSex;
         textViewSex.setAdapter(sexAdapter);
 
         //Auto complete drop out menu for dog wight
         ArrayAdapter<String> weightAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line, dropOutMenusReg3.getWeightList());
-        AutoCompleteTextView textViewWeight = (AutoCompleteTextView)
-                findViewById(R.id.dog_weight_list);
+        AutoCompleteTextView textViewWeight =  DogWeight;
         textViewWeight.setAdapter(weightAdapter);
 
 
@@ -140,13 +136,7 @@ public class Register3 extends AppCompatActivity {
                 goToReg4(documentReference.getId(),DogBreedInput);
 
             }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("SOMETHING WHENT BAD", "WIKES");
-
-            }
-        });
+        }).addOnFailureListener(e -> Log.e("SOMETHING WHENT BAD", "WIKES"));
     }
 
     private void goToReg4(String dogId, String breed){
