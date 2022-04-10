@@ -18,13 +18,12 @@ import com.example.Playpalv2.flipCards.CardBackFragment;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-
 public class DogOwnerProfile extends AppCompatActivity {
 
     ActivityServicesBinding activityServicesBinding;
     FragmentManager manager;
-    FrameLayout myframeLayout;
-    private  String cont2 = "container_dog_ownerprofile_edit";
+    FrameLayout myframeLayout2;
+    private  String cont2 = "container_dog_owner_profile_edit";
 
     private  String cont = cont2;
     boolean showingWalking;
