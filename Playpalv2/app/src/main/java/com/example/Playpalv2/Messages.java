@@ -202,8 +202,8 @@ public class Messages extends DrawerBase {
             Intent intent = new Intent(Messages.this, ChatRoom.class);
             //String dogName = intent.getExtras().getString("firstName");
             intent.putExtra("dogName", firstName.getText().toString());
-            intent.putExtra("dogImage", images.toString());
-            Log.e("images", images.toString());
+            intent.putExtra("dogImage", "https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/images%2F0050ba9e-639f-4d4b-90a8-657e1d18a0a9?alt=media&token=ffebca53-915d-432a-8406-7617ebe9a7e2");
+            //Log.e("images", getImages());
             //intent.putExtra("images", images);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -5,15 +5,15 @@ plugins {
 
 android {
     // Agustin needs to comment out compileSdk 31 when pushing
-    //compileSdk 31
-    compileSdkPreview "Tiramisu"
+    compileSdk 31
+    // compileSdkPreview "Tiramisu"
 
     defaultConfig {
         applicationId "com.example.Playpalv2"
         minSdk 22
         // Agustin needs to comment out targetSdk 31 when pushing
-        //targetSdk 31
-        targetSdkPreview "Tiramisu"
+        targetSdk 31
+        // targetSdkPreview "Tiramisu"
         versionCode 1
         versionName "1.0"
 
