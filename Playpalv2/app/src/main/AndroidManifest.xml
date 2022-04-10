@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Playpal">
         <activity
-            android:name=".Reg4"
+            android:name=".registrationClasses.Reg4"
             android:exported="false" />
 
         <activity
-            android:name=".Register3"
+            android:name=".registrationClasses.Register3"
             android:exported="false"/>
-           <!-- <intent-filter>
+          <!--  <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -39,13 +39,13 @@
             android:exported="true"/>
         <activity
             android:name=".flipCards.MainActivity"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Services"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".Messages"
-            android:exported="true" />
+            android:exported="false" />
         <activity
             android:name=".ChatRoom"
             android:exported="true" />

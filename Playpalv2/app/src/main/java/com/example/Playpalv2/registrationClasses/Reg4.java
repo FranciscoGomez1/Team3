@@ -1,6 +1,5 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.registrationClasses;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,24 +10,20 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.Playpalv2.GridAdapter;
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityReg4Binding;
 import com.example.Playpalv2.flipCards.MainActivity;
-import com.example.Playpalv2.franciscoClassesForRegistrationVersion.ImagesToFirestore;
+import com.example.Playpalv2.imagesToFirestore.ImagesToFirestore;
 import com.example.Playpalv2.progressDialog.CustomProgressDialog;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 
 public class Reg4 extends AppCompatActivity {
 
@@ -79,9 +74,9 @@ public class Reg4 extends AppCompatActivity {
 
         pickBtn.setOnClickListener(View -> {
             // Agustin needs to comment these out when pushing
-            /*Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+            Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
             intent.putExtra(MediaStore.EXTRA_PICK_IMAGES_MAX, maxNumPhotosAndVideos);
-            startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);*/
+            startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);
 
         });
         // This sets the image the user pick from their phone gallery
@@ -95,7 +90,7 @@ public class Reg4 extends AppCompatActivity {
             imagesToFirestore.addImagesOfDogToFirebase();
             imagesToFirestore.setReg4(this);
             // "Links the dog with its owner.
-          //-->  setDogReferenceToDogOwner(dogId, breed);
+            setDogReferenceToDogOwner(dogId, breed);
 
             // Moves to the next activity
             while(true) {

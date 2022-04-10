@@ -1,24 +1,16 @@
-package com.example.Playpalv2.franciscoClassesForRegistrationVersion;
+package com.example.Playpalv2.imagesToFirestore;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
-import com.example.Playpalv2.Messages;
-import com.example.Playpalv2.PlaypalRegister2;
-import com.example.Playpalv2.Reg4;
-import com.example.Playpalv2.Register3;
-import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.progressDialog.CustomProgressDialog;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;

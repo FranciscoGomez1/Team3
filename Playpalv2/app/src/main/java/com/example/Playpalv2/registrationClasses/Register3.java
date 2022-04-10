@@ -1,6 +1,4 @@
-package com.example.Playpalv2;
-
-import static androidx.fragment.app.FragmentManager.TAG;
+package com.example.Playpalv2.registrationClasses;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,14 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.Playpalv2.flipCards.MainActivity;
-import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DogBreeds;
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.RegisterPage3;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -30,7 +26,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class Register3 extends AppCompatActivity {
 

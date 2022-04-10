@@ -9,9 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.Playpalv2.Reg4;
-import com.example.Playpalv2.Register3;
-import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.LogIn;
 import com.example.Playpalv2.PlaypalRegister2;
 import com.example.Playpalv2.R;
