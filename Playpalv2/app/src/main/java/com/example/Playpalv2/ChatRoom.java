@@ -3,6 +3,7 @@ package com.example.Playpalv2;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirestoreRegistrar;
 import com.google.firebase.firestore.Query;
 
 import java.util.HashMap;
@@ -44,13 +46,20 @@ public class ChatRoom extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room);
 
+        Intent intent = getIntent();
+        String dogName = intent.getStringExtra("dogName");
+        String dogImage = intent.getStringExtra("dogImage");
+        Log.e("PLEASE GOD", dogName);
+        Log.e("PLEASE GOD", dogImage);
+
         newMsg = findViewById(R.id.newMsg);
         sendBtn = findViewById(R.id.sendMsg);
         backBtn = findViewById(R.id.backBtn);
         dogPic = findViewById(R.id.profileImg);
         firstName = findViewById(R.id.firstName);
+        firstName.setText(dogName);
 
-        //Intent intent = getIntent();
+
 
         db = FirebaseFirestore.getInstance();   //
         adapterList = findViewById(R.id.chatRecyclerView);
@@ -62,6 +71,16 @@ public class ChatRoom extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+/*
+        private void sendMessage(String sender, String receiver, String message) {
+            DatabaseReference reference = FirebaseFirestore.getInstance();
+            db = FirebaseFirestore.getInstance().getClass();
+            HashMap<String, Object> hashMap = new HashMap<>();
+            hashMap.put("sender", sender);
+            hashMap.put("receiver", receiver);
+            hashMap.put("message", message);
+        });*/
 
         /*sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override

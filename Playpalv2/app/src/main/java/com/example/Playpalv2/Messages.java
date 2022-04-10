@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,8 +170,6 @@ public class Messages extends DrawerBase {
 
             firstName = itemView.findViewById(R.id.firstName);
             bio = itemView.findViewById(R.id.bio);
-            //images = (CircleImageView) findViewById(R.id.image);
-            //images = itemView.findViewById(R.id.images);
             images = (CircleImageView) itemView.findViewById(R.id.images);
             //time = firebase.firestore.FieldValue.serverTimestamp();
             //time = itemView.findViewById(R.id.time);
@@ -199,10 +198,17 @@ public class Messages extends DrawerBase {
         @Override
         public void onClick(View v) {
             int position = getAbsoluteAdapterPosition();
-            Toast.makeText(firstName.getContext(), "position" + position, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(firstName.getContext(), ChatRoom.class);
-            //intent.putExtra("dogName",  NewMatches.get(position).getFirstName());
-            firstName.getContext().startActivity(intent);
+            Toast.makeText(Messages.this, "position" + position, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Messages.this, ChatRoom.class);
+            //String dogName = intent.getExtras().getString("firstName");
+            intent.putExtra("dogName", firstName.getText().toString());
+            intent.putExtra("dogImage", images.toString());
+            Log.e("images", images.toString());
+            //intent.putExtra("images", images);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
         }
 
         /*public interface ClickListener {
