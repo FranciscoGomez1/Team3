@@ -59,7 +59,9 @@ public class ChatRoom extends AppCompatActivity {
         firstName = findViewById(R.id.firstName);
         firstName.setText(dogName);
 
-
+        Glide.with(this)
+                .load(dogImage)
+                .into(dogPic);
 
         db = FirebaseFirestore.getInstance();   //
         adapterList = findViewById(R.id.chatRecyclerView);
