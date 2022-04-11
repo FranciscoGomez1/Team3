@@ -33,24 +33,13 @@
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/drawable/modern_round.xml" value="0.1" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/layout/fragment_card_front.xml" value="0.17980072463768115" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_check.xml" value="0.2065" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_dislike.xml" value="0.2065" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_likes.xml" value="0.2515" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_x.xml" value="0.242" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_log_in.xml" value="0.6" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_main.xml" value="0.3138888888888889" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_register2.xml" value="0.13297872340425532" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_registration.xml" value="0.14666666666666667" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_reg4.xml" value="0.13297872340425532" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_register3.xml" value="0.259375" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_user_uploads_images.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_main.xml" value="0.10677083333333333" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_registration.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/fragment_card_back.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/fragment_card_back_1.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/fragment_card_front.xml" value="0.10677083333333333" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/fragment_card_front_1.xml" value="0.1" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/fragment_card_front_2.xml" value="0.10677083333333333" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/grid_photo.xml" value="0.3125" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/user_uploads_images.xml" value="0.11574074074074074" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/flippingApp/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.16875" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/flippingApp/app/src/main/res/drawable/home.xml" value="0.16875" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/flippingApp/app/src/main/res/drawable/ic_home.xml" value="0.20052083333333334" />
@@ -111,17 +100,21 @@
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_drawer_base.xml" value="0.2793819655521783" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_messages.xml" value="0.1" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_register2.xml" value="0.26666666666666666" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_registration.xml" value="0.2793819655521783" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_reg4.xml" value="0.2793819655521783" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_register3.xml" value="0.26666666666666666" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_registration.xml" value="0.1" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/activity_services.xml" value="0.12092391304347826" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/content_registration.xml" value="0.1334853090172239" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_card_back.xml" value="0.12092391304347826" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_card_front.xml" value="0.12092391304347826" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_display_dog_owner_profile.xml" value="0.26671732522796354" />
-        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_display_dog_profile.xml" value="0.2" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_display_dog_profile.xml" value="0.264" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_dog_owner_photo_items.xml" value="0.26671732522796354" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_dog_photo_items.xml" value="0.264" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_edit_dog_owner_profile.xml" value="0.26671732522796354" />
-        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_edit_dog_profile.xml" value="0.2793819655521783" />
+        <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/layout/fragment_edit_dog_profile.xml" value="0.2" />
         <entry key="..\:/Users/markr/Documents/Team3/Playpalv2/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.1" />
       </map>
     </option>
@@ -135,7 +128,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.6" />
+        <option name="scale" value="0.12" />
       </ProjectState>
     </option>
   </component>

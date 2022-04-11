@@ -105,5 +105,9 @@
     <string name="or_register_with">Or Register With</string>
     <string name="register">Register</string>
 
+    <string name="edit_owner_profile">Your Profile</string>
+    <string name="owner_bio_hint">Owner Bio</string>
+
+
 
 </resources>

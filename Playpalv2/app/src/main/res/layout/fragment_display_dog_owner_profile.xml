@@ -19,9 +19,11 @@
         android:id="@+id/tittle2_display23"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/tell_us_about_your_doggo"
+        android:text="@string/tell_us_about_you"
         android:textAlignment="center"
-        android:textSize="25sp"/>
+        android:textSize="25sp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp" />
 
     <!--<TextView
         android:id="@+id/dog_name223"
