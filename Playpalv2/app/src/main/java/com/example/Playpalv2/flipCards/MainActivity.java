@@ -29,6 +29,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import com.google.android.material.button.MaterialButton;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -66,8 +67,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private int position;
     private Integer doubleTapFlag = 0;
 
-    private MaterialButton likeBtn;
-    private MaterialButton dislikeBtn;
+    private FloatingActionButton likeBtn;
+    private FloatingActionButton dislikeBtn;
     private MaterialButton showDogProfile;
 
 
@@ -249,7 +250,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 dog1 = qDogs.poll();
 
                 // Initialize the queue of dog cards
-                intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);
+                intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclas that holds a dog owner and a dog.
 
             }
         });

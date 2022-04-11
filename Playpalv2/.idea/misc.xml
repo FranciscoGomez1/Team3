@@ -33,7 +33,11 @@
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/drawable/modern_round.xml" value="0.1" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Playpalv2/app/src/main/res/layout/fragment_card_front.xml" value="0.17980072463768115" />
-        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_main.xml" value="0.10677083333333333" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_check.xml" value="0.2065" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_dislike.xml" value="0.2065" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_likes.xml" value="0.2515" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/drawable/ic_x.xml" value="0.242" />
+        <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_main.xml" value="0.3138888888888889" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_register2.xml" value="0.13297872340425532" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_playpal_registration.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/franc/AndroidStudioProjects/Team3/Playpalv2/app/src/main/res/layout/activity_reg4.xml" value="0.13297872340425532" />
@@ -129,7 +133,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.12" />
+        <option name="scale" value="0.3138888888888889" />
       </ProjectState>
     </option>
   </component>

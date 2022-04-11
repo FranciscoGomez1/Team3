@@ -43,9 +43,18 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_dislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:backgroundTint="#F4315E"
+            android:src="@drawable/ic_dislike"
+            android:contentDescription="@string/likes"
+            android:layout_margin="16dp" />
 
 
-        <com.google.android.material.button.MaterialButton
+       <!-- <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_dislike"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="55dp"
@@ -63,7 +72,7 @@
             app:icon="@drawable/close_circle_outline"
             app:iconGravity="textStart"
             app:iconPadding="0dp"
-            app:iconSize="55dp" />
+            app:iconSize="55dp" />-->
 
 
         <com.google.android.material.button.MaterialButton
@@ -71,7 +80,8 @@
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/orange_500"
+            android:backgroundTint="#EEE"
+            android:textColor="@color/black"
             android:gravity="center"
             android:insetLeft="0dp"
             android:insetTop="0dp"
@@ -82,7 +92,7 @@
             android:text="@string/view_potential_match_profile"
             />
 
-        <com.google.android.material.button.MaterialButton
+    <!--    <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_like"
             style="@style/Widget.MaterialComponents.Button.Icon"
             android:layout_width="55dp"
@@ -102,8 +112,17 @@
             app:iconSize="55dp"
 
 
-            />
-
+            />-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            app:backgroundTint="#86DF60"
+            android:tint="@android:color/white"
+            android:src="@drawable/ic_check"
+            android:contentDescription="@string/likes"
+            android:layout_margin="16dp" />
 
     </LinearLayout>
 
