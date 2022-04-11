@@ -181,7 +181,7 @@
 
 
 
-        <ImageView
+      <!--  <ImageView
             android:id="@+id/lineTop"
             android:layout_width="361dp"
             android:layout_height="35dp"
@@ -189,7 +189,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_register"
-            app:srcCompat="@drawable/line2" />
+            app:srcCompat="@drawable/line2" />-->
+    <View
+        android:id="@+id/lineTop"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/orange_300"
+        android:contentDescription="@string/lineTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_register" />
 
         <ImageButton
             android:id="@+id/googleSignIn"
@@ -247,7 +259,8 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2"
             app:srcCompat="@drawable/facebook" />
 
-        <ImageView
+
+       <!-- <ImageView
             android:id="@+id/lineBottom"
             android:layout_width="361dp"
             android:layout_height="35dp"
@@ -256,16 +269,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/twitterSignIn"
             app:srcCompat="@drawable/line2" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/or_register_with"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/lineTop" />
+-->
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/or_register_with"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lineTop" />
+    <View
+        android:id="@+id/lineBottom"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginRight="30dp"
+        android:background="@color/orange_300"
+        android:contentDescription="@string/lineTop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/twitterSignIn" />
 
        <!-- <TextView
             android:id="@+id/haveAnAccount"
