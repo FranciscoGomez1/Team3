@@ -91,11 +91,11 @@
                     android:id="@+id/edit_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/email_address"
+                    android:hint="@string/edit_email"
                     android:inputType="textEmailAddress"
                     android:textColorHint="#78909C"
                     android:textSize="20sp"
-                    android:autofillHints="@string/edit_email_address" />
+                    android:autofillHints="@string/edit_email" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
