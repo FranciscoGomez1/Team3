@@ -52,7 +52,7 @@ public class PlaypalRegister extends AppCompatActivity {
         setContentView(R.layout.activity_playpal_registration);
 
         btnRegister = findViewById(R.id.btn_register); // Link to the xml bottom element
-        btnSignIn = findViewById(R.id.button_sign_in); //link to sign in
+        //btnSignIn = findViewById(R.id.button_sign_in); //link to sign in
 
         firstName = findViewById(R.id.first_name);
         lastName = findViewById(R.id.last_name);
@@ -80,10 +80,10 @@ public class PlaypalRegister extends AppCompatActivity {
         });
 
         // Set a clickListner
-        btnSignIn.setOnClickListener(view -> { // When clicked it takes user to the main activity
+      /*  btnSignIn.setOnClickListener(view -> { // When clicked it takes user to the main activity
             // firebaseUser.sendEmailVerification();
            goToLogIn();
-        });
+        });*/
     }
 
     private boolean registerUser(String inputFirtName, String inputLastName, String inputEmail, String inputMobile, String inputPassword) {

@@ -101,6 +101,9 @@
     <string name="add_photos">Add photos</string>
     <string name="view_potential_match_profile">View Profile</string>
     <string name="likes">likesBtn</string>
+    <string name="confirm_passsword">Confirm Passsword</string>
+    <string name="or_register_with">Or Register With</string>
+    <string name="register">Register</string>
 
 
 </resources>
