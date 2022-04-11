@@ -10,10 +10,12 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="36dp"
         android:text="@string/tell_us_about_your_doggo"
         android:textAlignment="center"
-        android:textSize="25sp"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange_500"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -22,22 +24,20 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dog_name_texfield"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="10dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
+        android:layout_width="373dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="40dp"
         app:endIconMode="clear_text"
         app:helperTextTextColor="#4F4F4F"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/title">
 
         <EditText
             android:id="@+id/dog_name"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:autofillHints="Dog's name"
             android:hint="@string/dog_name_hint"
             android:imeOptions="actionNext"
@@ -47,12 +47,10 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dog_breeds_textfield"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_width="373dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/dog_breed"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dog_name_texfield">
@@ -61,29 +59,68 @@
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/breeds_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:completionThreshold="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dog_age_input_texfield"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:hint="@string/age"
-        app:layout_constraintEnd_toEndOf="@+id/dog_sex_input_texfield"
-        app:layout_constraintEnd_toStartOf="@id/dog_sex_input_texfield"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dog_breeds_textfield">
 
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/dog_age_list"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:completionThreshold="3" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dog_energy_level_input_texfield"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:gravity="center"
+        android:hint="Energy Level"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_breeds_textfield">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/dog_energy_level_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:completionThreshold="3"
+            android:gravity="center" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/dog_weight_input_texfield"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:hint="@string/weight"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_age_input_texfield">
+
+        <com.google.android.material.textfield.MaterialAutoCompleteTextView
+            android:id="@+id/dog_weight_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:completionThreshold="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -91,38 +128,18 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dog_sex_input_texfield"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="125dp"
-        android:layout_marginTop="12dp"
-        android:layout_height="wrap_content"
+        android:layout_width="170dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:hint="@string/sex"
-        app:layout_constraintEnd_toEndOf="@+id/dog_weight_input_texfield"
-        app:layout_constraintStart_toEndOf="@id/dog_age_input_texfield"
-        app:layout_constraintTop_toBottomOf="@+id/dog_breeds_textfield">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dog_energy_level_input_texfield">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/dog_sex_list"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:completionThreshold="3" />
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/dog_weight_input_texfield"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        android:gravity="center"
-        android:hint="@string/weight"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/dog_sex_input_texfield"
-        app:layout_constraintTop_toBottomOf="@+id/dog_breeds_textfield">
-
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/dog_weight_list"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:completionThreshold="3" />
 
     </com.google.android.material.textfield.TextInputLayout>
@@ -130,31 +147,27 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/dog_bio_input_texfield"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-
-        android:layout_marginTop="30dp"
+        android:layout_width="381dp"
+        android:layout_height="205dp"
+        android:layout_marginTop="20dp"
         app:endIconMode="clear_text"
+
+
         app:helperTextTextColor="#4F4F4F"
-
-
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.517"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dog_sex_input_texfield"
 
-        >
+        app:layout_constraintTop_toBottomOf="@+id/dog_weight_input_texfield">
 
         <EditText
             android:id="@+id/dog_bio"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:autofillHints="Dog's Bio"
+            android:gravity="start"
             android:hint="@string/dog_bio_hint"
             android:imeOptions="actionNext"
             android:inputType="textMultiLine"
-            android:gravity="start"
 
             />
 
@@ -165,7 +178,6 @@
         style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="55dp"
         android:layout_height="55dp"
-        android:layout_marginEnd="15dp"
         android:backgroundTint="@color/teal_200"
         android:gravity="center"
         android:insetLeft="0dp"
@@ -180,7 +192,9 @@
         app:iconSize="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.932"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dog_bio_input_texfield"
-        app:layout_constraintVertical_bias="0.487" />
+        app:layout_constraintVertical_bias="0.755" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
