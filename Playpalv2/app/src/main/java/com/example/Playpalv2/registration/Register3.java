@@ -118,31 +118,28 @@ public class Register3 extends AppCompatActivity {
         CollectionReference collecRef = db.collection("Dog Breeds").
                 document(DogBreedInput).collection("Dogs");
         Map<String,Object> dogInfo = new HashMap<>();
-        dogInfo.put("Name", DogNameInput);
-        dogInfo.put("Breed", DogBreedInput );
-        dogInfo.put("Age", DogAgeInput);
-        dogInfo.put("Sex", DogSexInput);
-        dogInfo.put("Weight", DogWeightInput);
-        dogInfo.put("Bio", DogBioInput);
+        dogInfo.put("name", DogNameInput);
+        dogInfo.put("breed", DogBreedInput );
+        dogInfo.put("age", DogAgeInput);
+        dogInfo.put("sex", DogSexInput);
+        dogInfo.put("weight", DogWeightInput);
+        dogInfo.put("bio", DogBioInput);
        // dogInfo.put("Images","");
-        dogInfo.put("Owner", userID);
+        dogInfo.put("owner", userID);
 
 
-        collecRef.add(dogInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
+        collecRef.add(dogInfo).addOnSuccessListener(documentReference -> {
 
-                Log.e("THIS IS THE DOCUMENT ID", documentReference.getId());
-                goToReg4(documentReference.getId(),DogBreedInput);
+            Log.e("THIS IS THE DOCUMENT ID", documentReference.getId());
+            goToReg4(documentReference.getId(),DogBreedInput);
 
-            }
         }).addOnFailureListener(e -> Log.e("SOMETHING WHENT BAD", "WIKES"));
     }
 
     private void goToReg4(String dogId, String breed){
 
         Intent intent = new Intent(this, Reg4.class);
-        intent.putExtra("dogId", dogId);
+        intent.putExtra("dog_id", dogId);
         intent.putExtra("breed", breed);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_NEW_TASK);

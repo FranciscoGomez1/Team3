@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.R;
+import com.example.Playpalv2.view_models.DogViewModel;
 
 import java.util.Objects;
 
@@ -45,9 +46,9 @@ public class CardFrontFragment1 extends Fragment {
                 dogName.setText(dogViewModel.getDog1().getValue().getName());
                 dogBio.setText(dogViewModel.getDog1().getValue().getBio());
 
-                String onlineImg = Objects.requireNonNull(dogViewModel.getDog1().getValue()).getAlbum().get(0);
+                String onlineImg = Objects.requireNonNull(dogViewModel.getDog1().getValue()).getImages().get(0);
 
-                if(onlineImg != "") {
+                if(!onlineImg.equals("")) {
                     Glide.with(this).load(onlineImg).into(profilePic);
                 }
                 else{

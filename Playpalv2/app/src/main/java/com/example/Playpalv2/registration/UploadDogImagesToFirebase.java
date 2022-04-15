@@ -60,7 +60,7 @@ public class UploadDogImagesToFirebase extends ImagesToFirestore{
          DocumentReference docRef = db.collection("Dog Breeds").
                  document(breed).collection("Dogs").document(dogId);
          Map<String, Object> Images = new HashMap<>();
-         Images.put("Images", imagesList);
+         Images.put("images", imagesList);
 
 
          docRef.update(Images).addOnCompleteListener(task -> {

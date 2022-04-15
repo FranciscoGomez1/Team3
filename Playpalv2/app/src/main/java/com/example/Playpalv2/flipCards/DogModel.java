@@ -5,89 +5,93 @@ import java.net.URI;
 import java.util.List;
 
 public class DogModel {
-    private String name;
-    private String bio;
-    private String age;
-    private String breed;
-    private String owner;
+/*
+    private String accountCreated;
+*/
+  private String age;
+  private String bio;
+  private String breed;
+  private List<String> images;
+  private String name;
+  private String owner;
+  private String sex;
+  private String weight;
 
-    public String getName() {
-        return name;
-    }
+  public DogModel() {
+  }
 
-    public void setName(String name) {
-        this.name = name;
-    }
+  public DogModel(String age, String bio, String breed, List<String> images, String name, String owner, String sex, String weight) {
+    this.age = age;
+    this.bio = bio;
+    this.breed = breed;
+    this.images = images;
+    this.name = name;
+    this.owner = owner;
+    this.sex = sex;
+    this.weight = weight;
+  }
 
-    public String getBio() {
-        return bio;
-    }
+  public String getAge() {
+    return age;
+  }
 
-    public void setBio(String bio) {
-        this.bio = bio;
-    }
+  public void setAge(String age) {
+    this.age = age;
+  }
 
-    public String getAge() {
-        return age;
-    }
+  public String getBio() {
+    return bio;
+  }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
+  public void setBio(String bio) {
+    this.bio = bio;
+  }
 
-    public String getBreed() {
-        return breed;
-    }
+  public String getBreed() {
+    return breed;
+  }
 
-    public void setBreed(String breed) {
-        this.breed = breed;
-    }
+  public void setBreed(String breed) {
+    this.breed = breed;
+  }
 
-    public String getOwner() {
-        return owner;
-    }
+  public List<String> getImages() {
+    return images;
+  }
 
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
+  public void setImages(List<String> images) {
+    this.images = images;
+  }
 
-    public String getSex() {
-        return sex;
-    }
+  public String getName() {
+    return name;
+  }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+  public void setName(String name) {
+    this.name = name;
+  }
 
-    public String getWeight() {
-        return weight;
-    }
+  public String getOwner() {
+    return owner;
+  }
 
-    public void setWeight(String weight) {
-        this.weight = weight;
-    }
+  public void setOwner(String owner) {
+    this.owner = owner;
+  }
 
-    public List<String> getAlbum() {
-        return album;
-    }
+  public String getSex() {
+    return sex;
+  }
 
-    public void setAlbum(List<String> album) {
-        this.album = album;
-    }
+  public void setSex(String sex) {
+    this.sex = sex;
+  }
 
-    private String sex;
-    private String weight;
-    List<String>  album;
+  public String getWeight() {
+    return weight;
+  }
 
-    public DogModel(String age, String bio, String breed, List<String> album, String name, String owner, String sex, String weight){
-        this.age = age;
-        this.bio = bio;
-        this.breed = breed;
-        this.album = album;
-        this.name = name;
-        this.owner = owner;
-        this.sex = sex;
-        this.weight = weight;
-
-    }
+  public void setWeight(String weight) {
+    this.weight = weight;
+  }
 }

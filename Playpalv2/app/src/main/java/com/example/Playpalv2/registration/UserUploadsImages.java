@@ -47,7 +47,7 @@ public class UserUploadsImages extends AppCompatActivity {
         setContentView(binding.getRoot());
         //setContentView(R.layout.activity_user_uploads_images);
         Intent myIntent = getIntent();
-        String userId = myIntent.getExtras().getString("userId");
+        String userId = myIntent.getExtras().getString("user_id");
 
        uploadUserImagesToFirebase = new UploadUserImagesToFirebase(userImages,"Dog Owners",userId,this);
 

@@ -18,12 +18,14 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
             <ImageView
+                android:id="@+id/dog_owner_image1"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
                 android:src="@drawable/card_back"
                 android:contentDescription="@string/dog_owner_image_1" />
             <TextView
+                android:id="@+id/dog_owner_name1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dog_owner_1"
@@ -33,9 +35,9 @@
                 android:fontFamily="sans-serif-black"
                 android:textSize="30sp"/>
             <TextView
+                android:id="@+id/dog_ower_bio1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_margin="5dp"
                 android:text="@string/dog_owner_bio_1"
                 android:textSize="18sp"

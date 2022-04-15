@@ -38,8 +38,8 @@ public class PlaypalRegister2 extends AppCompatActivity {
 
     private String date;
 
-    FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseFirestore db;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseFirestore db;
 
     private static final String TAG= "PlaypalRegister2";
 
@@ -63,7 +63,7 @@ public class PlaypalRegister2 extends AppCompatActivity {
             String inputDogOwnerBio = dogOwnerBio.getText().toString();
             setDogOwnerBio(inputDogOwnerBio, owerDOB);
             Intent intent = new Intent(PlaypalRegister2.this, UserUploadsImages.class);
-            intent.putExtra("userId", userID);
+            intent.putExtra("user_id", userID);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                     | Intent.FLAG_ACTIVITY_NEW_TASK);
 
@@ -107,8 +107,8 @@ public class PlaypalRegister2 extends AppCompatActivity {
         //Set a hashmap to pass data to the database
         Map<String,Object> userBio = new HashMap<>();
         Map<String,Object> userDob = new HashMap<>();
-        userBio.put("Bio", inputDogOwnerBio);
-        userDob.put("DOB", inputDogOwnerBio);
+        userBio.put("bio", inputDogOwnerBio);
+        userDob.put("dob", inputDogOwnerBio);
 
 
         docRef.update(userBio).addOnCompleteListener(task -> {

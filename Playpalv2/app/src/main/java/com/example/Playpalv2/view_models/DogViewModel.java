@@ -1,7 +1,9 @@
-package com.example.Playpalv2.flipCards;
+package com.example.Playpalv2.view_models;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
+import com.example.Playpalv2.flipCards.DogModel;
 
 public class DogViewModel extends ViewModel {
     private MutableLiveData<DogModel> dogMutableLiveData;

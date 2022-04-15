@@ -1,7 +1,6 @@
 
 package com.example.Playpalv2.flipCards;
 
-import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -21,8 +19,15 @@ import com.example.Playpalv2.R;
 import com.example.Playpalv2.Services;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.example.Playpalv2.get_from_firestore.GetDogOwner;
+import com.example.Playpalv2.get_from_firestore.GetDogs;
+import com.example.Playpalv2.get_from_firestore.OnGotDogOwnerListener;
+import com.example.Playpalv2.get_from_firestore.OnGotDogsListener;
+import com.example.Playpalv2.models.CardModel;
+import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.view_models.CardsQueueViewModel;
+import com.example.Playpalv2.view_models.DogOwnerView;
+import com.example.Playpalv2.view_models.DogViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -31,19 +36,11 @@ import com.google.android.material.button.MaterialButton;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
-import java.net.URI;
-import java.net.URL;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
 import java.util.Queue;
 
 public class MainActivity extends DrawerBase implements View.OnTouchListener {
@@ -67,34 +64,39 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private int position;
     private Integer doubleTapFlag = 0;
 
+    private DogOwnerModel thisDogOwner;
+
     private FloatingActionButton likeBtn;
     private FloatingActionButton dislikeBtn;
     private MaterialButton showDogProfile;
 
 
-    DogViewModel dogViewModel;
-
+    private DogViewModel dogViewModel;
+    private DogOwnerView dogOwnerView;
     ActivityMainBinding activityMainBinding; //This is for the top navigation bar
 
 
     private DogModel dog;
     private DogModel dog1;
+    private CardModel card;
+    private CardModel card1;
+
     private TextView profileBtn;
-    FragmentManager manager;
+    private FragmentManager manager;
 
     // FOR TOOLBAR NAVIGATION
-    MaterialToolbar toolbar;
-    // -->DrawerLayout drawerLayout;
-    NavigationView navigationView;
-    FrameLayout myframeLayout;
+    private MaterialToolbar toolbar;
+    private NavigationView navigationView;
+    private FrameLayout myframeLayout;
 
-   Queue<DogModel> qDogs = new LinkedList<>();
+    private CardsQueueViewModel cardsQueueViewModel;
+    private Queue<CardModel> qCards = new LinkedList<>();
+    private Queue<DogModel> qDogs = new LinkedList<>();
+    private GetDogs getDogoos = new GetDogs();
 
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
 
     FirebaseFirestore db;
-    //FirebaseAuth mAuth = FirebaseAuth.getInstance();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +109,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
 
 
-        //set title to top bar
+
+    //set title to top bar
         allocateActivityTitle("Home");
         //new waitForFirebase().execute();
 
@@ -119,20 +122,26 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
        // qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
 
 
-       /* dog = qDogs.poll();
-        dog1 = qDogs.poll();
-*/
         dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
         dogViewModel.init();
-
+        dogOwnerView = new ViewModelProvider(this).get(DogOwnerView.class);
+        dogOwnerView.init();
+       /* dog = qDogs.poll();
+        dog1 = qDogs.poll();
+        dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
+        dogViewModel.init();*/
+       /* cardViewModel = new ViewModelProvider(this).get(CardViewModel.class);
+        cardViewModel.init();*/
 
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         int id2 = getResources().getIdentifier(cont2, "id", getPackageName());
+        View v1 = findViewById(R.id.container);
+        View v2 = findViewById(R.id.container1);
 
         View frameLayoutView = findViewById(id);
         View frameLayoutView2 = findViewById(id2);
 
-        getDogs(frameLayoutView, frameLayoutView2);
+       getDogs(frameLayoutView, frameLayoutView2);
        /* // Initialize the queue of dog cards
         intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);*/
 
@@ -174,28 +183,24 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                     .add(R.id.container1, new CardFrontFragment1())
                     .commit();
         }
- 
+
         Log.i("FRAMELAOUT CONTEXT", frameLayoutView.getContext().toString());
         ogX = frameLayoutView.getX();
         ogY = frameLayoutView.getY();
 
         likeBtn.setOnClickListener(view -> {
-            dog = qDogs.poll();
             viewProfile();
             resetBtnText();
             canFlip = !canFlip;
-
-
-            resetCards(frameLayoutView, frameLayoutView2, view, dog);
+            dogGotLiked(frameLayoutView, frameLayoutView2, view);
         });
 
         dislikeBtn.setOnClickListener(view -> {
-            dog = qDogs.poll();
             viewProfile();
             resetBtnText();
-
             canFlip = !canFlip;
-            resetCards(frameLayoutView, frameLayoutView2, view, dog);
+            dogGotDisLiked(frameLayoutView, frameLayoutView2, view);
+          //  resetCards(frameLayoutView, frameLayoutView2, view, dog);
 
         });
 
@@ -203,29 +208,38 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             showDogProfile.setText(replaceTextForShoDogProfileBtn);
             viewProfile();
             resetBtnText();
-            canFlip = !canFlip;
         });
 
-
     }
-
 
     void resetBtnText(){
         if(!canFlip){
             showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
         }
     }
+//-->
 
     private void getDogs(View frameLayoutView, View frameLayoutView2){
+        GetDogs getDogs = new GetDogs();
+        getDogs.fetchDogs(dogs -> {
+            qDogs = dogs;
+            dog = qDogs.poll();
+            dog1 = qDogs.poll();
+        //    getDogOwner(dog);
+            //getDogOwner(dog1);
+            intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclass that holds a dog owner and a dog.
+        });
         //FirebaseFirestore db;
-        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+       /* FirebaseAuth mAuth = FirebaseAuth.getInstance();
         final String[] doc = new String[1];
-        final CollectionReference[] thisCollecRef = new CollectionReference[1];
-        db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
+        final CollectionReference[] thisCollecRef = new CollectionReference[1];*/
+
+       /* db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
         CollectionReference collecRef = db.collection("Dog Breeds").
                 document("Bulldog").collection("Dogs");
 
-        collecRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        collecRef.whereLessThan("Age",9).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+        //collecRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Log.i("TAG","ONSUCESS: IT WORKS");
@@ -253,16 +267,40 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclas that holds a dog owner and a dog.
 
             }
-        });
+        });*/
+      /*  BuildCard cards = new BuildCard();
+        cards.getCards(new OnGotCardsListener() {
+            @Override
+            public void onGotCards(Queue<CardModel> cards) {
+                Log.e("Card", cards.toString());
 
+                qCards = cards;
+                card = qCards.poll();
+                card1 = qCards.poll();
+                intCardViewModel(frameLayoutView, frameLayoutView2 , card, card1); // This has to become a cardclass that holds a dog owner and a dog.
+
+            }
+        });*/
+
+        /*GetDogs dogs = new GetDogs();
+        dogs.fetchDogs(new OnGotDogsListener(){
+         @Override
+            public void onGotDogs(Queue<DogModel> dogs) {
+                qDogs = dogs;
+                Log.e("GETDOGS", qDogs.toString());
+                dog = qDogs.poll();
+                dog1 = qDogs.poll();
+             intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclass that holds a dog owner and a dog.
+
+         }
+        });*/
     }
 
 
     private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dog, DogModel dog1) {
-
         dogViewModel.updateDog(dog);
         dogViewModel.updateDog1(dog1);
-
+        initDogOwners(dog, dog1);
         if( dog == null) {
             frameLayoutView.setVisibility(View.INVISIBLE);
             frameLayoutView2.setVisibility(View.INVISIBLE);
@@ -308,14 +346,17 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                         //Reset stack
                         Log.i("Should Be deleted:", String.valueOf(view));
                         right = false;
-                        dog = qDogs.poll();
-                        resetCards(v1, v2, view, dog);
+                        dogGotLiked(v1,v2,view);
+                        //dog = qDogs.poll();
+                        //resetCards(v1, v2, view, dog);
+//                        resetCards(v1, v2, view, dog);
                     } else if (left) {
 
                         Log.i("Should Be deleted:", String.valueOf(view));
                         left = false;
-                        dog = qDogs.poll();
-                        resetCards(v1, v2, view, dog);
+                        dogGotDisLiked(v1,v2,view);
+                        //dog = qDogs.poll();
+                       // resetCards(v1, v2, view, dog);
                     }
                     view.setX(ogX);
                     view.setY(ogY);
@@ -345,6 +386,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             cont = cont2;
             if(dog != null){
                 dogViewModel.updateDog(dog);
+                getDogOwner(dog);
+
             }else {
                 v1.setVisibility(View.INVISIBLE);
             }
@@ -354,7 +397,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             v2.setElevation(-1);
             v1.setElevation(0);
             if(dog != null) {
-                dogViewModel.updateDog1(dog);
+                dogViewModel.updateDog(dog);
+                getDogOwner1(dog);
             }else {
                 v2.setVisibility(View.INVISIBLE);
             }
@@ -394,18 +438,30 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         if (showingBack) {
             showingBack = false;
             getSupportFragmentManager().popBackStack();
-        } else {
+        }else if (cont.equals("container")){
             showingBack = true;
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .setCustomAnimations(
-                            R.anim.card_flip_right_in,
-                            R.anim.card_flip_right_out,
-                            R.anim.card_flip_left_in,
-                            R.anim.card_flip_left_out)
-                    .replace(id, new CardBackFragment())
-                    .addToBackStack(null)
-                    .commit();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.card_flip_right_in,
+                                R.anim.card_flip_right_out,
+                                R.anim.card_flip_left_in,
+                                R.anim.card_flip_left_out)
+                        .replace(id, new CardBackFragment())
+                        .addToBackStack(null)
+                        .commit();
+        }else{
+            showingBack = true;
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.card_flip_right_in,
+                                R.anim.card_flip_right_out,
+                                R.anim.card_flip_left_in,
+                                R.anim.card_flip_left_out)
+                        .replace(id, new CardBackFragment1())
+                        .addToBackStack(null)
+                        .commit();
         }
     }
     public static class FragmentUtils {
@@ -417,6 +473,60 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         FragmentUtils.mDisableFragmentAnimations = true;
         getSupportFragmentManager().popBackStackImmediate(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         FragmentUtils.mDisableFragmentAnimations = false;
+    }
+
+    void dogGotLiked(View frameLayoutView, View frameLayoutView2, View view){
+        dog = qDogs.poll();
+      //  getDogOwner(dog);
+
+        resetCards(frameLayoutView, frameLayoutView2, view, dog);
+    }
+    void dogGotDisLiked(View frameLayoutView, View frameLayoutView2, View view){
+        dog = qDogs.poll();
+       // getDogOwner(dog);
+        resetCards(frameLayoutView, frameLayoutView2, view, dog);
+    }
+
+    void initDogOwners(DogModel dog, DogModel dog1){
+        try {
+            GetDogOwner owner = new GetDogOwner(dog.getOwner());
+            owner.getOwner(dogOwner -> {
+                dogOwnerView.updateOwner(dogOwner);
+                Log.e("When did OnGotOwnerGot", dog.getName());
+            });
+
+            GetDogOwner owner1 = new GetDogOwner(dog1.getOwner());
+            owner1.getOwner(dogOwner -> {
+                dogOwnerView.updateOwner1(dogOwner);
+                Log.e("When did OnGotOwnerGot1", dog1.getName());
+            });
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
+    void getDogOwner(DogModel dog ){
+        try {
+            GetDogOwner owner = new GetDogOwner(dog.getOwner());
+            owner.getOwner(dogOwner -> {
+                thisDogOwner = dogOwner;
+                dogOwnerView.updateOwner(thisDogOwner);
+                Log.e("When did OnGotOwnerGot", "now");
+            });
+        }catch (Exception e){
+            e.getMessage();
+        }
+    }
+    void getDogOwner1(DogModel dog ){
+        try {
+            GetDogOwner owner = new GetDogOwner(dog.getOwner());
+            owner.getOwner(dogOwner -> {
+                thisDogOwner = dogOwner;
+                dogOwnerView.updateOwner1(thisDogOwner);
+                Log.e("When did OnGotOwnerGot", "now");
+            });
+        }catch (Exception e){
+            e.getMessage();
+        }
     }
 }
 

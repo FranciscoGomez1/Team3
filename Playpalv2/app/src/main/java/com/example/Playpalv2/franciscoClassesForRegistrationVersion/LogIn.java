@@ -12,10 +12,13 @@ import com.example.Playpalv2.R;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.registration.PlaypalRegister;
 
-public class LogIn extends AppCompatActivity {
+import java.time.ZoneId;
 
+public class LogIn extends AppCompatActivity {
     private Button logIn;
     private TextView register;
+    private ZoneId zoneId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class LogIn extends AppCompatActivity {
         setContentView(R.layout.activity_log_in);
         logIn = findViewById(R.id.login_btn);
         register = findViewById(R.id.register_btn);
+
 
         logIn.setOnClickListener(View ->{
             Intent intent = new Intent(LogIn.this, MainActivity.class);

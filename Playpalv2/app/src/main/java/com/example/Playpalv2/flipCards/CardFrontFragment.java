@@ -17,13 +17,14 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.R;
+import com.example.Playpalv2.view_models.DogViewModel;
 
 import java.net.URI;
 import java.net.URL;
 
 
 public class CardFrontFragment extends Fragment {
-    DogViewModel dogViewModel;
+    private DogViewModel dogViewModel;
     private TextView dogName;
     private TextView dogBio;
     private ImageView profilePic;
@@ -41,26 +42,29 @@ public class CardFrontFragment extends Fragment {
         dogName = view.findViewById(R.id.dog_name);
         dogBio = view.findViewById(R.id.dog_bio);
         profilePic = view.findViewById(R.id.dog_front_image);
+        try {
+            dogViewModel.getDog().observe(requireActivity(), DogViewModel -> {
+                if (dogViewModel.getDog().getValue() != null) {
 
-        dogViewModel.getDog().observe(requireActivity(), DogViewModel -> {
-            if(dogViewModel.getDog().getValue() != null) {
+
+                    dogName.setText(dogViewModel.getDog().getValue().getName());
+                    dogBio.setText(dogViewModel.getDog().getValue().getBio());
+                    onlineImg = dogViewModel.getDog().getValue().getImages().get(0);
+                    //"https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/DogPhotesTest%2FPony.png?alt=media&token=a45c6b4b-1b42-4bf0-8db3-7baa45291771";
+
+                    if (!onlineImg.equals("")) {
+                        Glide.with(this).load(onlineImg).into(profilePic);
+                    } else {
+                        profilePic.setImageResource(R.drawable.card_front);
+                    }
 
 
-                dogName.setText(dogViewModel.getDog().getValue().getName());
-                dogBio.setText(dogViewModel.getDog().getValue().getBio() );
-                onlineImg = dogViewModel.getDog().getValue().getAlbum().get(0);
-                        //"https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/DogPhotesTest%2FPony.png?alt=media&token=a45c6b4b-1b42-4bf0-8db3-7baa45291771";
-
-                if(onlineImg != "") {
-                    Glide.with(this).load(onlineImg).into(profilePic);
-                } else{
-                    profilePic.setImageResource(R.drawable.card_front);
                 }
 
-
-            }
-
-        });
+            });
+        }catch (Exception e){
+            e.getMessage();
+        }
 
        /* profilePic.setOnClickListener(View ->{
             Log.i("DOGGO IMAGE", "I CLICKED THE IMAGE OF THE DOG!!!!!!!");
