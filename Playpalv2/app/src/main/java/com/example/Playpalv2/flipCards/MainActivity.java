@@ -19,14 +19,15 @@ import com.example.Playpalv2.R;
 import com.example.Playpalv2.Services;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
 
+import com.example.Playpalv2.firestore_updates.RecordUserChoice;
 import com.example.Playpalv2.get_from_firestore.GetDogOwner;
 import com.example.Playpalv2.get_from_firestore.GetDogs;
-import com.example.Playpalv2.get_from_firestore.OnGotDogOwnerListener;
-import com.example.Playpalv2.get_from_firestore.OnGotDogsListener;
 import com.example.Playpalv2.models.CardModel;
 import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.models.CardsModel;
 import com.example.Playpalv2.view_models.CardsQueueViewModel;
 import com.example.Playpalv2.view_models.DogOwnerView;
+import com.example.Playpalv2.view_models.DogQueueViewModel;
 import com.example.Playpalv2.view_models.DogViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -73,11 +74,13 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
     private DogViewModel dogViewModel;
     private DogOwnerView dogOwnerView;
+    public DogQueueViewModel dogQueueViewModel;
     ActivityMainBinding activityMainBinding; //This is for the top navigation bar
 
 
-    private DogModel dog;
-    private DogModel dog1;
+    private DogModel dogCard;
+    private DogModel dogCard1;
+    private DogModel topDog;
     private CardModel card;
     private CardModel card1;
 
@@ -93,10 +96,11 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private Queue<CardModel> qCards = new LinkedList<>();
     private Queue<DogModel> qDogs = new LinkedList<>();
     private GetDogs getDogoos = new GetDogs();
-
+    private RecordUserChoice recordUserChoice;
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
-
+    private CardsModel cardsModel;
     FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         FirebaseFirestore db;
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
+        recordUserChoice = new RecordUserChoice();
 
 
 
@@ -222,12 +227,15 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private void getDogs(View frameLayoutView, View frameLayoutView2){
         GetDogs getDogs = new GetDogs();
         getDogs.fetchDogs(dogs -> {
-            qDogs = dogs;
+
+            cardsModel = new CardsModel(dogs);
+            /*qDogs = dogs;
             dog = qDogs.poll();
-            dog1 = qDogs.poll();
+            topDog = dog;
+            dog1 = qDogs.poll();*/
         //    getDogOwner(dog);
             //getDogOwner(dog1);
-            intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclass that holds a dog owner and a dog.
+            intDogViewModel(frameLayoutView, frameLayoutView2 , cardsModel.getTopDogCard(), cardsModel.getBottomDogCard()); // This has to become a cardclass that holds a dog owner and a dog.
         });
         //FirebaseFirestore db;
        /* FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -297,18 +305,18 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     }
 
 
-    private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dog, DogModel dog1) {
-        dogViewModel.updateDog(dog);
-        dogViewModel.updateDog1(dog1);
-        initDogOwners(dog, dog1);
-        if( dog == null) {
+    private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dogCard, DogModel dogCard1) {
+        dogViewModel.updateDog(dogCard);
+        dogViewModel.updateDog1(dogCard1);
+        initDogOwners(dogCard, dogCard1);
+        if( dogCard == null) {
             frameLayoutView.setVisibility(View.INVISIBLE);
             frameLayoutView2.setVisibility(View.INVISIBLE);
-        }else if(dog1 == null){
+        }else if(dogCard1 == null){
             frameLayoutView2.setVisibility(View.INVISIBLE);
         }
         else{
-            dogViewModel.updateDog1(dog1);
+            dogViewModel.updateDog1(dogCard1);
         }
     }
 
@@ -377,16 +385,16 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         return true;
     }
 
-    private void resetCards(View v1, View v2, View view, DogModel dog) {
+    private void resetCards(View v1, View v2, View view, DogModel dogCard) {
 
         if(cont.equals(cont1)){
 
             v2.setElevation(0);
             v1.setElevation(-1);
             cont = cont2;
-            if(dog != null){
-                dogViewModel.updateDog(dog);
-                getDogOwner(dog);
+            if(dogCard != null){
+                dogViewModel.updateDog(dogCard);
+                getDogOwner(dogCard);
 
             }else {
                 v1.setVisibility(View.INVISIBLE);
@@ -396,9 +404,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             cont = cont1;
             v2.setElevation(-1);
             v1.setElevation(0);
-            if(dog != null) {
-                dogViewModel.updateDog(dog);
-                getDogOwner1(dog);
+            if(dogCard != null) {
+                dogViewModel.updateDog(dogCard);
+                getDogOwner1(dogCard);
             }else {
                 v2.setVisibility(View.INVISIBLE);
             }
@@ -476,15 +484,17 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     }
 
     void dogGotLiked(View frameLayoutView, View frameLayoutView2, View view){
-        dog = qDogs.poll();
+//        recordUserChoice.userLikesThisOwnerDog(dog.getOwner());
+        recordUserChoice.userLikesThisOwnerDog(cardsModel.getTopDogCard().getOwner());
+        dogCard = cardsModel.pullCard();
       //  getDogOwner(dog);
-
-        resetCards(frameLayoutView, frameLayoutView2, view, dog);
+        resetCards(frameLayoutView, frameLayoutView2, view, dogCard);
     }
     void dogGotDisLiked(View frameLayoutView, View frameLayoutView2, View view){
-        dog = qDogs.poll();
+        recordUserChoice.userDisLikesThisOwnerDog(cardsModel.getTopDogCard().getOwner());
+        dogCard = cardsModel.pullCard();
        // getDogOwner(dog);
-        resetCards(frameLayoutView, frameLayoutView2, view, dog);
+        resetCards(frameLayoutView, frameLayoutView2, view, dogCard);
     }
 
     void initDogOwners(DogModel dog, DogModel dog1){

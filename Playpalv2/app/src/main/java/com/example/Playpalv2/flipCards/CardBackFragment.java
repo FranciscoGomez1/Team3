@@ -43,7 +43,7 @@ public class CardBackFragment extends Fragment {
         dogOwnerName = view.findViewById(R.id.dog_owner_name);
         dogOwnerBio = view.findViewById(R.id.dog_ower_bio);
 
-        Log.e("THIS DOG OWNER", Objects.requireNonNull(ownerView.getOwner().getValue()).getFirst_name());
+        //Log.e("THIS DOG OWNER", Objects.requireNonNull(ownerView.getOwner().getValue()).getFirst_name());
             ownerView.getOwner().observe(requireActivity(), DogOwnerView -> {
                 if (ownerView.getOwner().getValue() != null) {
                     dogOwnerName.setText(ownerView.getOwner().getValue().getFirst_name());

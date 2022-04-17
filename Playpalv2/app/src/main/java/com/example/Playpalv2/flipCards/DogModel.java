@@ -8,19 +8,19 @@ public class DogModel {
 /*
     private String accountCreated;
 */
-  private String age;
+  private Integer age;
   private String bio;
   private String breed;
   private List<String> images;
   private String name;
   private String owner;
   private String sex;
-  private String weight;
+  private Integer weight;
 
   public DogModel() {
   }
 
-  public DogModel(String age, String bio, String breed, List<String> images, String name, String owner, String sex, String weight) {
+  public DogModel(Integer age, String bio, String breed, List<String> images, String name, String owner, String sex, Integer weight) {
     this.age = age;
     this.bio = bio;
     this.breed = breed;
@@ -31,11 +31,11 @@ public class DogModel {
     this.weight = weight;
   }
 
-  public String getAge() {
+  public Integer getAge() {
     return age;
   }
 
-  public void setAge(String age) {
+  public void setAge(Integer age) {
     this.age = age;
   }
 
@@ -87,11 +87,11 @@ public class DogModel {
     this.sex = sex;
   }
 
-  public String getWeight() {
+  public Integer getWeight() {
     return weight;
   }
 
-  public void setWeight(String weight) {
+  public void setWeight(Integer weight) {
     this.weight = weight;
   }
 }

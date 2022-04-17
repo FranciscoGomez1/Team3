@@ -35,6 +35,7 @@ public class Register3 extends AppCompatActivity {
     private DropOutMenusReg3 dropOutMenusReg3 = new DropOutMenusReg3();
     //
     private Button nextBtn;
+    private Map<String, Object> dogOwner = new HashMap<>();
 
     FirebaseAuth auth = FirebaseAuth.getInstance();
     FirebaseFirestore db;
@@ -111,35 +112,40 @@ public class Register3 extends AppCompatActivity {
             Toast.makeText(Register3.this, "No user ID",
                     Toast.LENGTH_LONG).show();
         }
-
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
 
-       // DocumentReference docRef = db.collection("Dog Owners").document(userID);
+        // DocumentReference docRef = db.collection("Dog Owners").document(userID);
         CollectionReference collecRef = db.collection("Dog Breeds").
                 document(DogBreedInput).collection("Dogs");
         Map<String,Object> dogInfo = new HashMap<>();
         dogInfo.put("name", DogNameInput);
         dogInfo.put("breed", DogBreedInput );
-        dogInfo.put("age", DogAgeInput);
+        dogInfo.put("age", Integer.parseInt(DogAgeInput));
         dogInfo.put("sex", DogSexInput);
-        dogInfo.put("weight", DogWeightInput);
+        dogInfo.put("weight", Integer.parseInt(DogWeightInput));
         dogInfo.put("bio", DogBioInput);
-       // dogInfo.put("Images","");
+        // dogInfo.put("Images","");
         dogInfo.put("owner", userID);
 
+        collecRef.add(dogInfo).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            @Override
+            public void onSuccess(DocumentReference documentReference) {
+                dogOwner.put("Owner", userID);
 
-        collecRef.add(dogInfo).addOnSuccessListener(documentReference -> {
+                DocumentReference dogsSeen = db.collection("Dog Owners").
+                        document(userID);
+                dogsSeen.collection("dogsSeen").document(userID).set(dogOwner);
+                Log.e("THIS IS THE DOCUMENT ID", documentReference.getId());
+                goToReg4(documentReference.getId(),DogBreedInput);
 
-            Log.e("THIS IS THE DOCUMENT ID", documentReference.getId());
-            goToReg4(documentReference.getId(),DogBreedInput);
-
+            }
         }).addOnFailureListener(e -> Log.e("SOMETHING WHENT BAD", "WIKES"));
     }
 
     private void goToReg4(String dogId, String breed){
 
-        Intent intent = new Intent(this, Reg4.class);
-        intent.putExtra("dog_id", dogId);
+        Intent intent = new Intent(Register3.this, Reg4.class);
+        intent.putExtra("dogId", dogId);
         intent.putExtra("breed", breed);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_NEW_TASK);

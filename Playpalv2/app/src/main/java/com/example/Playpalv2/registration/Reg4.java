@@ -62,7 +62,7 @@ public class Reg4 extends AppCompatActivity {
         binding =  ActivityReg4Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         Intent mintent = getIntent();
-        String dogId = mintent.getExtras().getString("dog_id");
+        String dogId = mintent.getExtras().getString("dogId");
         String breed = mintent.getExtras().getString("breed");
         Log.e("PLEASE GOD", dogId);
         Log.e("PLEASE GOD", breed);
@@ -94,7 +94,7 @@ public class Reg4 extends AppCompatActivity {
             // Upload images of dog to firestore.
 
             // "Links the dog with its owner.
-             setDogReferenceToDogOwner(dogId, breed);
+            setDogReferenceToDogOwner(dogId, breed);
             uploadDogImagesToFirebase.setUserImagesLinksUrls();
             uploadDogImagesToFirebase.setMyActivity(this);
             // Moves to the next activity
@@ -143,6 +143,7 @@ public class Reg4 extends AppCompatActivity {
                 uploadDogImagesToFirebase.uploadImages();
 
                 //uploadImages();
+                return;
 
 
         }
@@ -163,8 +164,8 @@ public class Reg4 extends AppCompatActivity {
 
         //Set a hashmap to pass data to the database
         Map<String,Object> dogOwner = new HashMap<>();
-        dogOwner.put("dog_id", dogId);
-        dogOwner.put("dog_breed", dogBreed);
+        dogOwner.put("DogId", dogId);
+        dogOwner.put("DogsBreed", dogBreed);
 
 
         docRef.update(dogOwner).addOnCompleteListener(task -> {

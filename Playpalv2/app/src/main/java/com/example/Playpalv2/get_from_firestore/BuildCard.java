@@ -57,14 +57,14 @@ public class BuildCard {
                        for (DocumentSnapshot snapshot : snapshotList) {
                            Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
                            DogModel dog = (new DogModel(
-                                   Objects.requireNonNull(snapshot.get("age")).toString(),
+                                   ((Integer) Objects.requireNonNull(snapshot.get("age"))),
                                    Objects.requireNonNull(snapshot.get("bio")).toString(),
                                    Objects.requireNonNull(snapshot.get("breed")).toString(),
                                    (List<String>) snapshot.get("images"),
                                    Objects.requireNonNull(snapshot.get("name")).toString(),
                                    Objects.requireNonNull(snapshot.get("owner")).toString(),
                                    Objects.requireNonNull(snapshot.get("sex")).toString(),
-                                   Objects.requireNonNull(snapshot.get("weight")).toString())
+                                   ((Integer) Objects.requireNonNull(snapshot.get("weight"))))
                            );
                            cnt += 1;
                          //  GetDogOwner owner = new GetDogOwner(dog.getOwner());
