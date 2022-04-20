@@ -108,7 +108,8 @@
     <string name="edit_owner_profile">Your Profile</string>
     <string name="edit_email">Email Address</string>
     <string name="owner_bio_hint">Owner Bio</string>
-
+    <string name="owner_uploads_images_title">Show the community who you are</string>
+    <string name="upload_dog_images_title">Show the community your dog</string>
 
 
 </resources>

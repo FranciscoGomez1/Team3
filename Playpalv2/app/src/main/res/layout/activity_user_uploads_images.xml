@@ -6,17 +6,31 @@
     android:layout_height="match_parent"
     tools:context=".registration.UserUploadsImages">
 
+    <TextView
+        android:id="@+id/dog_owner_images_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:text="@string/owner_uploads_images_title"
+        android:textSize="20sp"
+        android:textColor="@color/orange_500"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <GridView
         android:id="@+id/grid_view_user_images"
         android:layout_width="385dp"
-        android:layout_height="659dp"
+        android:layout_height="600dp"
         android:layout_marginStart="1dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="1dp"
         android:numColumns="2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/dog_owner_images_title" />
 
     <Button
         android:id="@+id/user_picks_photos_buttom"
@@ -50,5 +64,7 @@
         app:layout_constraintEnd_toEndOf="@+id/grid_view_user_images"
         app:layout_constraintTop_toBottomOf="@+id/grid_view_user_images"
         app:layout_constraintVertical_bias="0.487" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
