@@ -20,11 +20,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirestoreRegistrar;
 import com.google.firebase.firestore.Query;
+import com.google.firestore.v1.WriteResult;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -38,6 +46,8 @@ public class ChatRoom extends AppCompatActivity {
     private TextView firstName;
 
     private FirebaseFirestore db;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private String firebaseUser = auth.getCurrentUser().getUid();
     private RecyclerView adapterList;
     private FirestoreRecyclerAdapter adapterChat;
 
@@ -57,14 +67,15 @@ public class ChatRoom extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         dogPic = findViewById(R.id.profileImg);
         firstName = findViewById(R.id.firstName);
-        firstName.setText(dogName);
 
+        firstName.setText(dogName);
         Glide.with(this)
                 .load(dogImage)
                 .into(dogPic);
 
         db = FirebaseFirestore.getInstance();   //
         adapterList = findViewById(R.id.chatRecyclerView);
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,46 +85,41 @@ public class ChatRoom extends AppCompatActivity {
             }
         });
 
-/*
-        private void sendMessage(String sender, String receiver, String message) {
-            DatabaseReference reference = FirebaseFirestore.getInstance();
-            db = FirebaseFirestore.getInstance().getClass();
-            HashMap<String, Object> hashMap = new HashMap<>();
-            hashMap.put("sender", sender);
-            hashMap.put("receiver", receiver);
-            hashMap.put("message", message);
-        });*/
-
-        /*sendBtn.setOnClickListener(new View.OnClickListener() {
+        sendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String currentMsg = newMsg.getText().toString();
                 //Toast.makeText(ChatRoom.this, currentMsg, Toast.LENGTH_SHORT).show();
                 //get current timestamps
-                String currentTimeStamp = String.valueOf(System.currentTimeMillis()).substring(0,13);
+                String currentTimeStamp = String.valueOf(System.currentTimeMillis()).substring(0, 13);
 
                 //create unique key for db that will contain msg, timestamp, and user's id in db
-                String key = FirebaseDatabase.getInstance().getReference("users").child("chats").child(chatId).push().getKey();
+                //String key = db.getInstance().collection("users").document("chats").collection("chatId").add().getKey();
 
                 if (currentMsg.length() != 0) {
-                    DatabaseReference msgHistory = FirebaseDatabase.getInstance().getReference("chats").child(chatId).child("history").child(key);
+                    CollectionReference msgHistory = db.collection("Chat Rooms")
+                            .document()
+                            .collection("Messages");
 
                     Map<String, Object> msgContent = new HashMap<>();
 
                     msgContent.put("msg", currentMsg);
                     msgContent.put("timestamp", currentTimeStamp);
-                    msgContent.put("sender", userId);
-                    msgHistory.updateChildren(msgContent);
+                    msgContent.put("sender", firebaseUser);
+                    msgHistory.add(msgContent);
 
                     newMsg.setText("");
+
+
                 }
             }
-        });*/
+        });
+
         //setUpRecyclerView5();
     }
 
-   /* private void setUpRecyclerView5() {
-        Query query = db.collection("Test Msg");
+    /*private void setUpRecyclerView5() {
+        Query query = db.collection("Chat Rooms").document().collection("Messages");
 
         FirestoreRecyclerOptions<ChatRoomModel> options = new FirestoreRecyclerOptions.Builder<ChatRoomModel>()
                 .setQuery(query, ChatRoomModel.class)
@@ -132,7 +138,7 @@ public class ChatRoom extends AppCompatActivity {
 
                 //ChatList list2 = chatLists.get(position);
 
-                if(list2.getSenderId().equals(userId)){
+                *//*if(list2.getSenderId().equals(userId)){
                     holder.myLayout.setVisibility(View.VISIBLE);
                     holder.oppoLayout.setVisibility(View.GONE);
 
@@ -144,7 +150,7 @@ public class ChatRoom extends AppCompatActivity {
 
                     holder.oppoMSG.setText(list2.getMessage());
                     holder.oppoTime.setText(list2.getDate()+" "+list2.getTime());
-                }
+                }*//*
 
 
                 holder.oppoMSG.setText(model.getOppoMSG());
@@ -192,4 +198,3 @@ public class ChatRoom extends AppCompatActivity {
         adapterChat.stopListening();
     }*/
 }
-
