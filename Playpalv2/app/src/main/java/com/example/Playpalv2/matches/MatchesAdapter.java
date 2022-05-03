@@ -46,7 +46,9 @@ public class MatchesAdapter extends RecyclerView.Adapter<MatchesAdapter.MatcheeV
     public void onBindViewHolder(@NonNull MatcheeViewHolder holder, int position) {
         Glide.with(context).load(matches.get(position).getImages().get(1)).into(holder.imageView);
 
-        holder.fname.setText(matches.get(position).getFirst_name());
+        holder.fname.setText(matches.get(position).getFirst_name()
+                + " " + matches.get(position).getLast_name()
+            );
 
     }
 

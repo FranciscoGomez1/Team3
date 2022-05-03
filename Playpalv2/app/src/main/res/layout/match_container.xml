@@ -15,42 +15,63 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/image"
+            android:layout_centerVertical="true"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:src="@drawable/rocky" />
+
+        <TextView
+            android:id="@+id/owner_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@+id/image"
+            android:text="Dog Onwer:"
+            android:textColor="#fc6d00"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/firstName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="7dp"
             android:layout_toRightOf="@+id/image"
-            android:text="TextView"
+            android:text="Owner's name"
+            android:layout_below="@+id/owner_name"
             android:textColor="#fc6d00"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textSize="17sp"
+            />
 
         <TextView
-            android:id="@+id/bio"
+            android:id="@+id/dog_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/firstName"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginTop="7dp"
             android:layout_toEndOf="@+id/image"
-            android:text="TextView"
+            android:text="Dog name:"
             android:textColor="#fc6d00"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:textStyle="bold"
+            />
 
         <TextView
-            android:id="@+id/time"
+            android:id="@+id/the_dog_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="300dp"
-            android:text="8:45pm"
-            android:textAlignment="center"
-            android:textColor="#fc6d00" />
+            android:layout_below="@+id/dog_name"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="7dp"
+            android:layout_toEndOf="@+id/image"
+            android:text="Dog name"
+            android:textColor="#fc6d00"
+            android:textSize="16sp"
+
+            />
+
 
     </RelativeLayout>
 

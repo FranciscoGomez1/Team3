@@ -48,7 +48,7 @@ public class NewMatchesAdapter extends RecyclerView.Adapter<NewMatchesAdapter.Ne
         NewMatchesViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.firstName);
-            textDescription = itemView.findViewById(R.id.bio);
+            textDescription = itemView.findViewById(R.id.dog_name);
         }
     }
 }

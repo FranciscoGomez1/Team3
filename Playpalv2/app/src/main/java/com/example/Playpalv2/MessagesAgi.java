@@ -154,7 +154,7 @@ public class MessagesAgi extends DrawerBase {
             super(itemView);
 
             firstName = itemView.findViewById(R.id.firstName);
-            bio = itemView.findViewById(R.id.bio);
+            bio = itemView.findViewById(R.id.dog_name);
             images = (CircleImageView) itemView.findViewById(R.id.image);
             //time = firebase.firestore.FieldValue.serverTimestamp();
             //time = itemView.findViewById(R.id.time);
