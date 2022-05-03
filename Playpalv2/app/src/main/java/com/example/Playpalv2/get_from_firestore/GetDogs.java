@@ -51,7 +51,7 @@ public class GetDogs {
 
         //Query query = collecRef.whereLessThan("age", 11).whereNotEqualTo("owner", mAuth);
 
-        collecRef.whereLessThan("age", 11).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        collecRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {

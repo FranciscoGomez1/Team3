@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:gravity="center"
     android:id="@+id/frontCard"
@@ -8,18 +9,70 @@
     android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="25dp"
-        android:layout_width="360dp"
-        android:layout_height="665dp"
+        android:layout_marginTop="27dp"
+        android:layout_width="383dp"
+        android:layout_height="700dp"
         android:elevation="45dp"
         card_view:cardBackgroundColor="@color/white"
         card_view:cardCornerRadius="15dp">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/dog_front_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/card_front"
+                android:scaleType="center"
+                android:contentDescription="@string/dog_image_description"
+                android:adjustViewBounds="true"
+                />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/dog_name"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:fontFamily="sans-serif-black"
+                    android:text="@string/dog_name"
+                    android:textColor="@color/white"
+                    android:textSize="25sp"
+                    card_view:layout_constraintBottom_toTopOf="@+id/dog_bio"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent"
+                    card_view:layout_constraintTop_toTopOf="parent"
+                    card_view:layout_constraintVertical_bias="1.0" />
+
+                <TextView
+                    android:id="@+id/dog_bio"
+                    android:layout_width="310dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="156dp"
+                    android:text="@string/dog_name_bio"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    card_view:layout_constraintBottom_toBottomOf="parent"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    card_view:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+        </FrameLayout>
+
+       <!-- <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <ImageView
+
+           <ImageView
                 android:id="@+id/dog_front_image"
                 android:layout_width="match_parent"
                 android:layout_height="400dp"
@@ -47,7 +100,7 @@
                 android:text="@string/dog_name_bio"
                 android:textSize="18sp"
                 android:textColor="@color/black"/>
-        </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>-->
 
 
 

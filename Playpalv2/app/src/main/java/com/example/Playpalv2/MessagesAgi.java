@@ -1,22 +1,15 @@
 package com.example.Playpalv2;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
-import android.media.Image;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,20 +19,12 @@ import com.example.Playpalv2.flipCards.MainActivity;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import org.w3c.dom.Text;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class Messages extends DrawerBase {
+public class MessagesAgi extends DrawerBase {
     ActivityMessagesBinding activityMessagesBinding; //For services
 
     private FirebaseFirestore db;   //
@@ -53,7 +38,7 @@ public class Messages extends DrawerBase {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_messages);
+        setContentView(R.layout.activity_messages_agi);
 
         activityMessagesBinding = ActivityMessagesBinding.inflate(getLayoutInflater());
         setContentView(activityMessagesBinding.getRoot());
@@ -170,7 +155,7 @@ public class Messages extends DrawerBase {
 
             firstName = itemView.findViewById(R.id.firstName);
             bio = itemView.findViewById(R.id.bio);
-            images = (CircleImageView) itemView.findViewById(R.id.images);
+            images = (CircleImageView) itemView.findViewById(R.id.image);
             //time = firebase.firestore.FieldValue.serverTimestamp();
             //time = itemView.findViewById(R.id.time);
             itemView.setOnClickListener(this);
@@ -198,8 +183,8 @@ public class Messages extends DrawerBase {
         @Override
         public void onClick(View v) {
             int position = getAbsoluteAdapterPosition();
-            Toast.makeText(Messages.this, "position" + position, Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Messages.this, ChatRoom.class);
+            Toast.makeText(MessagesAgi.this, "position" + position, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MessagesAgi.this, ChatRoom.class);
             //String dogName = intent.getExtras().getString("firstName");
             intent.putExtra("dogName", firstName.getText().toString());
             intent.putExtra("dogImage", "https://firebasestorage.googleapis.com/v0/b/playpalv2-9e341.appspot.com/o/images%2F0050ba9e-639f-4d4b-90a8-657e1d18a0a9?alt=media&token=ffebca53-915d-432a-8406-7617ebe9a7e2");

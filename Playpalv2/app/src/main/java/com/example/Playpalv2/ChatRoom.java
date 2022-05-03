@@ -1,33 +1,46 @@
 package com.example.Playpalv2;
 
-import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.icu.text.SimpleDateFormat;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.Playpalv2.adapters.ChatAdapter;
+
+import com.example.Playpalv2.databinding.ChatRoomBinding;
+import com.example.Playpalv2.matches.Messages;
+import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.models.MessageModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirestoreRegistrar;
-import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
+import java.util.Locale;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+
 
 public class ChatRoom extends AppCompatActivity {
 
@@ -37,30 +50,41 @@ public class ChatRoom extends AppCompatActivity {
     private ImageView dogPic;
     private TextView firstName;
 
+    private DogOwnerModel owner;
+
     private FirebaseFirestore db;
     private RecyclerView adapterList;
     private FirestoreRecyclerAdapter adapterChat;
+    private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    private List<MessageModel> messages;
+    private ChatAdapter chatAdapter;
+    private EditText inputMessage;
+    private ChatRoomBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.chat_room);
+        binding = ChatRoomBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         Intent intent = getIntent();
-        String dogName = intent.getStringExtra("dogName");
-        String dogImage = intent.getStringExtra("dogImage");
-        Log.e("PLEASE GOD", dogName);
-        Log.e("PLEASE GOD", dogImage);
+        owner = (DogOwnerModel) intent.getSerializableExtra("dogOwner");
+        inputMessage = findViewById(R.id.newMsg);
+       // String dogName = intent.getStringExtra("dogName");
+        //String dogImage = intent.getStringExtra("dogImage");
+        Log.e("PLEASE GOD", owner.getFirst_name());
+        //Log.e("PLEASE GOD", dogImage);
 
         newMsg = findViewById(R.id.newMsg);
         sendBtn = findViewById(R.id.sendMsg);
         backBtn = findViewById(R.id.backBtn);
         dogPic = findViewById(R.id.profileImg);
         firstName = findViewById(R.id.firstName);
-        firstName.setText(dogName);
+        //firstName.setText(dogName);
 
         Glide.with(this)
-                .load(dogImage)
+                .load(owner.getImages().get(1))
                 .into(dogPic);
 
         db = FirebaseFirestore.getInstance();   //
@@ -74,6 +98,10 @@ public class ChatRoom extends AppCompatActivity {
             }
         });
 
+        sendBtn.setOnClickListener(View -> {
+            sendMessage();
+            inputMessage.setText("");
+        });
 /*
         private void sendMessage(String sender, String receiver, String message) {
             DatabaseReference reference = FirebaseFirestore.getInstance();
@@ -110,6 +138,83 @@ public class ChatRoom extends AppCompatActivity {
             }
         });*/
         //setUpRecyclerView5();
+        init();
+        listenMessages();
+    }
+
+    private void sendMessage(){
+        HashMap<String, Object> message = new HashMap<>();
+        message.put("SenderID", currentUser);
+        message.put("ReceiverID", owner.getId());
+        message.put("Message", inputMessage.getText().toString());
+        message.put("TimeStamp", new Date());
+        db.collection("Dog_Matches").document(getMatchDocumentId(currentUser,owner.getId())).collection("Messages").add(message);
+    }
+
+    private void init(){
+        //preferenceManager = new PreferenceManager(getApplicationContext());
+        messages = new ArrayList<>();
+        chatAdapter = new ChatAdapter(
+                messages, owner.getId(), owner.getImages().get(1)
+
+        );
+        binding.chatRecyclerView.setAdapter(chatAdapter);
+
+    }
+
+    private void listenMessages(){
+        db.collection("Dog_Matches").document(getMatchDocumentId(currentUser,owner.getId()))
+                .collection("Messages").addSnapshotListener(eventListener);
+    }
+
+    private final EventListener<QuerySnapshot> eventListener = (value, error) -> {
+        if(error != null){
+            return;
+        }
+        if(value != null){
+            int count = messages.size();
+
+            for(DocumentChange documentChange: value.getDocumentChanges()){
+                if(documentChange.getType() == DocumentChange.Type.ADDED) {
+                    MessageModel message = new MessageModel();
+                    message.senderId = documentChange.getDocument().getString("ReceiverID");
+                    message.receiverId = documentChange.getDocument().getString("ReceiverID");
+                    message.message = documentChange.getDocument().getString("Message");
+                    message.dateTime = getDataToString(documentChange.getDocument().getDate("TimeStamp"));
+                    message.dateOfMessage = documentChange.getDocument().getDate("TimeStamp");
+                    messages.add(message);
+                }
+            }
+            Collections.sort(messages, Comparator.comparing(obj -> obj.dateOfMessage));
+            if(count == 0){
+                chatAdapter.notifyDataSetChanged();
+            }else{
+                Log.e("MESSAGES", messages.get(1).message);
+                chatAdapter.notifyItemRangeInserted(messages.size(),
+                        messages.size());
+                binding.chatRecyclerView.smoothScrollToPosition(messages.size() - 1);
+            }
+        }
+    };
+
+    private Bitmap getBitmapFromEnCodedString(String encodedImage){
+        byte[] bytes = Base64.decode(encodedImage, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    private String getMatchDocumentId(String userId, String ownerId) {
+        int comparedResult = userId.compareTo(ownerId);
+
+        if (comparedResult > 0) {
+            return userId + ownerId;
+        } else if (comparedResult < 0) {
+            return ownerId + userId;
+        }
+        return null;
+    }
+
+    private String getDataToString(Date date){
+        return new SimpleDateFormat("MMMM dd, yyyy - hh:mm a", Locale.getDefault()).format(date);
     }
 
    /* private void setUpRecyclerView5() {

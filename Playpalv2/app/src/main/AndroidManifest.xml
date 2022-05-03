@@ -1,55 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.Playpalv2">
+    package="com.example.Playpalv2" >
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_INTERNET" />
-
-    <!-- Always include this permission -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- Include only if your app benefits from precise location access. -->
+    <uses-permission android:name="android.permission.ACCESS_INTERNET" /> <!-- Always include this permission -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Include only if your app benefits from precise location access. -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Playpal">
+        android:theme="@style/Theme.Playpal" >
+        <activity
+            android:name=".matches.Messages"
+            android:exported="false" />
         <activity
             android:name=".registration.UserUploadsImages"
             android:exported="false" />
-
         <activity
             android:name=".registration.Register3"
-            android:exported="false"/>
-<!--
+            android:exported="false" />
+        <!--
           <intent-filter>
            <action android:name="android.intent.action.MAIN" />
            <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
         </activity>
--->
+        -->
         <activity
             android:name=".registration.Reg4"
             android:exported="false" />
-             <!--   <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>-->
-
-        <activity
-            android:name=".franciscoClassesForRegistrationVersion.LogIn"
-            android:exported="true">
-            <intent-filter>
+        <!--
+   <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        -->
+        <activity
+            android:name=".franciscoClassesForRegistrationVersion.LogIn"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".DogOwnerProfile"
             android:exported="false" />
@@ -65,7 +65,6 @@
         <activity
             android:name=".registration.PlaypalRegister"
             android:exported="false" />
-
         <activity
             android:name=".flipCards.MainActivity"
             android:exported="false" />
@@ -73,7 +72,7 @@
             android:name=".Services"
             android:exported="false" />
         <activity
-            android:name=".Messages"
+            android:name=".MessagesAgi"
             android:exported="false" />
         <activity
             android:name=".ChatRoom"

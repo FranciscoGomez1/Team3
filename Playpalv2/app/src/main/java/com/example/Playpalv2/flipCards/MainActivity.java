@@ -10,18 +10,21 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.Playpalv2.DrawerBase;
-import com.example.Playpalv2.Messages;
+import com.example.Playpalv2.MessagesAgi;
 import com.example.Playpalv2.CardProfileFragment;
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.Services;
-import com.example.Playpalv2.databinding.ActivityMainBinding;
 
+import com.example.Playpalv2.databinding.ActivityMainBinding;
 import com.example.Playpalv2.firestore_updates.RecordUserChoice;
 import com.example.Playpalv2.get_from_firestore.GetDogOwner;
 import com.example.Playpalv2.get_from_firestore.GetDogs;
+import com.example.Playpalv2.matches.GetMatchesList;
+import com.example.Playpalv2.matches.Messages;
 import com.example.Playpalv2.models.CardModel;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.CardsModel;
@@ -75,8 +78,13 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private DogViewModel dogViewModel;
     private DogOwnerView dogOwnerView;
     public DogQueueViewModel dogQueueViewModel;
-    ActivityMainBinding activityMainBinding; //This is for the top navigation bar
+    private ActivityMainBinding activityMainBinding; //This is for the top navigation bar
 
+
+
+    private LinearLayout buttons;
+    private FrameLayout f;
+    private FrameLayout f1;
 
     private DogModel dogCard;
     private DogModel dogCard1;
@@ -101,6 +109,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private CardsModel cardsModel;
     FirebaseFirestore db;
 
+    private GetMatchesList getMatchesList = new GetMatchesList();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +122,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         recordUserChoice = new RecordUserChoice();
 
-
+        loading(true);
 
     //set title to top bar
         allocateActivityTitle("Home");
@@ -154,6 +163,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         dislikeBtn = findViewById(R.id.btn_dislike);
         showDogProfile = findViewById(R.id.btn_show_profile);
+        buttons = findViewById(R.id.buttons);
+        f = findViewById(R.id.container);
+        f1 = findViewById(R.id.container1);
 
         //FOR BOTTOM NAVIGATION BAR
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -163,10 +175,12 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             if (itemId == R.id.home) {
                 return true;
             } else if (itemId == R.id.messages) {
+                loading(false);
                 startActivity(new Intent(getApplicationContext(), Messages.class));
                 overridePendingTransition(0, 0);
                 return true;
             } else if (itemId == R.id.services) {
+                loading(false);
                 startActivity(new Intent(getApplicationContext(), Services.class));
                 overridePendingTransition(0, 0);
                 return true;
@@ -228,6 +242,14 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         GetDogs getDogs = new GetDogs();
         getDogs.fetchDogs(dogs -> {
 
+            if (dogs.size() > 1) {
+                f.setVisibility(View.VISIBLE);
+                f1.setVisibility(View.VISIBLE);
+                buttons.setVisibility(View.VISIBLE);
+            }else if(dogs.size() == 1){
+                f.setVisibility(View.VISIBLE);
+                buttons.setVisibility(View.VISIBLE);
+            }
             cardsModel = new CardsModel(dogs);
             /*qDogs = dogs;
             dog = qDogs.poll();
@@ -235,6 +257,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             dog1 = qDogs.poll();*/
         //    getDogOwner(dog);
             //getDogOwner(dog1);
+            loading(false);
             intDogViewModel(frameLayoutView, frameLayoutView2 , cardsModel.getTopDogCard(), cardsModel.getBottomDogCard()); // This has to become a cardclass that holds a dog owner and a dog.
         });
         //FirebaseFirestore db;
@@ -302,6 +325,12 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
          }
         });*/
+/*
+        getMatchesList.getMyMatches( matches -> {
+            Log.e("MATCHES", matches.get(0).getFirst_name());
+            Log.e("MATCHES", matches.get(1).getFirst_name());
+        });*/
+
     }
 
 
@@ -312,6 +341,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         if( dogCard == null) {
             frameLayoutView.setVisibility(View.INVISIBLE);
             frameLayoutView2.setVisibility(View.INVISIBLE);
+            buttons.setVisibility(View.INVISIBLE);
         }else if(dogCard1 == null){
             frameLayoutView2.setVisibility(View.INVISIBLE);
         }
@@ -343,6 +373,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                         Log.i("Should Be deleted:", String.valueOf(right));
                     } else if (view.getX() < -520) {
                         left = true;
+                    } else if (view.getX() < 520 || view.getX() > -520 ){
+                        right = false;
+                        left = false;
                     }
 
                     Log.i("VIEW X:", String.valueOf(view.getX()));
@@ -409,6 +442,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 getDogOwner1(dogCard);
             }else {
                 v2.setVisibility(View.INVISIBLE);
+                buttons.setVisibility(View.INVISIBLE);
             }
         }
         /*
@@ -536,6 +570,14 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             });
         }catch (Exception e){
             e.getMessage();
+        }
+    }
+    private void loading(Boolean isLoading){
+        if(isLoading){
+            activityMainBinding.mainProgressBar.setVisibility(View.VISIBLE);
+        }
+        else{
+            activityMainBinding.mainProgressBar.setVisibility(View.INVISIBLE);
         }
     }
 }

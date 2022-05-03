@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.Playpalv2"
-        minSdk 22
+        minSdk 25
         // Agustin needs to comment out targetSdk 31 when pushing
         //targetSdk 31
          targetSdkPreview "Tiramisu"
@@ -64,6 +64,7 @@ dependencies {
 
     implementation 'com.github.bumptech.glide:glide:4.13.0'
     implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'androidx.preference:preference:1.1.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.13.0'
 
     implementation 'com.squareup.picasso:picasso:2.71828'

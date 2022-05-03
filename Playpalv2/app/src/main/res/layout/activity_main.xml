@@ -7,72 +7,90 @@
     tools:context=".flipCards.MainActivity">
 
     <FrameLayout
-        android:id="@+id/container1"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-
-        android:gravity="center"
-
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="800dp"
         app:layout_constraintBottom_toBottomOf="@+id/buttons"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="0dp"
-        android:gravity="center"
-        app:layout_constraintBottom_toBottomOf="@+id/buttons"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"  />
+        <ProgressBar
+            android:id="@+id/mainProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
 
+        <FrameLayout
+            android:id="@+id/container1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+
+            android:gravity="center"
+            android:visibility="invisible"
+
+            app:layout_constraintBottom_toBottomOf="@+id/buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:gravity="center"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/buttons"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:clipChildren="false"
         android:clipToPadding="false"
         android:gravity="center"
         android:orientation="horizontal"
         android:padding="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        >
+
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_dislike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            app:backgroundTint="#F4315E"
-            android:src="@drawable/ic_dislike"
+            android:layout_margin="16dp"
             android:contentDescription="@string/likes"
-            android:layout_margin="16dp" />
+            android:src="@drawable/ic_dislike"
+            app:backgroundTint="#F4315E" />
 
 
-       <!-- <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_dislike"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="55dp"
+        <!-- <com.google.android.material.button.MaterialButton
+             android:id="@+id/btn_dislike"
+             style="@style/Widget.MaterialComponents.Button.Icon"
+             android:layout_width="55dp"
 
-            android:layout_height="55dp"
-            android:layout_marginEnd="35dp"
-            android:backgroundTint="#DA034E"
-            android:gravity="center"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:padding="3dp"
-            app:cornerRadius="100dp"
-            app:icon="@drawable/close_circle_outline"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="55dp" />-->
+             android:layout_height="55dp"
+             android:layout_marginEnd="35dp"
+             android:backgroundTint="#DA034E"
+             android:gravity="center"
+             android:insetLeft="0dp"
+             android:insetTop="0dp"
+             android:insetRight="0dp"
+             android:insetBottom="0dp"
+             android:padding="3dp"
+             app:cornerRadius="100dp"
+             app:icon="@drawable/close_circle_outline"
+             app:iconGravity="textStart"
+             app:iconPadding="0dp"
+             app:iconSize="55dp" />-->
 
 
         <com.google.android.material.button.MaterialButton
@@ -81,52 +99,49 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#EEE"
-            android:textColor="@color/black"
             android:gravity="center"
             android:insetLeft="0dp"
             android:insetTop="0dp"
             android:insetRight="0dp"
             android:insetBottom="0dp"
             android:padding="6dp"
-            app:cornerRadius="15dp"
             android:text="@string/view_potential_match_profile"
-            />
+            android:textColor="@color/black"
+            app:cornerRadius="15dp" />
 
-    <!--    <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_like"
-            style="@style/Widget.MaterialComponents.Button.Icon"
-            android:layout_width="55dp"
-            android:layout_height="55dp"
-            android:layout_marginStart="35dp"
-            android:backgroundTint="@color/teal_200"
-            android:gravity="center"
-            android:insetLeft="0dp"
-            android:insetTop="0dp"
-            android:insetRight="0dp"
-            android:insetBottom="0dp"
-            android:padding="0dp"
-            app:cornerRadius="100dp"
-            app:icon="@drawable/like_icon_btn"
-            app:iconGravity="textStart"
-            app:iconPadding="0dp"
-            app:iconSize="55dp"
+        <!--    <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_like"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="35dp"
+                android:backgroundTint="@color/teal_200"
+                android:gravity="center"
+                android:insetLeft="0dp"
+                android:insetTop="0dp"
+                android:insetRight="0dp"
+                android:insetBottom="0dp"
+                android:padding="0dp"
+                app:cornerRadius="100dp"
+                app:icon="@drawable/like_icon_btn"
+                app:iconGravity="textStart"
+                app:iconPadding="0dp"
+                app:iconSize="55dp"
 
 
-            />-->
+                />-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/btn_like"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end|bottom"
-            app:backgroundTint="#86DF60"
-            android:tint="@android:color/white"
-            android:src="@drawable/ic_check"
+            android:layout_margin="16dp"
             android:contentDescription="@string/likes"
-            android:layout_margin="16dp" />
+            android:src="@drawable/ic_check"
+            android:tint="@android:color/white"
+            app:backgroundTint="#86DF60" />
 
     </LinearLayout>
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"

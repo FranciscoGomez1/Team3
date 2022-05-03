@@ -9,10 +9,8 @@ import android.widget.Switch;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
-import com.example.Playpalv2.flipCards.CardBackFragment;
-import com.example.Playpalv2.flipCards.CardFrontFragment;
-import com.example.Playpalv2.flipCards.CardFrontFragment1;
 import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.matches.Messages;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Services extends DrawerBase {
