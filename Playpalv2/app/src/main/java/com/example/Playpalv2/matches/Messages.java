@@ -38,6 +38,7 @@ public class Messages extends DrawerBase {
         super.onCreate(savedInstanceState);
         binding = ActivityMessagesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        allocateActivityTitle("Your Matches");
         //preferenceManager = new PreferenceManager(getApplicationContext());
         /*
         testOwner.setFirst_name("TestDogOwner");
