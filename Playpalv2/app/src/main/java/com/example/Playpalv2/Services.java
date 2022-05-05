@@ -10,8 +10,13 @@ import androidx.fragment.app.FragmentManager;
 
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
 import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.get_from_firestore.GetServiceProviders;
 import com.example.Playpalv2.matches.Messages;
+import com.example.Playpalv2.models.DogOwnerModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Services extends DrawerBase {
 
@@ -24,6 +29,9 @@ public class Services extends DrawerBase {
     boolean showingWalking;
     private Switch aSwitch;
 
+    private List<DogOwnerModel> walkers = new LinkedList<>();
+
+    private GetServiceProviders getWalkers = new GetServiceProviders();
 
     private BottomNavigationView bottomNavigationView;//FOR NAVIGATION BAR
     @Override
@@ -64,9 +72,12 @@ public class Services extends DrawerBase {
 
         }
 
+       /* getWalkers.fetchWalkers(walkers ->{
 
-//on clicklistener
-//fragment mannager
+            Log.e("walkers", walkers.size() + "");
+
+        });
+*/
     }
     //This functions flips the card with a turning animation
     void flipCard() {
@@ -86,7 +97,6 @@ public class Services extends DrawerBase {
     public static class FragmentUtils {
         public static boolean mDisableFragmentAnimations = false;
     }
-
     // This function turns the card without flip animation
     public void clearBackStack() {
         MainActivity.FragmentUtils.mDisableFragmentAnimations = true;

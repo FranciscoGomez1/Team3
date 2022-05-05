@@ -12,8 +12,8 @@
         android:id="@+id/switch1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="Switch"
+        android:layout_marginTop="57dp"
+        android:text="Services"
         app:layout_constraintEnd_toEndOf="@+id/containerService"
         app:layout_constraintHorizontal_bias="0.521"
         app:layout_constraintStart_toStartOf="@+id/containerService"
@@ -22,10 +22,10 @@
     <FrameLayout
         android:id="@+id/containerService"
         android:layout_width="0dp"
-        android:layout_height="512dp"
+        android:layout_height="0dp"
         android:layout_margin="0dp"
 
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="27dp"
 
         android:gravity="center"
         app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"

@@ -42,10 +42,13 @@ public class LogIn extends AppCompatActivity {
         inputEmail = findViewById(R.id.log_in_email);
 
 
+
         logIn.setOnClickListener(View ->{
-            email = inputEmail.getText().toString();
-            password = inputPassword.getText().toString();
-            signIn(email, password);
+           /* email = inputEmail.getText().toString();
+            password = inputPassword.getText().toString();*/
+            //TODO TESTING
+            signIn("smith@gmail.com","123456");
+          //  signIn(email, password);
         });
 
         register.setOnClickListener(View -> {

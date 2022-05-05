@@ -81,7 +81,7 @@ public class ChatRoom extends AppCompatActivity {
         backBtn = findViewById(R.id.backBtn);
         dogPic = findViewById(R.id.profileImg);
         firstName = findViewById(R.id.firstName);
-        //firstName.setText(dogName);
+        firstName.setText(owner.getFirst_name());
 
         Glide.with(this)
                 .load(owner.getImages().get(1))
