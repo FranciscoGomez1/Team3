@@ -22,15 +22,23 @@ public class DogOwnerModel implements Serializable {
     private String last_name;
     private String location;
     private String mobile_number;
+    private Boolean isSitter;
+
+
 
     public DogOwnerModel() {
     }
 
-    public DogOwnerModel(String account_created, String bio, String dog_id, String dog_breed, String dogs_disliked, String dogs_liked, String dogs_seen, String email, String first_name, String has_sitter, String has_walker, String id, List<String> images, String last_name, String location, String mobile_number) {
+    public DogOwnerModel(String account_created, String bio, String dog_id, String dog_breed, Boolean
+            isSitter,  String dogs_disliked, String dogs_liked, String dogs_seen, String
+            email, String first_name, String has_sitter, String has_walker,
+            String id, List<String> images, String last_name, String location,
+            String mobile_number) {
         this.account_created = account_created;
         this.bio = bio;
         this.dog_id = dog_id;
         this.dog_breed = dog_breed;
+        this.isSitter = isSitter;
         this.dogs_disLiked = dogs_disliked;
         this.dogs_liked = dogs_liked;
         this.dogs_seen = dogs_seen;
@@ -171,6 +179,12 @@ public class DogOwnerModel implements Serializable {
 
     public void setMobile_number(String mobile_number) {
         this.mobile_number = mobile_number;
+    }
+    public Boolean getSitter() {
+        return isSitter;
+    }
+    public void setSitter(Boolean sitter) {
+        isSitter = sitter;
     }
 }
 

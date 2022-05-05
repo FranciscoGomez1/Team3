@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Playpalv2.get_from_firestore.GetServiceProviders;
+import com.example.Playpalv2.get_from_firestore.GetWalkers;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.view_models.WalkersViewModel;
 import com.example.Playpalv2.walkers_services.WalkersAdapter;
@@ -23,7 +24,7 @@ public class servicesWalking extends Fragment {
     // Add RecyclerView member
     private RecyclerView recyclerView;
     private List<DogOwnerModel> walkers2 = new LinkedList<>();
-    private GetServiceProviders getWalkers = new GetServiceProviders();
+    private GetWalkers getWalkers = new GetWalkers();
     private WalkersViewModel walkersViewModel = new WalkersViewModel();
 
     @Override

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.Playpalv2.get_from_firestore.GetServiceProviders;
+import com.example.Playpalv2.get_from_firestore.GetSitters;
+import com.example.Playpalv2.get_from_firestore.GetWalkers;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.view_models.SittersViewModel;
 import com.example.Playpalv2.walkers_services.WalkersAdapter;
@@ -23,7 +25,7 @@ public class ServicesSitter extends Fragment {
     // Add RecyclerView member
     private RecyclerView recyclerView;
     private List<DogOwnerModel> walkers2 = new LinkedList<>();
-    private GetServiceProviders getWalkers = new GetServiceProviders();
+    private GetSitters getSitters = new GetSitters();
     private SittersViewModel sittersViewModel = new SittersViewModel();
 
     @Override
@@ -45,7 +47,7 @@ public class ServicesSitter extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sittersViewModel.ini();
-        getWalkers.fetchServiceProviders(walkers ->{
+        getSitters.fetchServiceProviders(walkers ->{
             sittersViewModel.updateSitters(walkers);
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
             recyclerView.setAdapter(new WalkersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
