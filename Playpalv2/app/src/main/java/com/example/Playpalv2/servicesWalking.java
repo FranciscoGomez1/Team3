@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.Playpalv2.get_from_firestore.GetServiceProviders;
 import com.example.Playpalv2.get_from_firestore.GetWalkers;
 import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.services.ServiceProvidersAdapter;
 import com.example.Playpalv2.view_models.WalkersViewModel;
 import com.example.Playpalv2.walkers_services.WalkersAdapter;
 
@@ -33,7 +34,7 @@ public class servicesWalking extends Fragment {
 
         // Add the following lines to create RecyclerView
         recyclerView = v.findViewById(R.id.walkersRecyclerView);
-        Log.e("TEST", "YES");
+        Log.e("TEST", "Walker");
 
         if(walkersViewModel.getWalkersLiveData().getValue() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));

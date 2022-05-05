@@ -11,12 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.Playpalv2.get_from_firestore.GetServiceProviders;
 import com.example.Playpalv2.get_from_firestore.GetSitters;
-import com.example.Playpalv2.get_from_firestore.GetWalkers;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.view_models.SittersViewModel;
-import com.example.Playpalv2.walkers_services.WalkersAdapter;
+import com.example.Playpalv2.services.ServiceProvidersAdapter;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -34,11 +32,11 @@ public class ServicesSitter extends Fragment {
 
         // Add the following lines to create RecyclerView
         recyclerView = v.findViewById(R.id.sitterRecyclerView);
-        Log.e("TEST", "YES");
+        Log.e("TEST", "Sitter");
 
         if(sittersViewModel.getSittersLiveData().getValue() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            recyclerView.setAdapter(new WalkersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
+            recyclerView.setAdapter(new ServiceProvidersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
         }
         return v;
     }
@@ -50,7 +48,7 @@ public class ServicesSitter extends Fragment {
         getSitters.fetchServiceProviders(walkers ->{
             sittersViewModel.updateSitters(walkers);
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
-            recyclerView.setAdapter(new WalkersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
+            recyclerView.setAdapter(new ServiceProvidersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
         });
     }
 }

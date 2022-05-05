@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.ChatRoom;
 import com.example.Playpalv2.R;
+import com.example.Playpalv2.WalkersReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.servicesWalking;
 
@@ -64,8 +65,8 @@ public class WalkersAdapter extends RecyclerView.Adapter<WalkersAdapter.WalkerVi
             matchContainerView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(view.getContext(), ChatRoom.class);
-                    i.putExtra("dogOwner", matches.get(getAbsoluteAdapterPosition()));
+                    Intent i = new Intent(view.getContext(), WalkersReviews.class);
+                    i.putExtra("walker", matches.get(getAbsoluteAdapterPosition()));
                     view.getContext().startActivity(i);
                 }
             });
