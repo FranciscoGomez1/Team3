@@ -12,13 +12,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import com.example.Playpalv2.firestore_updates.UpdateUserPreferences;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DogBreeds;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class FilterOptions extends AppCompatActivity {
     private RangeSlider ageRangeSlider;
@@ -26,17 +29,17 @@ public class FilterOptions extends AppCompatActivity {
     private RangeSlider energySlider;
     private Slider distanceSlider;
 
-    private String minAge;
-    private String maxAge;
+    private Integer minAge;
+    private Integer maxAge;
 
-    private String minEnergy;
-    private String maxEnergy;
+    private Integer minEnergy;
+    private Integer maxEnergy;
 
-    private String minWeight;
-    private String maxWeight;
+    private Integer minWeight;
+    private Integer maxWeight;
 
-    private String minDistance;
-    private String maxDistance;
+    private Integer minDistance;
+    private Integer maxDistance;
 
     private Button goToMainBtn;
 
@@ -45,8 +48,15 @@ public class FilterOptions extends AppCompatActivity {
     private List<Float> ageValues;
     private List<Float> weightValues;
     private List<Float> energyValues;
+    private Float distanceValues;
     private DropOutMenusReg3 dropOutMenusReg3 = new DropOutMenusReg3();
     private MaterialAutoCompleteTextView DogBreed;
+
+    Map<String,Object> userFilterPreferencesHashMap = new HashMap<>();
+
+    UpdateUserPreferences updateUserPreferences;
+
+    private String dogBreedInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,8 +89,8 @@ public class FilterOptions extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 ageValues = ageRangeSlider.getValues();
-                minAge = ageValues.get(0).toString();
-                maxAge = ageValues.get(1).toString();
+                minAge = Math.round(ageValues.get(0));
+                maxAge = Math.round(ageValues.get(1));
                 Log.e("onStopTrackingTouch From", ageValues.get(0).toString());
                 Log.e("onStopTrackingTouch T0", ageValues.get(1).toString());
             }
@@ -99,8 +109,8 @@ public class FilterOptions extends AppCompatActivity {
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 weightValues = weightSlider.getValues();
-                minWeight = weightValues.get(0).toString();
-                maxWeight = weightValues.get(1).toString();
+                minWeight = Math.round(weightValues.get(0));
+                maxWeight = Math.round(weightValues.get(1));
                 Log.e("onStopTrackingTouch From",weightValues.get(0).toString() );
                 Log.e("onStopTrackingTouch T0", weightValues.get(1).toString());
             }
@@ -112,34 +122,60 @@ public class FilterOptions extends AppCompatActivity {
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
                 energyValues = energySlider.getValues();
 
-                Log.e("onStopTrackingTouch From", energyValues.get(1).toString());
+                Log.e("onStopTrackingTouch From", energyValues.get(0).toString());
                 Log.e("onStopTrackingTouch T0", energyValues.get(1).toString());
             }
             @SuppressLint("RestrictedApi")
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
                 energyValues = energySlider.getValues();
-                minEnergy = energyValues.get(0).toString();
-                maxEnergy = energyValues.get(0).toString();
+                minEnergy = Math.round(energyValues.get(0));
+                maxEnergy = Math.round(energyValues.get(1));
                 Log.e("onStopTrackingTouch From", energyValues.get(1).toString());
                 Log.e("onStopTrackingTouch T0", energyValues.get(1).toString());
             }
         });
 
+        distanceSlider.addOnSliderTouchListener(new Slider.OnSliderTouchListener() {
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStartTrackingTouch(@NonNull Slider slider) {
+                maxDistance = Math.round(distanceSlider.getValue());
+
+            }
+            @SuppressLint("RestrictedApi")
+            @Override
+            public void onStopTrackingTouch(@NonNull Slider slider) {
+                maxDistance = Math.round(distanceSlider.getValue());
+
+            }
+        });
+
         goToMainBtn.setOnClickListener(View ->{
-            Log.e("Minage", minAge);
-            Log.e("Maxage", maxAge);
+            dogBreedInput = DogBreed.getText().toString();
+            Log.e("Minage", minAge.toString());
+            Log.e("Maxage", maxAge.toString());
 
-            Log.e("MinWeight", minWeight);
-            Log.e("MaxWeight", maxWeight);
+            Log.e("MinWeight", minWeight.toString());
+            Log.e("MaxWeight", maxWeight.toString());
 
-            Log.e("MinEnergy", minEnergy);
-            Log.e("MaxEnergy", maxEnergy);
+            Log.e("MinEnergy", minEnergy.toString());
+            Log.e("MaxEnergy", maxEnergy.toString());
 
             Log.e("Sex", sexPreference);
 
+            userFilterPreferencesHashMap.put("Minage", minAge);
+            userFilterPreferencesHashMap.put("Maxage", maxAge);
+            userFilterPreferencesHashMap.put("MinWeight", minWeight);
+            userFilterPreferencesHashMap.put("MaxWeight", maxWeight);
+            userFilterPreferencesHashMap.put("MinEnergy", minEnergy);
+            userFilterPreferencesHashMap.put("MaxEnergy", maxEnergy);
+            userFilterPreferencesHashMap.put("Sex", sexPreference);
+            userFilterPreferencesHashMap.put("Breed", dogBreedInput);
+            userFilterPreferencesHashMap.put("MaxDistance", maxDistance);
 
-
+            updateUserPreferences = new UpdateUserPreferences(userFilterPreferencesHashMap);
+            updateUserPreferences.updateUserPreferenceFirebase();
         });
 
 

@@ -11,10 +11,17 @@ public class UpdateUserPreferences {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     Map<String,Object> userFilterPreferences = new HashMap<>();
 
-    private String firebaseUser = auth.getCurrentUser().getUid();
+    private String userID = auth.getCurrentUser().getUid();
 
+    public UpdateUserPreferences(Map<String, Object> userFilterPreferences) {
+        this.userFilterPreferences = userFilterPreferences;
+    }
 
+    public void updateUserPreferenceFirebase(){
+        userID = "PTE2QeXsVSVEDEwiY5FFvbyIxM23";
 
-
-
+        db.collection("Dog Owners").document(userID).
+                collection("Preference").document(userID+"preference").
+                set(userFilterPreferences);
+    }
 }
