@@ -6,4 +6,265 @@
     android:layout_height="match_parent"
     tools:context=".FilterOptions">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/nestedScrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Filter Dogs"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="39sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/age_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Dog Age Range"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/age_range_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="32dp"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_range"
+            app:values="@array/age_initial_range_slider_values" />
+
+        <TextView
+            android:id="@+id/dog_energy_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Dog Energy Level Range"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/age_range_slider" />
+
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/energy_range_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="32dp"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="100.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_energy_range"
+            app:values="@array/energy_level_initial_range_slider_values" />
+
+        <TextView
+            android:id="@+id/dog_weight_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Dog Weight Range"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/energy_range_slider" />
+
+
+        <com.google.android.material.slider.RangeSlider
+            android:id="@+id/weight_range_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="32dp"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="400.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_weight_range"
+            app:values="@array/weight_initial_range_slider_values" />
+
+        <TextView
+            android:id="@+id/dog_location"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Filter by Dog Distance From You"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/weight_range_slider" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/dog_distance_range_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="32dp"
+            android:stepSize="1.0"
+            android:valueFrom="0.0"
+            android:valueTo="400.0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_location"
+            app:values="@array/weight_initial_range_slider_values" />
+
+
+        <TextView
+            android:id="@+id/dog_breeds"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Filter by Dog breeds"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_distance_range_slider" />
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dog_breeds_textfield"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+            android:layout_width="373dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/dog_breed"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_breeds">
+
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/breeds_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:completionThreshold="3" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/dog_sex"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Filter by Dog Sex"
+            android:textAlignment="center"
+            android:textColor="@color/orange_500"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_breeds_textfield" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dog_sex"
+
+            >
+
+            <RadioButton
+                android:id="@+id/all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:textColor="@color/orange_500" />
+
+            <RadioButton
+                android:id="@+id/radio_females"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="Females" />
+
+            <RadioButton
+                android:id="@+id/radio_males"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onRadioButtonClicked"
+                android:text="Males" />
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_to_main"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="37dp"
+            android:backgroundTint="@color/teal_200"
+            android:gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:padding="0dp"
+            app:cornerRadius="100dp"
+            app:icon="@drawable/ic_next"
+            app:iconGravity="textStart"
+            app:iconPadding="0dp"
+            app:iconSize="55dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.932"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+            app:layout_constraintVertical_bias="0.755" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

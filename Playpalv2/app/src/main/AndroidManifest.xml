@@ -18,6 +18,13 @@
         <activity
             android:name=".FilterOptions"
             android:exported="false" />
+       <!-- <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>-->
+
+
         <activity
             android:name=".WalkersReviews"
             android:exported="false" />
@@ -30,13 +37,11 @@
         <activity
             android:name=".registration.Register3"
             android:exported="false" />
-        <!--
-          <intent-filter>
+<!--          <intent-filter>
            <action android:name="android.intent.action.MAIN" />
            <category android:name="android.intent.category.LAUNCHER" />
           </intent-filter>
-        </activity>
-        -->
+        </activity>-->
         <activity
             android:name=".registration.Reg4"
             android:exported="false" />

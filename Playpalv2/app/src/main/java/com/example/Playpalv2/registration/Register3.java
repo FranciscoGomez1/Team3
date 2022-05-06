@@ -46,6 +46,7 @@ public class Register3 extends AppCompatActivity {
     private MaterialAutoCompleteTextView DogAge;
     private MaterialAutoCompleteTextView DogSex;
     private MaterialAutoCompleteTextView DogWeight;
+    private MaterialAutoCompleteTextView DogEnergyLevel;
     private EditText DogBio;
 
     private static final String TAG= "Register3";
@@ -62,6 +63,7 @@ public class Register3 extends AppCompatActivity {
         DogSex = findViewById(R.id.dog_sex_list);
         DogWeight = findViewById(R.id.dog_weight_list);
         DogBio = findViewById(R.id.dog_bio);
+        DogEnergyLevel = findViewById(R.id.dog_energy_level_list);
 
         //Auto complete drop out menu for dog breeds
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -87,6 +89,11 @@ public class Register3 extends AppCompatActivity {
         AutoCompleteTextView textViewWeight =  DogWeight;
         textViewWeight.setAdapter(weightAdapter);
 
+        //Auto complete drop out menu for dog energy level
+        ArrayAdapter<String> EnergyLevelAdapter = new ArrayAdapter<>(this,
+                android.R.layout.simple_dropdown_item_1line, dropOutMenusReg3.getEnergyLevel());
+        AutoCompleteTextView textViewEnergy =  DogEnergyLevel;
+        textViewEnergy.setAdapter(EnergyLevelAdapter);
 
         nextBtn.setOnClickListener(View -> {
             String DogNameInput = DogName.getText().toString();

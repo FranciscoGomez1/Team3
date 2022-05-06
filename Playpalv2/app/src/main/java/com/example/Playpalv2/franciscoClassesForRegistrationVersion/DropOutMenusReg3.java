@@ -10,12 +10,14 @@ public class DropOutMenusReg3 {
 
     private String[]age = new String[30];
 
-    private String[]weight = new String[200];
+    private String[]weight = new String[400];
 
+    private String[]energyLevel = new String[10];
 
     public DropOutMenusReg3() {
         createAgeList();
         createWeightList();
+        createEnergyLevelList();
     }
 
     private void createAgeList() {
@@ -26,9 +28,17 @@ public class DropOutMenusReg3 {
         }
     }
 
+    private void createEnergyLevelList(){
+        int j;
+        for(int i = 0; i < 10; i++){
+            j = i + 1;
+            energyLevel[i]= j + "";
+        }
+    }
+
     private void createWeightList(){
         int j;
-        for(int i = 0; i < 200; i++){
+        for(int i = 0; i < 400; i++){
             j = i + 1;
             weight[i]= j+"";
         }
@@ -48,4 +58,5 @@ public class DropOutMenusReg3 {
     public String[] getWeightList(){
         return weight;
     }
+    public String[] getEnergyLevel(){return energyLevel;}
 }
