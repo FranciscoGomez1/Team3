@@ -1,9 +1,14 @@
 package com.example.Playpalv2;
 
+import static java.util.List.of;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +24,8 @@ import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
+import java.security.spec.ECField;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +45,7 @@ public class FilterOptions extends AppCompatActivity {
     private Integer minWeight;
     private Integer maxWeight;
 
-    private Integer minDistance;
+    private Float maxDistanceFloat;
     private Integer maxDistance;
 
     private Button goToMainBtn;
@@ -50,6 +57,7 @@ public class FilterOptions extends AppCompatActivity {
     private List<Float> energyValues;
     private Float distanceValues;
     private DropOutMenusReg3 dropOutMenusReg3 = new DropOutMenusReg3();
+    private UserFilterPreferences  userFilterPreferences = new UserFilterPreferences();
     private MaterialAutoCompleteTextView DogBreed;
 
     Map<String,Object> userFilterPreferencesHashMap = new HashMap<>();
@@ -58,9 +66,22 @@ public class FilterOptions extends AppCompatActivity {
 
     private String dogBreedInput;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        try{
+            //This is if we coming from the drawer and not during registration
+            Intent mintent = getIntent();
+            userFilterPreferences = (UserFilterPreferences) mintent.getSerializableExtra("userPreferences");
+            //Preference class
+            ifIsEditPreference(userFilterPreferences);
+
+        }catch (Exception e){
+
+        }
+
         setContentView(R.layout.activity_filter_options);
         ageRangeSlider = findViewById(R.id.age_range_slider);
         DogBreed = findViewById(R.id.breeds_list);
@@ -81,18 +102,12 @@ public class FilterOptions extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-               ageValues = ageRangeSlider.getValues();
-                Log.e("onStopTrackingTouch From", ageValues.get(0).toString());
-                Log.e("onStopTrackingTouch T0", ageValues.get(1).toString());
+                getAgeValues();
             }
             @SuppressLint("RestrictedApi")
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
-                ageValues = ageRangeSlider.getValues();
-                minAge = Math.round(ageValues.get(0));
-                maxAge = Math.round(ageValues.get(1));
-                Log.e("onStopTrackingTouch From", ageValues.get(0).toString());
-                Log.e("onStopTrackingTouch T0", ageValues.get(1).toString());
+                getAgeValues();
             }
         });
 
@@ -100,19 +115,13 @@ public class FilterOptions extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-                weightValues= ageRangeSlider.getValues();
-
-                Log.e("onStopTrackingTouch From",weightValues.get(0).toString() );
-                Log.e("onStopTrackingTouch T0", weightValues.get(1).toString());
+                getWeightValues();
             }
             @SuppressLint("RestrictedApi")
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
-                weightValues = weightSlider.getValues();
-                minWeight = Math.round(weightValues.get(0));
-                maxWeight = Math.round(weightValues.get(1));
-                Log.e("onStopTrackingTouch From",weightValues.get(0).toString() );
-                Log.e("onStopTrackingTouch T0", weightValues.get(1).toString());
+                getWeightValues();
+
             }
         });
 
@@ -120,19 +129,12 @@ public class FilterOptions extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onStartTrackingTouch(@NonNull RangeSlider slider) {
-                energyValues = energySlider.getValues();
-
-                Log.e("onStopTrackingTouch From", energyValues.get(0).toString());
-                Log.e("onStopTrackingTouch T0", energyValues.get(1).toString());
+               getEnergyValues();
             }
             @SuppressLint("RestrictedApi")
             @Override
             public void onStopTrackingTouch(@NonNull RangeSlider slider) {
-                energyValues = energySlider.getValues();
-                minEnergy = Math.round(energyValues.get(0));
-                maxEnergy = Math.round(energyValues.get(1));
-                Log.e("onStopTrackingTouch From", energyValues.get(1).toString());
-                Log.e("onStopTrackingTouch T0", energyValues.get(1).toString());
+               getEnergyValues();
             }
         });
 
@@ -140,18 +142,20 @@ public class FilterOptions extends AppCompatActivity {
             @SuppressLint("RestrictedApi")
             @Override
             public void onStartTrackingTouch(@NonNull Slider slider) {
-                maxDistance = Math.round(distanceSlider.getValue());
+               getDistance();
 
             }
             @SuppressLint("RestrictedApi")
             @Override
             public void onStopTrackingTouch(@NonNull Slider slider) {
-                maxDistance = Math.round(distanceSlider.getValue());
+                getDistance();
 
             }
         });
 
         goToMainBtn.setOnClickListener(View ->{
+            checkFilterPreferenceAgain();
+
             dogBreedInput = DogBreed.getText().toString();
             Log.e("Minage", minAge.toString());
             Log.e("Maxage", maxAge.toString());
@@ -164,8 +168,8 @@ public class FilterOptions extends AppCompatActivity {
 
             Log.e("Sex", sexPreference);
 
-            userFilterPreferencesHashMap.put("Minage", minAge);
-            userFilterPreferencesHashMap.put("Maxage", maxAge);
+            userFilterPreferencesHashMap.put("MinAge", minAge);
+            userFilterPreferencesHashMap.put("MaxAge", maxAge);
             userFilterPreferencesHashMap.put("MinWeight", minWeight);
             userFilterPreferencesHashMap.put("MaxWeight", maxWeight);
             userFilterPreferencesHashMap.put("MinEnergy", minEnergy);
@@ -176,10 +180,83 @@ public class FilterOptions extends AppCompatActivity {
 
             updateUserPreferences = new UpdateUserPreferences(userFilterPreferencesHashMap);
             updateUserPreferences.updateUserPreferenceFirebase();
+
+            RangeSlider ageRs = findViewById(R.id.age_range_slider);
+            List<Float> newAgeValues = new ArrayList<Float>();
+
+            newAgeValues.add(minAge.floatValue());
+            newAgeValues.add(33.00F);
+
+
+
+            ageRs.setValues(newAgeValues);
+
+
+
         });
 
 
     }
+
+    private void ifIsEditPreference(UserFilterPreferences userFilterPreferences) {
+        List<Float> newAgeValues = new ArrayList<Float>();
+        List<Float> newEnergyValues = new ArrayList<Float>();
+        List<Float> newWeightValues = new ArrayList<Float>();
+
+
+        newAgeValues.add(userFilterPreferences.getMinAge().floatValue());
+        newAgeValues.add(userFilterPreferences.getMaxAge().floatValue());
+
+        newEnergyValues.add(userFilterPreferences.getMinEngergy().floatValue());
+        newEnergyValues.add(userFilterPreferences.getMaxEnergy().floatValue());
+
+        newWeightValues.add(userFilterPreferences.getMinWeight().floatValue());
+        newWeightValues.add(userFilterPreferences.getMaxDistancd().floatValue());
+
+        maxDistanceFloat = userFilterPreferences.getMaxDistancd().floatValue();
+
+        ageRangeSlider.setValues(newAgeValues);
+        weightSlider.setValues(newWeightValues);
+        energySlider.setValues(newEnergyValues);
+        distanceSlider.setValue(maxDistance);
+
+
+    }
+
+    private void checkFilterPreferenceAgain() {
+        getAgeValues();
+        getEnergyValues();
+        getWeightValues();
+        getDistance();
+
+    }
+
+    private void getAgeValues() {
+        ageValues = ageRangeSlider.getValues();
+        minAge = Math.round(ageValues.get(0));
+        maxAge = Math.round(ageValues.get(1));
+    }
+
+
+    private void getEnergyValues() {
+
+        energyValues = energySlider.getValues();
+        minEnergy = Math.round(energyValues.get(0));
+        maxEnergy = Math.round(energyValues.get(1));
+
+    }
+
+    private void getDistance(){
+        maxDistance = Math.round(distanceSlider.getValue());
+    }
+
+    private void getWeightValues(){
+        weightValues = weightSlider.getValues();
+        minWeight = Math.round(weightValues.get(0));
+        maxWeight = Math.round(weightValues.get(1));
+    }
+
+
     //for dog sex filtering
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
