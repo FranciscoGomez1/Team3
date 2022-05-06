@@ -289,7 +289,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                                 Objects.requireNonNull(snapshot.get("Weight")).toString()));
                     }
                 }catch(Exception e){
-                    Log.i("EXEPTION", e.getMessage());
+                  //  Log.i("EXEPTION", e.getMessage());
                 }
                 dog = qDogs.poll();
                 dog1 = qDogs.poll();
