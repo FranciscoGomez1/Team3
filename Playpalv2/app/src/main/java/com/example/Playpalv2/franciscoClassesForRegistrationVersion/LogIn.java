@@ -47,7 +47,7 @@ public class LogIn extends AppCompatActivity {
            /* email = inputEmail.getText().toString();
             password = inputPassword.getText().toString();*/
             //TODO TESTING
-            signIn("bripriscilla@email.com","123456");
+            signIn("hope@hope.com","123456");
           //  signIn(email, password);
         });
 

@@ -224,9 +224,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         });
 
         showDogProfile.setOnClickListener(view -> {
-            showDogProfile.setText(replaceTextForShoDogProfileBtn);
             viewProfile();
             resetBtnText();
+            canFlip = !canFlip;
         });
 
     }
@@ -234,6 +234,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     void resetBtnText(){
         if(!canFlip){
             showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
+        }else{
+            showDogProfile.setText(replaceTextForShoDogProfileBtn);
         }
     }
 //-->
