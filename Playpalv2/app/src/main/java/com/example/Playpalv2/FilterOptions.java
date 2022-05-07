@@ -15,11 +15,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RadioButton;
 
 import com.example.Playpalv2.firestore_updates.UpdateUserPreferences;
+import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DogBreeds;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
+import com.example.Playpalv2.get_from_firestore.GetUserFilterPreferences;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
@@ -57,12 +60,13 @@ public class FilterOptions extends AppCompatActivity {
     private List<Float> energyValues;
     private Float distanceValues;
     private DropOutMenusReg3 dropOutMenusReg3 = new DropOutMenusReg3();
-    private UserFilterPreferences  userFilterPreferences = new UserFilterPreferences();
+    private UserFilterPreferences  userFilterPreferences;
     private MaterialAutoCompleteTextView DogBreed;
 
     Map<String,Object> userFilterPreferencesHashMap = new HashMap<>();
 
     UpdateUserPreferences updateUserPreferences;
+    GetUserFilterPreferences getUserFilterPreferences = new GetUserFilterPreferences();
 
     private String dogBreedInput;
 
@@ -74,12 +78,15 @@ public class FilterOptions extends AppCompatActivity {
         try{
             //This is if we coming from the drawer and not during registration
             Intent mintent = getIntent();
-            userFilterPreferences = (UserFilterPreferences) mintent.getSerializableExtra("userPreferences");
+            String isEdit = mintent.getExtras().toString();
+            //String isEdit = mintent.geExtras("isEdit");
             //Preference class
-            ifIsEditPreference(userFilterPreferences);
+            getUserFilterPreferences.getUserPreferences(userFilterPreferences -> {
+                ifIsEditPreference(userFilterPreferences);
+            });
 
         }catch (Exception e){
-
+            Log.e("exeption", e.toString());
         }
 
         setContentView(R.layout.activity_filter_options);
@@ -166,7 +173,7 @@ public class FilterOptions extends AppCompatActivity {
             Log.e("MinEnergy", minEnergy.toString());
             Log.e("MaxEnergy", maxEnergy.toString());
 
-            Log.e("Sex", sexPreference);
+            //Log.e("Sex", sexPreference);
 
             userFilterPreferencesHashMap.put("MinAge", minAge);
             userFilterPreferencesHashMap.put("MaxAge", maxAge);
@@ -180,19 +187,7 @@ public class FilterOptions extends AppCompatActivity {
 
             updateUserPreferences = new UpdateUserPreferences(userFilterPreferencesHashMap);
             updateUserPreferences.updateUserPreferenceFirebase();
-
-            RangeSlider ageRs = findViewById(R.id.age_range_slider);
-            List<Float> newAgeValues = new ArrayList<Float>();
-
-            newAgeValues.add(minAge.floatValue());
-            newAgeValues.add(33.00F);
-
-
-
-            ageRs.setValues(newAgeValues);
-
-
-
+            goToFilterActivity();
         });
 
 
@@ -207,20 +202,25 @@ public class FilterOptions extends AppCompatActivity {
         newAgeValues.add(userFilterPreferences.getMinAge().floatValue());
         newAgeValues.add(userFilterPreferences.getMaxAge().floatValue());
 
-        newEnergyValues.add(userFilterPreferences.getMinEngergy().floatValue());
+        newEnergyValues.add(userFilterPreferences.getMinEnergy().floatValue());
         newEnergyValues.add(userFilterPreferences.getMaxEnergy().floatValue());
 
         newWeightValues.add(userFilterPreferences.getMinWeight().floatValue());
-        newWeightValues.add(userFilterPreferences.getMaxDistancd().floatValue());
+        newWeightValues.add(userFilterPreferences.getMaxDistance().floatValue());
 
-        maxDistanceFloat = userFilterPreferences.getMaxDistancd().floatValue();
+        maxDistanceFloat = userFilterPreferences.getMaxDistance().floatValue();
 
         ageRangeSlider.setValues(newAgeValues);
         weightSlider.setValues(newWeightValues);
         energySlider.setValues(newEnergyValues);
-        distanceSlider.setValue(maxDistance);
+        distanceSlider.setValue(maxDistanceFloat);
+        setBreedPreference(userFilterPreferences.getBreed());
+        setRadioButtonSelection(userFilterPreferences.getSex());
 
+    }
 
+    private void setBreedPreference(String breed) {
+        DogBreed.setText(breed);
     }
 
     private void checkFilterPreferenceAgain() {
@@ -257,6 +257,20 @@ public class FilterOptions extends AppCompatActivity {
     }
 
 
+    private void setRadioButtonSelection(String sex) {
+        if(sex.equals("all")){
+            RadioButton rb1 = (RadioButton) findViewById(R.id.all);
+            rb1.setChecked(true);
+        }else if (sex.equals("males")){
+            RadioButton rb1 = (RadioButton) findViewById(R.id.radio_males);
+            rb1.setChecked(true);
+
+        }else if (sex.equals("females")){
+            RadioButton rb1 = (RadioButton) findViewById(R.id.radio_females);
+            rb1.setChecked(true);
+
+        }
+    }
     //for dog sex filtering
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
@@ -279,4 +293,13 @@ public class FilterOptions extends AppCompatActivity {
 
         }
     }
+
+    void goToFilterActivity(){
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+        finish();
+    }
+
 }

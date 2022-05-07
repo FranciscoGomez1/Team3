@@ -2,7 +2,7 @@
 <resources>
     <array name="age_initial_range_slider_values">
         <item>0.0</item>
-        <item>30.0</item>
+        <item>40.0</item>
     </array>
     <array name="weight_initial_range_slider_values">
         <item>0.0</item>

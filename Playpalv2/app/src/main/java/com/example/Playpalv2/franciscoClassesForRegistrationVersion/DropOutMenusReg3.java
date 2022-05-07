@@ -8,7 +8,7 @@ public class DropOutMenusReg3 {
         "Male", "Female"
     };
 
-    private String[]age = new String[30];
+    private String[]age = new String[40];
 
     private String[]weight = new String[400];
 
@@ -22,7 +22,7 @@ public class DropOutMenusReg3 {
 
     private void createAgeList() {
         int j;
-        for(int i = 0; i < 30; i++){
+        for(int i = 0; i < 40; i++){
             j = i + 1;
             age[i]= j+"";
         }

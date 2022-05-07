@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GetDogOwner  {
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-    private FirebaseFirestore db;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();;
     private String ownerID;
     private DogOwnerModel owner;
 
@@ -26,7 +26,7 @@ public class GetDogOwner  {
     }
   private void getTheDogOwner(OnGotDogOwnerListener onGotDogOwnerLister){
 
-      db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
+      //db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
       DocumentReference docRef = db.collection("Dog Owners").document(ownerID);
       docRef.get().addOnCompleteListener(task -> {
           if (task.isSuccessful()) {

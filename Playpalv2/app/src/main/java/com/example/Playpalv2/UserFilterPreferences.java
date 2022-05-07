@@ -1,98 +1,103 @@
 package com.example.Playpalv2;
 
+
 public class UserFilterPreferences {
-    private Integer breed;
-    private Integer maxAge;
-    private Integer maxDistancd;
-    private Integer maxEnergy;
-    private Integer maxWeight;
-    private Integer minAge;
-    private Integer minEngergy;
-    private Integer minWeight;
-    private String sex;
+    private String Breed;
+    private Integer MaxAge;
+    private Integer MaxDistance;
+    private Integer MaxEnergy;
+    private Integer MaxWeight;
+    private Integer MinAge;
+    private Integer MinEnergy;
+    private Integer MinWeight;
+    private String Sex;
 
-    public UserFilterPreferences(){};
-    public UserFilterPreferences(Integer breed, Integer maxAge, Integer maxDistancd, Integer maxEnergy, Integer maxWeight, Integer minAge, Integer minEngergy, Integer minWeight, String sex) {
-        this.breed = breed;
-        this.maxAge = maxAge;
-        this.maxDistancd = maxDistancd;
-        this.maxEnergy = maxEnergy;
-        this.maxWeight = maxWeight;
-        this.minAge = minAge;
-        this.minEngergy = minEngergy;
-        this.minWeight = minWeight;
-        this.sex = sex;
+    public UserFilterPreferences() {
     }
 
-    public Integer getBreed() {
-        return breed;
+    public UserFilterPreferences(
+            String breed, Integer maxAge, Integer maxDistance, Integer maxEnergy,
+            Integer maxWeight, Integer minAge, Integer minEnergy, Integer minWeight, String sex) {
+        Breed = breed;
+        MaxAge = maxAge;
+        MaxDistance = maxDistance;
+        MaxEnergy = maxEnergy;
+        MaxWeight = maxWeight;
+        MinAge = minAge;
+        MinEnergy = minEnergy;
+        MinWeight = minWeight;
+        Sex = sex;
     }
 
-    public void setBreed(Integer breed) {
-        this.breed = breed;
+    public String getBreed() {
+        return Breed;
+    }
+
+    public void setBreed(String breed) {
+        Breed = breed;
     }
 
     public Integer getMaxAge() {
-        return maxAge;
+        return MaxAge;
     }
 
     public void setMaxAge(Integer maxAge) {
-        this.maxAge = maxAge;
+        MaxAge = maxAge;
     }
 
-    public Integer getMaxDistancd() {
-        return maxDistancd;
+    public Integer getMaxDistance() {
+        return MaxDistance;
     }
 
-    public void setMaxDistancd(Integer maxDistancd) {
-        this.maxDistancd = maxDistancd;
+    public void setMaxDistance(Integer maxDistance) {
+        MaxDistance = maxDistance;
     }
 
     public Integer getMaxEnergy() {
-        return maxEnergy;
+        return MaxEnergy;
     }
 
     public void setMaxEnergy(Integer maxEnergy) {
-        this.maxEnergy = maxEnergy;
+        MaxEnergy = maxEnergy;
     }
 
     public Integer getMaxWeight() {
-        return maxWeight;
+        return MaxWeight;
     }
 
     public void setMaxWeight(Integer maxWeight) {
-        this.maxWeight = maxWeight;
+        MaxWeight = maxWeight;
     }
 
     public Integer getMinAge() {
-        return minAge;
+        return MinAge;
     }
 
     public void setMinAge(Integer minAge) {
-        this.minAge = minAge;
+        MinAge = minAge;
     }
 
-    public Integer getMinEngergy() {
-        return minEngergy;
+    public Integer getMinEnergy() {
+        return MinEnergy;
     }
 
-    public void setMinEngergy(Integer minEngergy) {
-        this.minEngergy = minEngergy;
+    public void setMinEnergy(Integer minEnergy) {
+        MinEnergy = minEnergy;
     }
 
     public Integer getMinWeight() {
-        return minWeight;
+        return MinWeight;
     }
 
     public void setMinWeight(Integer minWeight) {
-        this.minWeight = minWeight;
+        MinWeight = minWeight;
     }
 
     public String getSex() {
-        return sex;
+        return Sex;
     }
 
     public void setSex(String sex) {
-        this.sex = sex;
+        Sex = sex;
     }
 }

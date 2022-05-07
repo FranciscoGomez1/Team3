@@ -57,9 +57,9 @@ public class UserUploadsImages extends AppCompatActivity {
         CustomProgressDialog customProgressDialog = new CustomProgressDialog(UserUploadsImages.this);
         pickBtn.setOnClickListener(View -> {
             // Agustin needs to comment these out when pushing
-            /*Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
+            Intent intent = new Intent(MediaStore.ACTION_PICK_IMAGES);
             intent.putExtra(MediaStore.EXTRA_PICK_IMAGES_MAX, maxNumPhotosAndVideos);
-            startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);*/
+            startActivityForResult(intent, PHOTO_PICKER_MULTI_SELECT_REQUEST_CODE);
 
         });
         // This sets the image the user pick from their phone gallery

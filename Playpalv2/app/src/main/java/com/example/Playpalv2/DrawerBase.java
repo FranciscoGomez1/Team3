@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.lang.reflect.Field;
 import java.security.acl.Owner;
 
 public class DrawerBase extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -58,6 +59,13 @@ public class DrawerBase extends AppCompatActivity implements NavigationView.OnNa
 
         } else if (itemId == R.id.nav_owner_profile) {
             startActivity(new Intent(this, DogOwnerProfile.class));
+            overridePendingTransition(0, 0);
+        } else if (itemId == R.id.nav_filter_preferences){
+            Intent i = new Intent(DrawerBase.this, FilterOptions.class);
+            i.putExtra("isEdit", "edit");
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
             overridePendingTransition(0, 0);
         }
         return false;

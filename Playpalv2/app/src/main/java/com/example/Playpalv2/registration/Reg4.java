@@ -11,6 +11,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.Playpalv2.FilterOptions;
 import com.example.Playpalv2.GridAdapter;
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityReg4Binding;
@@ -101,7 +102,7 @@ public class Reg4 extends AppCompatActivity {
             while(true) {
 
                 if(uploadDogImagesToFirebase.isSucess()){
-                    goToMainActivity();
+                    goToFilterOptionActivity();
                     break;
                 }
             }
@@ -185,8 +186,8 @@ public class Reg4 extends AppCompatActivity {
 
     }
 
-    void goToMainActivity(){
-        Intent intent = new Intent(this, MainActivity.class);
+    void goToFilterOptionActivity(){
+        Intent intent = new Intent(this, FilterOptions.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
                 | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
