@@ -206,7 +206,7 @@ public class FilterOptions extends AppCompatActivity {
         newEnergyValues.add(userFilterPreferences.getMaxEnergy().floatValue());
 
         newWeightValues.add(userFilterPreferences.getMinWeight().floatValue());
-        newWeightValues.add(userFilterPreferences.getMaxDistance().floatValue());
+        newWeightValues.add(userFilterPreferences.getMaxWeight().floatValue());
 
         maxDistanceFloat = userFilterPreferences.getMaxDistance().floatValue();
 
@@ -216,6 +216,7 @@ public class FilterOptions extends AppCompatActivity {
         distanceSlider.setValue(maxDistanceFloat);
         setBreedPreference(userFilterPreferences.getBreed());
         setRadioButtonSelection(userFilterPreferences.getSex());
+        sexPreference = userFilterPreferences.getSex();
 
     }
 
@@ -229,7 +230,10 @@ public class FilterOptions extends AppCompatActivity {
         getWeightValues();
         getDistance();
 
+
     }
+
+
 
     private void getAgeValues() {
         ageValues = ageRangeSlider.getValues();

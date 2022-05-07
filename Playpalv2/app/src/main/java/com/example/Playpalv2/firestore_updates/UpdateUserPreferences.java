@@ -18,7 +18,6 @@ public class UpdateUserPreferences {
     }
 
     public void updateUserPreferenceFirebase(){
-        userID = "PTE2QeXsVSVEDEwiY5FFvbyIxM23";
 
         db.collection("Dog Owners").document(userID).
                 collection("Preference").document(userID+"preference").

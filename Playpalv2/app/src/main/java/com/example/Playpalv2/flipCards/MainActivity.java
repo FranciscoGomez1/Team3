@@ -126,26 +126,14 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
     //set title to top bar
         allocateActivityTitle("Home");
-        //new waitForFirebase().execute();
 
-/*
-        qDogs.add(new DogModel("Dog1", "Dog1 bio" + getString(R.string.dummy_dog_bio)));
-        qDogs.add(new DogModel("Dog2", "Dog2 bio" + getString(R.string.dummy_dog_bio)));
-        qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
-        qDogs.add(new DogModel("Dog4", "Dog4 bio" + getString(R.string.dummy_dog_bio)));*/
-       // qDogs.add(new DogModel("Dog3", "Dog3 bio" + getString(R.string.dummy_dog_bio)));
 
 
         dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
         dogViewModel.init();
         dogOwnerView = new ViewModelProvider(this).get(DogOwnerView.class);
         dogOwnerView.init();
-       /* dog = qDogs.poll();
-        dog1 = qDogs.poll();
-        dogViewModel = new ViewModelProvider(this).get(DogViewModel.class);
-        dogViewModel.init();*/
-       /* cardViewModel = new ViewModelProvider(this).get(CardViewModel.class);
-        cardViewModel.init();*/
+
 
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         int id2 = getResources().getIdentifier(cont2, "id", getPackageName());
@@ -253,85 +241,11 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 buttons.setVisibility(View.VISIBLE);
             }
             cardsModel = new CardsModel(dogs);
-            /*qDogs = dogs;
-            dog = qDogs.poll();
-            topDog = dog;
-            dog1 = qDogs.poll();*/
-        //    getDogOwner(dog);
-            //getDogOwner(dog1);
+
             loading(false);
             intDogViewModel(frameLayoutView, frameLayoutView2 , cardsModel.getTopDogCard(), cardsModel.getBottomDogCard()); // This has to become a cardclass that holds a dog owner and a dog.
         });
-        //FirebaseFirestore db;
-       /* FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        final String[] doc = new String[1];
-        final CollectionReference[] thisCollecRef = new CollectionReference[1];*/
 
-       /* db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
-        CollectionReference collecRef = db.collection("Dog Breeds").
-                document("Bulldog").collection("Dogs");
-
-        collecRef.whereLessThan("Age",9).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-        //collecRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Log.i("TAG","ONSUCESS: IT WORKS");
-                List<DocumentSnapshot> snapshotList = Objects.requireNonNull(task.getResult()).getDocuments();
-
-                try {
-                    for (DocumentSnapshot snapshot : snapshotList) {
-                        Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
-                        qDogs.add(new DogModel(Objects.requireNonNull(snapshot.get("Age")).toString(),
-                                Objects.requireNonNull(snapshot.get("Bio")).toString(),
-                                Objects.requireNonNull(snapshot.get("Breed")).toString(),
-                                (List<String>) snapshot.get("Images"),
-                                Objects.requireNonNull(snapshot.get("Name")).toString(),
-                                Objects.requireNonNull(snapshot.get("Owner")).toString(),
-                                Objects.requireNonNull(snapshot.get("Sex")).toString(),
-                                Objects.requireNonNull(snapshot.get("Weight")).toString()));
-                    }
-                }catch(Exception e){
-                  //  Log.i("EXEPTION", e.getMessage());
-                }
-                dog = qDogs.poll();
-                dog1 = qDogs.poll();
-
-                // Initialize the queue of dog cards
-                intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclas that holds a dog owner and a dog.
-
-            }
-        });*/
-      /*  BuildCard cards = new BuildCard();
-        cards.getCards(new OnGotCardsListener() {
-            @Override
-            public void onGotCards(Queue<CardModel> cards) {
-                Log.e("Card", cards.toString());
-
-                qCards = cards;
-                card = qCards.poll();
-                card1 = qCards.poll();
-                intCardViewModel(frameLayoutView, frameLayoutView2 , card, card1); // This has to become a cardclass that holds a dog owner and a dog.
-
-            }
-        });*/
-
-        /*GetDogs dogs = new GetDogs();
-        dogs.fetchDogs(new OnGotDogsListener(){
-         @Override
-            public void onGotDogs(Queue<DogModel> dogs) {
-                qDogs = dogs;
-                Log.e("GETDOGS", qDogs.toString());
-                dog = qDogs.poll();
-                dog1 = qDogs.poll();
-             intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1); // This has to become a cardclass that holds a dog owner and a dog.
-
-         }
-        });*/
-/*
-        getMatchesList.getMyMatches( matches -> {
-            Log.e("MATCHES", matches.get(0).getFirst_name());
-            Log.e("MATCHES", matches.get(1).getFirst_name());
-        });*/
 
     }
 
