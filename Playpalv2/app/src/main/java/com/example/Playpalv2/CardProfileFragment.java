@@ -3,62 +3,59 @@ package com.example.Playpalv2;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CardProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.example.Playpalv2.flipCards.DogModel;
+import com.example.Playpalv2.models.CardModel;
+import com.example.Playpalv2.view_models.DogProfileViewModel;
+
+
 public class CardProfileFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private TextView nameOfDog;
+    private TextView dogAge;
+    private TextView dogEnergy;
+    private TextView dogWeight;
+    private TextView dogAboutBio;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public CardProfileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static CardProfileFragment newInstance(String param1, String param2) {
-        CardProfileFragment fragment = new CardProfileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private DogProfileViewModel dogOwnerProfile;
+    private DogModel dog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.card_fragment_profile, container, false);
+
+        View v = inflater.inflate(R.layout.card_fragment_profile, container, false);
+        setProfile(v);
+
+        return v;
+    }
+
+    private void setProfile(View view) {
+        dogOwnerProfile = new ViewModelProvider(requireActivity()).get(DogProfileViewModel.class);
+        nameOfDog = view.findViewById(R.id.name_of_dog);
+        dogAge = view.findViewById(R.id.dog_age);
+        dogEnergy = view.findViewById(R.id.dog_energy);
+        dogWeight = view.findViewById(R.id.dog_weight);
+        dogAboutBio = view.findViewById(R.id.dog_about_bio);
+        try {
+            dogOwnerProfile.getDogProfile().observe(requireActivity(), DogOwnerProfile -> {
+                dog = new DogModel();
+                dog = dogOwnerProfile.getDogProfile().getValue();
+
+                nameOfDog.setText("Name: " + dog.getName());
+                dogAge.setText("Age: " + dog.getAge().toString());
+                dogWeight.setText("Weight: " + dog.getWeight().toString());
+                dogAboutBio.setText(dog.getBio());
+            });
+        }catch (Exception e){
+            Log.e("Exception", e.getMessage());
+        }
     }
 }

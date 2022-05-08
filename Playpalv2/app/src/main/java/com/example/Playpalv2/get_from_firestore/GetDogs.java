@@ -81,8 +81,6 @@ public class GetDogs {
             }
         });
 
-
-
 /*
                 addOnSuccessListener(new OnSucessListener<QuerySnapshot>() {
                     @Override
@@ -146,6 +144,7 @@ public class GetDogs {
     }
 
     private void hasSeenDog(DogModel dog, OnGotDogsListener onGotDogsListener) {
+
         Log.e("DID DOG GOT?", "YES");
         DocumentReference docRef = db.collection("Dog Owners").document(mAuth).
                 collection("dogsSeen").document(dog.getOwner());
@@ -153,19 +152,32 @@ public class GetDogs {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                if(task.isSuccessful()){
+
                    DocumentSnapshot document = task.getResult();
                    if(document.exists()) {
+                       addDogsChecked();
                        Log.e("Dog has Seen", dog.getName());
                       // onGotDogsListener.onGotDogs(qDogs);
+                       Log.e("DogsTobeCahecked", String.valueOf(dogsCheck));
                    }else{
-                       addToQ(dog, onGotDogsListener);
-                       Log.e("Dog has not Seen", dog.getName());
+                       addDogsChecked();
+                       qDogs.add(dog);
+                       //addToQ(dog, onGotDogsListener);
+
+
+                   }
+                   Log.e("Dog has not Seen", dog.getName());
+                   Log.e("DogsTobeCahecked", String.valueOf(dogsCheck));
+                   Log.e("dogsTobeCheck", String.valueOf(dogsTobeCheck));
+                   if(dogsTobeCheck  == dogsCheck) {
+                       Log.e("DOES IT RUN INSIDE ", "YES?");
+                       onGotDogsListener.onGotDogs(qDogs);
                    }
                }
                else{
                    Log.e("get failed with", task.getException().toString());
                }
-               addDogsChecked();
+
             }
 
         });
@@ -178,7 +190,7 @@ public class GetDogs {
         qDogs.add(dog);
         Log.e("QDOGS", qDogs.toString());
         //IT WORKS BUT IT IS UGLY OH WELL IT IS WHAT IT IS ¯\_(ツ)_/¯
-        if(dogsTobeCheck - 1 == dogsCheck) {
+        if(dogsTobeCheck   == dogsCheck) {
             onGotDogsListener.onGotDogs(qDogs);
         }
     }

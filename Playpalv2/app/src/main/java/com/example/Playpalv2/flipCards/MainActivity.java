@@ -30,6 +30,7 @@ import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.CardsModel;
 import com.example.Playpalv2.view_models.CardsQueueViewModel;
 import com.example.Playpalv2.view_models.DogOwnerView;
+import com.example.Playpalv2.view_models.DogProfileViewModel;
 import com.example.Playpalv2.view_models.DogQueueViewModel;
 import com.example.Playpalv2.view_models.DogViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
@@ -75,6 +76,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private MaterialButton showDogProfile;
 
 
+    private DogProfileViewModel dogProfileViewModel;
     private DogViewModel dogViewModel;
     private DogOwnerView dogOwnerView;
     public DogQueueViewModel dogQueueViewModel;
@@ -134,6 +136,8 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         dogOwnerView = new ViewModelProvider(this).get(DogOwnerView.class);
         dogOwnerView.init();
 
+        dogProfileViewModel = new ViewModelProvider(this).get(DogProfileViewModel.class);
+        dogProfileViewModel.init();
 
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         int id2 = getResources().getIdentifier(cont2, "id", getPackageName());
@@ -196,37 +200,28 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         ogY = frameLayoutView.getY();
 
         likeBtn.setOnClickListener(view -> {
-            viewProfile();
-            resetBtnText();
-            canFlip = !canFlip;
+            if(isProfile) {
+               closeViewProfile();
+            }
             dogGotLiked(frameLayoutView, frameLayoutView2, view);
         });
 
         dislikeBtn.setOnClickListener(view -> {
-            viewProfile();
-            resetBtnText();
-            canFlip = !canFlip;
+            if(isProfile) {
+                closeViewProfile();
+            }
             dogGotDisLiked(frameLayoutView, frameLayoutView2, view);
-          //  resetCards(frameLayoutView, frameLayoutView2, view, dog);
 
         });
 
         showDogProfile.setOnClickListener(view -> {
-            viewProfile();
-            resetBtnText();
-            canFlip = !canFlip;
+            if(isProfile) {
+                closeViewProfile();
+            }else{
+                viewProfile();
+            }
         });
-
     }
-
-    void resetBtnText(){
-        if(!canFlip){
-            showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
-        }else{
-            showDogProfile.setText(replaceTextForShoDogProfileBtn);
-        }
-    }
-//-->
 
     private void getDogs(View frameLayoutView, View frameLayoutView2){
         GetDogs getDogs = new GetDogs();
@@ -242,6 +237,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             }
             cardsModel = new CardsModel(dogs);
 
+            dogProfileViewModel.updateDogProfileView(cardsModel.getTopDogCard());
             loading(false);
             intDogViewModel(frameLayoutView, frameLayoutView2 , cardsModel.getTopDogCard(), cardsModel.getBottomDogCard()); // This has to become a cardclass that holds a dog owner and a dog.
         });
@@ -253,8 +249,12 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dogCard, DogModel dogCard1) {
         dogViewModel.updateDog(dogCard);
         dogViewModel.updateDog1(dogCard1);
+
+
         initDogOwners(dogCard, dogCard1);
         if( dogCard == null) {
+
+
             frameLayoutView.setVisibility(View.INVISIBLE);
             frameLayoutView2.setVisibility(View.INVISIBLE);
             buttons.setVisibility(View.INVISIBLE);
@@ -262,6 +262,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             frameLayoutView2.setVisibility(View.INVISIBLE);
         }
         else{
+
             dogViewModel.updateDog1(dogCard1);
         }
     }
@@ -343,6 +344,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             cont = cont2;
             if(dogCard != null){
                 dogViewModel.updateDog(dogCard);
+//here get owner for profile
                 getDogOwner(dogCard);
 
             }else {
@@ -358,15 +360,12 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                 getDogOwner1(dogCard);
             }else {
                 v2.setVisibility(View.INVISIBLE);
-                buttons.setVisibility(View.INVISIBLE);
             }
         }
-        /*
-        Log.i("View elevation:", String.valueOf(view.getElevation()));
-        Log.i("Should Be deleted:", String.valueOf(view));
-        Log.i("Should Be deleted:", "RIGHT SWIPE");
-        */
 
+        if (cardsModel.getTopDogCard() == null){
+            buttons.setVisibility(View.INVISIBLE);
+        }
 
         if(showingBack){
             showingBack = false;
@@ -374,21 +373,23 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         }
     }
     // This function adds view profile fragment
+    void closeViewProfile(){
+        isProfile = false;
+        canFlip = true;
+        showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
+        getSupportFragmentManager().popBackStack();
+    }
     void viewProfile() {
         int id = getResources().getIdentifier(cont, "id", getPackageName());
-        if (isProfile) {
-            isProfile = false;
-            /*canFlip = true;*/
-            getSupportFragmentManager().popBackStack();
-        } else {
-            isProfile = true;
-          /*  canFlip = false;*/
+        isProfile = true;
+        canFlip = false;
+        showDogProfile.setText(replaceTextForShoDogProfileBtn);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(id, new CardProfileFragment())
                     .addToBackStack(null)
                     .commit();
-        }
+
     }
     //This functions flips the card with a turning animation
     void flipCard() {
@@ -434,17 +435,38 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     }
 
     void dogGotLiked(View frameLayoutView, View frameLayoutView2, View view){
-//        recordUserChoice.userLikesThisOwnerDog(dog.getOwner());
         recordUserChoice.userLikesThisOwnerDog(cardsModel.getTopDogCard().getOwner());
+        updateDogProfileView();
         dogCard = cardsModel.pullCard();
-      //  getDogOwner(dog);
-        resetCards(frameLayoutView, frameLayoutView2, view, dogCard);
+
+        resetCards(frameLayoutView, frameLayoutView2, view,  dogCard);
+
     }
+
+
     void dogGotDisLiked(View frameLayoutView, View frameLayoutView2, View view){
         recordUserChoice.userDisLikesThisOwnerDog(cardsModel.getTopDogCard().getOwner());
+        updateDogProfileView();
         dogCard = cardsModel.pullCard();
-       // getDogOwner(dog);
+
         resetCards(frameLayoutView, frameLayoutView2, view, dogCard);
+    }
+
+    void updateDogProfileView(){
+
+        try {
+            dogProfileViewModel.updateDogProfileView(cardsModel.getBottomDogCard());
+        }catch (Exception e){
+            Log.e("Profile error", e.getMessage());
+        }
+    }
+
+    private void resetDogProfile(DogModel dogCard) {
+        try {
+            dogProfileViewModel.updateDogProfileView(dogCard);
+        } catch (Exception e){
+            Log.e("Expection", e.getMessage());
+        }
     }
 
     void initDogOwners(DogModel dog, DogModel dog1){

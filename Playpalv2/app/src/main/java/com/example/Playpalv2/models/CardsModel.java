@@ -22,16 +22,25 @@ public class CardsModel {
     }
     public DogModel pullCard(){
         tempDog = qDogs.poll();
+
         updateQ(tempDog);
         return tempDog;
+
     }
 
-    public DogModel peek(DogModel dog){
+    public DogModel peek(){
         return qDogs.peek();
     }
     private void updateQ(DogModel tempDog){
-        topDog = bottomDog;
-        bottomDog = tempDog;
+        if( tempDog != null && bottomDog != null) {
+            topDog = bottomDog;
+            bottomDog = tempDog;
+        }else if( tempDog == null && bottomDog != null){
+            topDog = bottomDog;
+            bottomDog = null;
+        } else if (bottomDog == null){
+           topDog = null;
+        }
     }
     public DogModel getTopDogCard(){
        return topDog;
@@ -39,4 +48,6 @@ public class CardsModel {
     public DogModel getBottomDogCard(){
         return bottomDog;
     }
+
+
 }
