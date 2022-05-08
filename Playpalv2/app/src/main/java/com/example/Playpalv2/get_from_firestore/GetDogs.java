@@ -4,8 +4,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.Playpalv2.UserFilterPreferences;
 import com.example.Playpalv2.flipCards.DogModel;
 import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.matches.DogFilter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -15,7 +17,6 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -32,18 +33,24 @@ public class GetDogs {
     private MainActivity mainActy;
     private int dogsTobeCheck = 0;
     private int dogsCheck = 0;
-    public void fetchDogs(OnGotDogsListener onGotDogsListener1){
-        getTheDogs(onGotDogsListener1);
-    }
     private DogModel dog = new DogModel();
     private String mAuth = FirebaseAuth.getInstance().getUid();
+    private GetUserFilterPreferences getUserFilterPreferences;
+    private UserFilterPreferences userFilterPreferences = new UserFilterPreferences();
+    private DogFilter dogFilter =  new DogFilter();
 
-    private void getTheDogs(OnGotDogsListener onGotDogsListener) {
+
+    public void fetchDogs(OnGotDogsListener onGotDogsListener1){
+        getUserFilterPreferences = new GetUserFilterPreferences();
+        getUserFilterPreferences.getUserPreferences(userFilterPreferences -> {
+            getTheDogs(onGotDogsListener1, userFilterPreferences);
+            Log.e("TEST", "isgood");
+        });
+    }
+
+    private void getTheDogs(OnGotDogsListener onGotDogsListener, UserFilterPreferences userFilterPreferences) {
         final List<Task<QuerySnapshot>> tasks = new ArrayList<>();
 
-
-        final String[] doc = new String[1];
-        final CollectionReference[] thisCollecRef = new CollectionReference[1];
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
         CollectionReference collecRef = db.collection("Dog Breeds").
                 document("Bulldog").collection("Dogs");
@@ -58,7 +65,7 @@ public class GetDogs {
                     dog = Objects.requireNonNull(documentSnapshot.toObject(DogModel.class));
                     // Here is when i check if a user has been seen by the ower if not seed by the owner add to teh qDogs
                     // to be display in the queue of cards.
-                    hasSeenDog(dog, onGotDogsListener);
+                    hasSeenDog(dog, onGotDogsListener, userFilterPreferences);
                     //tasks.add();//db.collection("Dog Owners").document(mAuth).collection("dogsSeen").get());
                     dogsTobeCheck++;
                 }
@@ -67,7 +74,7 @@ public class GetDogs {
 
     }
 
-    private void hasSeenDog(DogModel dog, OnGotDogsListener onGotDogsListener) {
+    private void hasSeenDog(DogModel dog, OnGotDogsListener onGotDogsListener, UserFilterPreferences userFilterPreferences) {
 
         Log.e("DID DOG GOT?", "YES");
         DocumentReference docRef = db.collection("Dog Owners").document(mAuth).
@@ -85,7 +92,10 @@ public class GetDogs {
                        Log.e("DogsTobeCahecked", String.valueOf(dogsCheck));
                    }else{
                        addDogsChecked();
-                       qDogs.add(dog);
+                       dogFilter = new DogFilter(dog, userFilterPreferences);
+                      if(dogFilter.doesDogPassFilter()) {
+                          qDogs.add(dog);
+                      }
 
                    }
                    Log.e("Dog has not Seen", dog.getName());
@@ -105,6 +115,7 @@ public class GetDogs {
         });
         Log.e("CHECKED ALL DOGS", qDogs.toString());
     }
+
     void addDogsChecked(){
         dogsCheck++;
     }
