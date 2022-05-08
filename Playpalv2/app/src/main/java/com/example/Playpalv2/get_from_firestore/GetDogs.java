@@ -41,7 +41,7 @@ public class GetDogs {
     private void getTheDogs(OnGotDogsListener onGotDogsListener) {
         final List<Task<QuerySnapshot>> tasks = new ArrayList<>();
 
-//FirebaseFirestore db;
+
         final String[] doc = new String[1];
         final CollectionReference[] thisCollecRef = new CollectionReference[1];
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
@@ -62,84 +62,8 @@ public class GetDogs {
                     //tasks.add();//db.collection("Dog Owners").document(mAuth).collection("dogsSeen").get());
                     dogsTobeCheck++;
                 }
-                /*Tasks.whenAllComplete(tasks).addOnCompleteListener(new OnCompleteListener<List<Task<?>>>() {
-                    @Override
-                    public void onComplete(@NonNull Task<List<Task<?>>> task) {
-                            for(DocumentSnapshot documentSnap : queryDocumentSnapshots){
-                                if(documentSnap.exists()) {
-                                    Log.e("The dog has been seen", documentSnap.toObject(DogModel.class).getName());
-                                }else{
-                                    qDogs.add(documentSnap.toObject(DogModel.class));
-                                    //qDogs.add(dog);
-                                    //onGotDogsListener.onGotDogs(qDogs);
-                                    //dogQueueViewModel.update(qDogsClass);
-                                }
-                                //qDogs.add(documentSnap.toObject(DogModel.class));
-                            }
-                        onGotDogsListener.onGotDogs(qDogs);
-                    }*/
             }
         });
-
-/*
-                addOnSuccessListener(new OnSucessListener<QuerySnapshot>() {
-                    @Override
-                    public void On
-
-            try {
-                for (QueryDocumentSnapshot documentSnapshot: queryDocumentSnapshots) {
-                    Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
-                    dog = snapshot.toObject(DogModel.class);
-                     = db.collection("Dog Owners").document(mAuth).
-                            collection("dogsSeen").document(dog.getOwner()).get();
-                    tasks.add(q.get());
-                    Log.i("TAG", Objects.requireNonNull(snapshot.getData()).toString());
-                }
-                getNotSeenDogs(tasks);
-               // onGotDogsListener.onGotDogs(qDogs);
-            }catch(Exception e){
-                Log.i("EXEPTION", e.getMessage());
-            }
-
-
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("WHAT WHENT WRONG?", e.toString());
-            }
-        });
-
-*/
-
-      /*  thisCollecRef =  db.collection("Dog Breeds").
-                document("Bulldog").collection("Dogs");
-
-        thisCollecRef.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                Log.i("TAG", "ONSUCESS: IT WORKS");
-                List<DocumentSnapshot> snapshotList = Objects.requireNonNull(task.getResult()).getDocuments();
-
-                try {
-                    for (DocumentSnapshot snapshot : snapshotList) {
-                        Log.i("TAG", Objects.requireNonNull(snapshot.getId()));
-                        qDogs.add(new DogModel(
-                                Objects.requireNonNull(snapshot.get("Age")).toString(),
-                                Objects.requireNonNull(snapshot.get("Bio")).toString(),
-                                Objects.requireNonNull(snapshot.get("Breed")).toString(),
-                                (List<String>) snapshot.get("Images"),
-                                Objects.requireNonNull(snapshot.get("Name")).toString(),
-                                Objects.requireNonNull(snapshot.get("Owner")).toString(),
-                                Objects.requireNonNull(snapshot.get("Sex")).toString(),
-                                Objects.requireNonNull(snapshot.get("Weight")).toString()));
-
-                    }
-                    onGotDogsListener.onGotDogs(qDogs);
-                } catch (Exception e) {
-                    Log.i("EXEPTION", e.getMessage());
-                }
-            }
-        });*/
 
     }
 
@@ -162,8 +86,6 @@ public class GetDogs {
                    }else{
                        addDogsChecked();
                        qDogs.add(dog);
-                       //addToQ(dog, onGotDogsListener);
-
 
                    }
                    Log.e("Dog has not Seen", dog.getName());
@@ -194,18 +116,6 @@ public class GetDogs {
             onGotDogsListener.onGotDogs(qDogs);
         }
     }
-    void gotAllDgos(OnGotDogsListener onGotDogsListener){
-
-    }
- /* private void getNotSeenDogs(List<Task<DocumentSnapshot>> tasks) {
-        Tasks.whenAllComplete(tasks).addOnCompleteListener(new OnCompleteListener<List<Task<?>>>() {
-            @Override
-            public void onComplete(@NonNull Task<List<Task<?>>> task) {
-                for(Task<DocumentSnapshot> mtask : tasks){
 
 
-                }
-            }
-        });
-    }*/
 }
