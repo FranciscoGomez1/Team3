@@ -1,11 +1,5 @@
 package com.example.Playpalv2;
 
-import static java.util.List.of;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
@@ -15,19 +9,20 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.RadioButton;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Playpalv2.firestore_updates.UpdateUserPreferences;
 import com.example.Playpalv2.flipCards.MainActivity;
-import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DogBreeds;
 import com.example.Playpalv2.franciscoClassesForRegistrationVersion.DropOutMenusReg3;
 import com.example.Playpalv2.get_from_firestore.GetUserFilterPreferences;
 import com.google.android.material.slider.RangeSlider;
 import com.google.android.material.slider.Slider;
 import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 
-import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -262,14 +257,14 @@ public class FilterOptions extends AppCompatActivity {
 
 
     private void setRadioButtonSelection(String sex) {
-        if(sex.equals("all")){
+        if(sex.equals("All")){
             RadioButton rb1 = (RadioButton) findViewById(R.id.all);
             rb1.setChecked(true);
-        }else if (sex.equals("males")){
+        }else if (sex.equals("Male")){
             RadioButton rb1 = (RadioButton) findViewById(R.id.radio_males);
             rb1.setChecked(true);
 
-        }else if (sex.equals("females")){
+        }else if (sex.equals("Female")){
             RadioButton rb1 = (RadioButton) findViewById(R.id.radio_females);
             rb1.setChecked(true);
 
@@ -284,15 +279,15 @@ public class FilterOptions extends AppCompatActivity {
         switch(view.getId()) {
             case R.id.all:
                 if (checked)
-                    sexPreference = "all";
+                    sexPreference = "All";
                     break;
             case R.id.radio_females:
                 if (checked)
-                    sexPreference = "females";
+                    sexPreference = "Female";
                     break;
             case R.id.radio_males:
                 if(checked)
-                    sexPreference = "males";
+                    sexPreference = "Male";
                     break;
 
         }
