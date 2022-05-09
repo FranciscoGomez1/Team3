@@ -28,7 +28,7 @@ public class CardProfileFragment extends Fragment {
     private DogModel dog;
 
     ViewPager pager;
-    CustomPagerAdapter adapter;
+    ImagePagerAdapter adapter;
 
 
     @Override
@@ -57,7 +57,7 @@ public class CardProfileFragment extends Fragment {
             dogOwnerProfile.getDogProfile().observe(requireActivity(), DogOwnerProfile -> {
                 dog = new DogModel();
                 dog = dogOwnerProfile.getDogProfile().getValue();
-                adapter = new CustomPagerAdapter(CardProfileFragment.this, dog.getImages());
+                adapter = new ImagePagerAdapter(CardProfileFragment.this, dog.getImages());
                 pager.setAdapter(adapter);
 
                 nameOfDog.setText("Name: " + dog.getName());
