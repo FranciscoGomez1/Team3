@@ -130,7 +130,7 @@ public class Register3 extends AppCompatActivity {
         dogInfo.put("sex", DogSexInput);
         dogInfo.put("weight", Integer.parseInt(DogWeightInput));
         dogInfo.put("bio", DogBioInput);
-        dogInfo.put("energyLevel", DogEnergyInput);
+        dogInfo.put("energyLevel", Integer.parseInt(DogEnergyInput));
         // dogInfo.put("Images","");
         dogInfo.put("owner", userID);
 
