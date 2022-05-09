@@ -2,7 +2,6 @@ package com.example.Playpalv2.view_models;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -31,4 +30,7 @@ public class DogOwnerView extends ViewModel {
         return ownerMutableLiveData1;
     }
 
+    public DogOwnerModel getThiOwner(){
+        return ownerMutableLiveData.getValue();
+    }
 }

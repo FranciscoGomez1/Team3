@@ -24,7 +24,7 @@ public class CardProfileFragment extends Fragment {
     private TextView dogWeight;
     private TextView dogAboutBio;
 
-    private DogProfileViewModel dogOwnerProfile;
+    private DogProfileViewModel dogProfile;
     private DogModel dog;
 
     ViewPager pager;
@@ -42,7 +42,7 @@ public class CardProfileFragment extends Fragment {
     }
 
     private void setProfile(View view) {
-        dogOwnerProfile = new ViewModelProvider(requireActivity()).get(DogProfileViewModel.class);
+        dogProfile = new ViewModelProvider(requireActivity()).get(DogProfileViewModel.class);
         pager = view.findViewById(R.id.dog_viewpager);
 
 
@@ -54,9 +54,9 @@ public class CardProfileFragment extends Fragment {
 
 
         try {
-            dogOwnerProfile.getDogProfile().observe(requireActivity(), DogOwnerProfile -> {
+            dogProfile.getDogProfile().observe(requireActivity(), DogModel -> {
                 dog = new DogModel();
-                dog = dogOwnerProfile.getDogProfile().getValue();
+                dog = dogProfile.getDogProfile().getValue();
                 adapter = new ImagePagerAdapter(CardProfileFragment.this, dog.getImages());
                 pager.setAdapter(adapter);
 
