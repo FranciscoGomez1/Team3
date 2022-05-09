@@ -14,8 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.Playpalv2.DrawerBase;
-import com.example.Playpalv2.MessagesAgi;
-import com.example.Playpalv2.CardProfileFragment;
+import com.example.Playpalv2.view_dog_profile.CardProfileFragment;
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.Services;
 
