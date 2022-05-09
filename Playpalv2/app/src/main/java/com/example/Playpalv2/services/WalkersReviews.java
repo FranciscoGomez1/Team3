@@ -2,6 +2,7 @@ package com.example.Playpalv2.services;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.R;
+import com.example.Playpalv2.get_from_firestore.GetReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.MessageModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -32,6 +34,10 @@ public class WalkersReviews extends AppCompatActivity {
     private FirestoreRecyclerAdapter adapterChat;
     private String currentUser = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+    private GetReviews getReviews;
+    private RecyclerView recyclerView;
+    private String walkingReivewsCollection = "walkingReviews";
+
     private List<MessageModel> messages;
     private EditText inputMessage;
     @Override
@@ -40,7 +46,7 @@ public class WalkersReviews extends AppCompatActivity {
         setContentView(R.layout.activity_walkers_reviews);
         Intent intent = getIntent();
         owner = (DogOwnerModel) intent.getSerializableExtra("walker");
-
+        getReviews = new GetReviews(owner.getId(), walkingReivewsCollection);
 
         backBtn = findViewById(R.id.backBtn);
         sitterProfilePic = findViewById(R.id.profileImg);
@@ -51,7 +57,17 @@ public class WalkersReviews extends AppCompatActivity {
                 .into(sitterProfilePic);
 
         db = FirebaseFirestore.getInstance();   //
-        adapterList = findViewById(R.id.chatRecyclerView);
+        String userId = owner.getId();
+
+
+
+        getReviews.fetchReviews(reviews ->{
+            Log.e("WALKING REVIEWS", reviews.get(0).getReview());
+        });
+
+
+
+
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
