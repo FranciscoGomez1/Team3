@@ -43,12 +43,17 @@ public class DogFilter {
         dogWeight = dog.getWeight();
         filterMaxWeight = userFilterPreferences.getMaxWeight();
         filterMinWeight = userFilterPreferences.getMinWeight();
+
+        dogEnergy = dog.getEnergyLevel();
+        filterMaxEnergy = userFilterPreferences.getMaxEnergy();
+        filterMinEnergy = userFilterPreferences.getMinEnergy();
+
     }
 
     public Boolean doesDogPassFilter(){
 
 
-        if(isDogAgeInRange() && isDogWeightInRange() ){
+        if(isDogAgeInRange() && isDogWeightInRange() && isDogEnergyInRange()){
             return true;
         }
         return false;
@@ -63,6 +68,13 @@ public class DogFilter {
 
     public boolean isDogWeightInRange(){
         if( filterMinWeight <= dogWeight && dogWeight <= filterMaxWeight ){
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isDogEnergyInRange(){
+        if (filterMinEnergy <= dogEnergy && dogEnergy <= filterMaxEnergy){
             return true;
         }
         return false;

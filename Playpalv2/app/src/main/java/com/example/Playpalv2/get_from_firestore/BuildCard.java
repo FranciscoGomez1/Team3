@@ -2,14 +2,10 @@ package com.example.Playpalv2.get_from_firestore;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
-
 import com.example.Playpalv2.flipCards.DogModel;
 import com.example.Playpalv2.models.CardModel;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.view_models.CardsQueueViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -60,6 +56,7 @@ public class BuildCard {
                                    ((Integer) Objects.requireNonNull(snapshot.get("age"))),
                                    Objects.requireNonNull(snapshot.get("bio")).toString(),
                                    Objects.requireNonNull(snapshot.get("breed")).toString(),
+                                   ((Integer) Objects.requireNonNull(snapshot.get("energyLevel"))),
                                    (List<String>) snapshot.get("images"),
                                    Objects.requireNonNull(snapshot.get("name")).toString(),
                                    Objects.requireNonNull(snapshot.get("owner")).toString(),

@@ -1,7 +1,6 @@
 package com.example.Playpalv2.flipCards;
 
 
-import java.net.URI;
 import java.util.List;
 
 public class DogModel {
@@ -11,6 +10,7 @@ public class DogModel {
   private Integer age;
   private String bio;
   private String breed;
+  private Integer energyLevel;
   private List<String> images;
   private String name;
   private String owner;
@@ -20,10 +20,11 @@ public class DogModel {
   public DogModel() {
   }
 
-  public DogModel(Integer age, String bio, String breed, List<String> images, String name, String owner, String sex, Integer weight) {
+  public DogModel(Integer age, String bio, String breed, Integer energyLevel, List<String> images, String name, String owner, String sex, Integer weight) {
     this.age = age;
     this.bio = bio;
     this.breed = breed;
+    this.energyLevel = energyLevel;
     this.images = images;
     this.name = name;
     this.owner = owner;
@@ -53,6 +54,14 @@ public class DogModel {
 
   public void setBreed(String breed) {
     this.breed = breed;
+  }
+
+  public Integer getEnergyLevel() {
+    return energyLevel;
+  }
+
+  public void setEnergyLevel(Integer energyLevel) {
+    this.energyLevel = energyLevel;
   }
 
   public List<String> getImages() {

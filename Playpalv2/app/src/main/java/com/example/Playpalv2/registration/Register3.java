@@ -59,8 +59,9 @@ public class Register3 extends AppCompatActivity {
         DogAge = findViewById(R.id.dog_age_list);
         DogSex = findViewById(R.id.dog_sex_list);
         DogWeight = findViewById(R.id.dog_weight_list);
-        DogBio = findViewById(R.id.dog_bio);
         DogEnergyLevel = findViewById(R.id.dog_energy_level_list);
+        DogBio = findViewById(R.id.dog_bio);
+
 
         //Auto complete drop out menu for dog breeds
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
@@ -99,15 +100,15 @@ public class Register3 extends AppCompatActivity {
             String DogSexInput = DogSex.getText().toString();
             String DogWeightInput = DogWeight.getText().toString();
             String DogBioInput = DogBio.getText().toString();
-
+            String DogEnergyInput = DogEnergyLevel.getText().toString();
             setDog(DogNameInput, DogBreedInput, DogAgeInput, DogSexInput,
-                    DogWeightInput,DogBioInput);
+                    DogWeightInput,DogBioInput, DogEnergyInput);
 
         });
 
     }
     private void setDog(String DogNameInput, String DogBreedInput, String DogAgeInput, String DogSexInput,
-                        String DogWeightInput, String DogBioInput) {
+                        String DogWeightInput, String DogBioInput, String DogEnergyInput) {
 
         FirebaseUser firebaseUser = auth.getCurrentUser();
         if(firebaseUser != null){
@@ -129,6 +130,7 @@ public class Register3 extends AppCompatActivity {
         dogInfo.put("sex", DogSexInput);
         dogInfo.put("weight", Integer.parseInt(DogWeightInput));
         dogInfo.put("bio", DogBioInput);
+        dogInfo.put("energyLevel", DogEnergyInput);
         // dogInfo.put("Images","");
         dogInfo.put("owner", userID);
 
