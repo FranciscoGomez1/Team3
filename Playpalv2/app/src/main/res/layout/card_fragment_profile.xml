@@ -31,7 +31,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/name_of_dog"
+                android:id="@+id/name_of_dog_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Name:"
@@ -53,7 +53,7 @@
                 android:background="@color/ghost_white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name_of_dog" />
+                app:layout_constraintTop_toBottomOf="@+id/name_of_dog_owner" />
 
             <TextView
                 android:id="@+id/dog_age"
@@ -104,7 +104,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/dog_weight" />
 
             <TextView
-                android:id="@+id/dog_about"
+                android:id="@+id/dog_owner_about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -126,7 +126,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.58"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dog_about"
+                app:layout_constraintTop_toBottomOf="@+id/dog_owner_about"
                 app:layout_constraintVertical_bias="0.0" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

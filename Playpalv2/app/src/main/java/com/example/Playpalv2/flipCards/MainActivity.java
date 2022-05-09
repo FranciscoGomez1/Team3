@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.Playpalv2.DogOwnerViewProfile;
 import com.example.Playpalv2.DrawerBase;
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
@@ -120,7 +121,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         loading(true);
 
-    //set title to top bar
+        //set title to top bar
         allocateActivityTitle("Home");
 
 
@@ -141,7 +142,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         View frameLayoutView = findViewById(id);
         View frameLayoutView2 = findViewById(id2);
 
-       getDogs(frameLayoutView, frameLayoutView2);
+        getDogs(frameLayoutView, frameLayoutView2);
        /* // Initialize the queue of dog cards
         intDogViewModel(frameLayoutView, frameLayoutView2 , dog, dog1);*/
 
@@ -195,14 +196,15 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         likeBtn.setOnClickListener(view -> {
             if(isProfile) {
-               closeViewProfile();
+                //closeViewProfile();
+                closeProfile();
             }
             dogGotLiked(frameLayoutView, frameLayoutView2, view);
         });
 
         dislikeBtn.setOnClickListener(view -> {
             if(isProfile) {
-                closeViewProfile();
+                closeDogViewProfile();
             }
             dogGotDisLiked(frameLayoutView, frameLayoutView2, view);
 
@@ -210,12 +212,34 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
         showDogProfile.setOnClickListener(view -> {
             if(isProfile) {
-                closeViewProfile();
+                closeProfile();
             }else{
                 viewProfile();
             }
         });
     }
+
+    void closeProfile(){
+        if(isProfile){
+            if(!showingBack){
+                closeDogViewProfile();
+            }else{
+                closeOwnerProfile();
+            }
+        }
+    }
+
+    void viewProfile(){
+
+        if(!showingBack){
+            viewDogProfile();
+        }else{
+            viewOwnerProfile();
+        }
+
+    }
+
+
 
     private void getDogs(View frameLayoutView, View frameLayoutView2){
         GetDogs getDogs = new GetDogs();
@@ -308,7 +332,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
                         left = false;
                         dogGotDisLiked(v1,v2,view);
                         //dog = qDogs.poll();
-                       // resetCards(v1, v2, view, dog);
+                        // resetCards(v1, v2, view, dog);
                     }
                     view.setX(ogX);
                     view.setY(ogY);
@@ -367,23 +391,43 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         }
     }
     // This function adds view profile fragment
-    void closeViewProfile(){
+    void closeDogViewProfile(){
         isProfile = false;
         canFlip = true;
         showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
         getSupportFragmentManager().popBackStack();
     }
-    void viewProfile() {
+    void viewDogProfile() {
         int id = getResources().getIdentifier(cont, "id", getPackageName());
         isProfile = true;
         canFlip = false;
         showDogProfile.setText(replaceTextForShoDogProfileBtn);
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(id, new CardProfileFragment())
-                    .addToBackStack(null)
-                    .commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(id, new CardProfileFragment())
+                .addToBackStack(null)
+                .commit();
 
+    }
+
+    void viewOwnerProfile(){
+        int id = getResources().getIdentifier(cont, "id", getPackageName());
+        isProfile = true;
+        canFlip = false;
+        showDogProfile.setText(replaceTextForShoDogProfileBtn);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(id, new DogOwnerViewProfile())
+                .addToBackStack(null)
+                .commit();
+
+    }
+
+    void closeOwnerProfile(){
+        isProfile = false;
+        canFlip = true;
+        showDogProfile.setText(setOriginalTextForShoDogProfileBtn);
+        getSupportFragmentManager().popBackStack();
     }
     //This functions flips the card with a turning animation
     void flipCard() {
@@ -393,28 +437,28 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             getSupportFragmentManager().popBackStack();
         }else if (cont.equals("container")){
             showingBack = true;
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.card_flip_right_in,
-                                R.anim.card_flip_right_out,
-                                R.anim.card_flip_left_in,
-                                R.anim.card_flip_left_out)
-                        .replace(id, new CardBackFragment())
-                        .addToBackStack(null)
-                        .commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.card_flip_right_in,
+                            R.anim.card_flip_right_out,
+                            R.anim.card_flip_left_in,
+                            R.anim.card_flip_left_out)
+                    .replace(id, new CardBackFragment())
+                    .addToBackStack(null)
+                    .commit();
         }else{
             showingBack = true;
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .setCustomAnimations(
-                                R.anim.card_flip_right_in,
-                                R.anim.card_flip_right_out,
-                                R.anim.card_flip_left_in,
-                                R.anim.card_flip_left_out)
-                        .replace(id, new CardBackFragment1())
-                        .addToBackStack(null)
-                        .commit();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .setCustomAnimations(
+                            R.anim.card_flip_right_in,
+                            R.anim.card_flip_right_out,
+                            R.anim.card_flip_left_in,
+                            R.anim.card_flip_left_out)
+                    .replace(id, new CardBackFragment1())
+                    .addToBackStack(null)
+                    .commit();
         }
     }
     public static class FragmentUtils {
@@ -513,5 +557,4 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
         }
     }
 }
-
 

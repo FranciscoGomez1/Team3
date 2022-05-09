@@ -46,7 +46,7 @@ public class CardProfileFragment extends Fragment {
         pager = view.findViewById(R.id.dog_viewpager);
 
 
-        nameOfDog = view.findViewById(R.id.name_of_dog);
+        nameOfDog = view.findViewById(R.id.name_of_dog_owner);
         dogAge = view.findViewById(R.id.dog_age);
         dogEnergy = view.findViewById(R.id.dog_energy);
         dogWeight = view.findViewById(R.id.dog_weight);
