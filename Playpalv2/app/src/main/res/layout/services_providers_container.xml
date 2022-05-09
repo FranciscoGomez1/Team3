@@ -64,7 +64,7 @@
             android:layout_marginStart="20dp"
             android:layout_marginTop="7dp"
             android:layout_toEndOf="@+id/ratings"
-            android:text="/5"
+            android:text="5/5"
             android:textColor="#fc6d00"
             android:textSize="16sp"
 

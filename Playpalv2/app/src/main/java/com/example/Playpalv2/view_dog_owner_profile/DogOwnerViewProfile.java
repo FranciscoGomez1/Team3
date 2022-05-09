@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.view_dog_owner_profile;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.models.DogOwnerModel;
-import com.example.Playpalv2.view_dog_profile.ImagePagerAdapter;
 import com.example.Playpalv2.view_models.DogOwnerView;
 
 
@@ -24,7 +24,7 @@ public class DogOwnerViewProfile extends Fragment {
     private DogOwnerView dogOwnerView;
 
     ViewPager pager;
-    ImagePagerAdapter adapter;
+    ImageDogPagerAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,9 +41,13 @@ public class DogOwnerViewProfile extends Fragment {
         ownerBio = view.findViewById(R.id.dog_owner_about_bio);
 
         try{
-            dogOwnerView.getOwner().observe(requireActivity(), DogOwnerView ->{
+            dogOwnerView.getTopDogLiveData().observe(requireActivity(), DogOwnerView ->{
                 dogOwnerModel = new DogOwnerModel();
                 dogOwnerModel =  dogOwnerView.getOwner().getValue();
+                adapter = new ImageDogPagerAdapter(DogOwnerViewProfile.this, dogOwnerModel.getImages());
+                pager.setAdapter(adapter);
+
+
                // adapter = new ImagePagerAdapter(DogOwnerViewProfile.this, dogOwnerModel.getImages());
                 //pager.setAdapter(adapter);
 

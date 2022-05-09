@@ -10,10 +10,11 @@ import com.example.Playpalv2.models.DogOwnerModel;
 public class DogOwnerView extends ViewModel {
     private MutableLiveData<DogOwnerModel> ownerMutableLiveData;
     private MutableLiveData<DogOwnerModel> ownerMutableLiveData1;
-
+    private MutableLiveData<DogOwnerModel> topDogLiveData;
     public void init(){
         ownerMutableLiveData = new MutableLiveData<>();
         ownerMutableLiveData1  = new MutableLiveData<>();
+        topDogLiveData = new MutableLiveData<>();
     }
     public void updateOwner(DogOwnerModel ownerModel){
         ownerMutableLiveData.setValue(ownerModel);
@@ -30,7 +31,10 @@ public class DogOwnerView extends ViewModel {
         return ownerMutableLiveData1;
     }
 
-    public DogOwnerModel getThiOwner(){
-        return ownerMutableLiveData.getValue();
+
+    public MutableLiveData<DogOwnerModel> getTopDogLiveData(){return topDogLiveData;}
+
+    public void updateTopDog(DogOwnerModel ownerModel){
+        topDogLiveData.setValue(ownerModel);
     }
 }

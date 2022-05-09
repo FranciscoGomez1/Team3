@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +9,10 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="75dp" >
+        android:layout_height="75dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -72,14 +75,78 @@
         android:layout_below="@+id/topBar"
         android:background="#D3D3D3" />
 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar">
+
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="30dp"
+            android:text="Contact Service Provider:"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.162" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_contact_walker_provider"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#EEE"
+            android:gravity="center"
+            android:insetLeft="0dp"
+            android:insetTop="0dp"
+            android:insetRight="0dp"
+            android:insetBottom="0dp"
+            android:padding="6dp"
+            android:text="Message"
+            android:textColor="@color/black"
+            app:cornerRadius="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.491"
+            app:layout_constraintStart_toEndOf="@+id/textView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/lineTop1"
+            android:layout_width="0dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="27dp"
+            android:background="@color/ghost_white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:layout_constraintVertical_bias="0.515" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/walker_reviews_recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/topBar"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="3dp"
         android:orientation="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+        app:layout_constraintVertical_bias="0.016"
         app:stackFromEnd="false" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

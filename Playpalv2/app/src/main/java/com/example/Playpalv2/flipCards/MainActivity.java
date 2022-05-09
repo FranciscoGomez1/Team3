@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.Playpalv2.DogOwnerViewProfile;
+import com.example.Playpalv2.view_dog_owner_profile.DogOwnerViewProfile;
 import com.example.Playpalv2.DrawerBase;
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
@@ -363,7 +363,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             if(dogCard != null){
                 dogViewModel.updateDog(dogCard);
 //here get owner for profile
+                dogOwnerView.updateTopDog(dogOwnerView.getOwner1().getValue());
                 getDogOwner(dogCard);
+
 
             }else {
                 v1.setVisibility(View.INVISIBLE);
@@ -375,7 +377,9 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             v1.setElevation(0);
             if(dogCard != null) {
                 dogViewModel.updateDog(dogCard);
+                dogOwnerView.updateTopDog(dogOwnerView.getOwner().getValue());
                 getDogOwner1(dogCard);
+
             }else {
                 v2.setVisibility(View.INVISIBLE);
             }
@@ -512,6 +516,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
             GetDogOwner owner = new GetDogOwner(dog.getOwner());
             owner.getOwner(dogOwner -> {
                 dogOwnerView.updateOwner(dogOwner);
+                dogOwnerView.updateTopDog(dogOwner);
                 Log.e("When did OnGotOwnerGot", dog.getName());
             });
 
