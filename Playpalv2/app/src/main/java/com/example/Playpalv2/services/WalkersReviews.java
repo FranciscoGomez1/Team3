@@ -9,17 +9,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.R;
+import com.example.Playpalv2.adapters.ReviewsAdapter;
 import com.example.Playpalv2.get_from_firestore.GetReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.MessageModel;
+import com.example.Playpalv2.models.ReviewModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WalkersReviews extends AppCompatActivity {
@@ -40,6 +44,9 @@ public class WalkersReviews extends AppCompatActivity {
 
     private List<MessageModel> messages;
     private EditText inputMessage;
+
+    private ReviewsAdapter reviewsAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +70,14 @@ public class WalkersReviews extends AppCompatActivity {
 
         getReviews.fetchReviews(reviews ->{
             Log.e("WALKING REVIEWS", reviews.get(0).getReview());
+            recyclerView = findViewById(R.id.walker_reviews_recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setHasFixedSize(true);
+
+            reviewsAdapter =  new ReviewsAdapter(this, reviews);
+            recyclerView.setAdapter(reviewsAdapter);
+
+
         });
 
 
