@@ -57,8 +57,8 @@ public class UploadDogImagesToFirebase extends ImagesToFirestore{
          db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
 
          // DocumentReference docRef = db.collection("Dog Owners").document(userID);
-         DocumentReference docRef = db.collection("Dog Breeds").
-                 document(breed).collection("Dogs").document(dogId);
+         //("Dog Breeds").document(breed).collection
+         DocumentReference docRef = db.collection("Dogs").document(dogId);
          Map<String, Object> Images = new HashMap<>();
          Images.put("images", imagesList);
 

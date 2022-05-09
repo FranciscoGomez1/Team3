@@ -14,9 +14,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
-
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -52,13 +52,13 @@ public class GetDogs {
         final List<Task<QuerySnapshot>> tasks = new ArrayList<>();
 
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
-        CollectionReference collecRef = db.collection("Dog Breeds").
-                document("Bulldog").collection("Dogs");
+        // collection("Dog Breeds").document("Bulldog").
+        CollectionReference collecRef = db.collection("Dogs");
 
 
-        //Query query = collecRef.whereLessThan("age", 11).whereNotEqualTo("owner", mAuth);
+        Query query = collecRef.whereEqualTo("sex", userFilterPreferences.getSex()).whereEqualTo("breed", "Bulldog");
 
-        collecRef.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+        query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                 for (QueryDocumentSnapshot documentSnapshot : queryDocumentSnapshots) {
