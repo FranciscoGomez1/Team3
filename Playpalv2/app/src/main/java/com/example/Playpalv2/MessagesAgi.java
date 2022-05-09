@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.databinding.ActivityMessagesBinding;
 import com.example.Playpalv2.flipCards.MainActivity;
+import com.example.Playpalv2.services.Services;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

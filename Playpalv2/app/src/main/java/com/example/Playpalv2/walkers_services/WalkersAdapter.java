@@ -12,14 +12,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.Playpalv2.ChatRoom;
 import com.example.Playpalv2.R;
-import com.example.Playpalv2.WalkersReviews;
+import com.example.Playpalv2.services.WalkersReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
-import com.example.Playpalv2.servicesWalking;
 
 import java.util.LinkedList;
-import java.util.List;
 
 
 public class WalkersAdapter extends RecyclerView.Adapter<WalkersAdapter.WalkerViewHolder> {

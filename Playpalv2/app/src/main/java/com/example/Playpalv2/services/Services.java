@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.services;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.widget.Switch;
 
 import androidx.fragment.app.FragmentManager;
 
+import com.example.Playpalv2.DrawerBase;
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityServicesBinding;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.get_from_firestore.GetServiceProviders;

@@ -1,4 +1,4 @@
-package com.example.Playpalv2;
+package com.example.Playpalv2.services;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.get_from_firestore.GetSitters;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.view_models.SittersViewModel;
-import com.example.Playpalv2.services.ServiceProvidersAdapter;
 
 import java.util.LinkedList;
 import java.util.List;

@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.R;
-import com.example.Playpalv2.SitterReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
 
 import java.util.List;

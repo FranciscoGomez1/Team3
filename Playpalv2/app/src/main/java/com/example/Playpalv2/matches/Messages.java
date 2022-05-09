@@ -1,6 +1,5 @@
 package com.example.Playpalv2.matches;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.PreferenceManager;
 
 import android.content.Intent;
@@ -10,10 +9,9 @@ import android.view.View;
 
 import com.example.Playpalv2.DrawerBase;
 import com.example.Playpalv2.R;
-import com.example.Playpalv2.Services;
+import com.example.Playpalv2.services.Services;
 import com.example.Playpalv2.databinding.ActivityMessagesBinding;
 import com.example.Playpalv2.flipCards.MainActivity;
-import com.example.Playpalv2.matches.GetMatchesList;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 

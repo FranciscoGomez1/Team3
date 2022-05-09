@@ -1,9 +1,6 @@
 
 package com.example.Playpalv2.flipCards;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,11 +10,11 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.Playpalv2.DrawerBase;
-import com.example.Playpalv2.view_dog_profile.CardProfileFragment;
-import com.example.Playpalv2.R;
-import com.example.Playpalv2.Services;
+import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.Playpalv2.DrawerBase;
+import com.example.Playpalv2.R;
 import com.example.Playpalv2.databinding.ActivityMainBinding;
 import com.example.Playpalv2.firestore_updates.RecordUserChoice;
 import com.example.Playpalv2.get_from_firestore.GetDogOwner;
@@ -25,8 +22,10 @@ import com.example.Playpalv2.get_from_firestore.GetDogs;
 import com.example.Playpalv2.matches.GetMatchesList;
 import com.example.Playpalv2.matches.Messages;
 import com.example.Playpalv2.models.CardModel;
-import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.CardsModel;
+import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.services.Services;
+import com.example.Playpalv2.view_dog_profile.CardProfileFragment;
 import com.example.Playpalv2.view_models.CardsQueueViewModel;
 import com.example.Playpalv2.view_models.DogOwnerView;
 import com.example.Playpalv2.view_models.DogProfileViewModel;
@@ -34,14 +33,10 @@ import com.example.Playpalv2.view_models.DogQueueViewModel;
 import com.example.Playpalv2.view_models.DogViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-
 import com.google.android.material.button.MaterialButton;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.LinkedList;
