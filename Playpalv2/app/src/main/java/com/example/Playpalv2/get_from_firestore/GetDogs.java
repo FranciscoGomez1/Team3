@@ -36,13 +36,14 @@ public class GetDogs {
     private DogModel dog = new DogModel();
     private String mAuth = FirebaseAuth.getInstance().getUid();
     private GetUserFilterPreferences getUserFilterPreferences;
-    private UserFilterPreferences userFilterPreferences = new UserFilterPreferences();
     private DogFilter dogFilter =  new DogFilter();
-
-
+    private Query query;
+    private CollectionReference collecRef;
+    OnGotDogsListener onGotDogsListener3;
     public void fetchDogs(OnGotDogsListener onGotDogsListener1){
         getUserFilterPreferences = new GetUserFilterPreferences();
         getUserFilterPreferences.getUserPreferences(userFilterPreferences -> {
+
             getTheDogs(onGotDogsListener1, userFilterPreferences);
             Log.e("TEST", "isgood");
         });
@@ -50,14 +51,46 @@ public class GetDogs {
 
     private void getTheDogs(OnGotDogsListener onGotDogsListener, UserFilterPreferences userFilterPreferences) {
         final List<Task<QuerySnapshot>> tasks = new ArrayList<>();
-
+        onGotDogsListener3 = onGotDogsListener;
         db = FirebaseFirestore.getInstance(); // Get an instance of the firestore database
         // collection("Dog Breeds").document("Bulldog").
-        CollectionReference collecRef = db.collection("Dogs");
+        collecRef = db.collection("Dogs");
+        getTheQuery(userFilterPreferences);
 
 
-        Query query = collecRef.whereEqualTo("sex", userFilterPreferences.getSex()).whereEqualTo("breed", "Bulldog");
 
+    }
+
+    private void getTheQuery(UserFilterPreferences userFilterPreferences) {
+        //I know is ugly but it is what it is ¯\_(ツ)_/¯
+        if(userFilterPreferences.getBreed().equals("All") || userFilterPreferences.getBreed().equals("all")  ){
+            if (userFilterPreferences.getSex().equals("Male")){
+                query = collecRef.whereEqualTo("sex", userFilterPreferences.getSex());
+                fireTheQuery(userFilterPreferences);
+            }else if (userFilterPreferences.getSex().equals("Female")){
+                query = collecRef.whereEqualTo("sex", userFilterPreferences.getSex());
+                fireTheQuery(userFilterPreferences);
+            }else {
+                query = collecRef;
+                fireTheQuery(userFilterPreferences);
+            }
+        }else {
+            if (userFilterPreferences.getSex().equals("Male")) {
+                query = collecRef.whereEqualTo("breed", userFilterPreferences.getBreed()).whereEqualTo("sex", userFilterPreferences.getSex());
+                fireTheQuery(userFilterPreferences);
+
+            } else if (userFilterPreferences.getSex().equals("Female")) {
+                query = collecRef.whereEqualTo("breed", userFilterPreferences.getBreed()).whereEqualTo("sex", userFilterPreferences.getSex());
+                fireTheQuery(userFilterPreferences);
+            } else {
+                query = collecRef.whereEqualTo("breed", userFilterPreferences.getBreed());
+                fireTheQuery(userFilterPreferences);
+            }
+        }
+
+    }
+
+    private void fireTheQuery(UserFilterPreferences userFilterPreferences){
         query.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
             @Override
             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
@@ -65,13 +98,12 @@ public class GetDogs {
                     dog = Objects.requireNonNull(documentSnapshot.toObject(DogModel.class));
                     // Here is when i check if a user has been seen by the ower if not seed by the owner add to teh qDogs
                     // to be display in the queue of cards.
-                    hasSeenDog(dog, onGotDogsListener, userFilterPreferences);
+                    hasSeenDog(dog, onGotDogsListener3, userFilterPreferences);
                     //tasks.add();//db.collection("Dog Owners").document(mAuth).collection("dogsSeen").get());
                     dogsTobeCheck++;
                 }
             }
         });
-
     }
 
     private void hasSeenDog(DogModel dog, OnGotDogsListener onGotDogsListener, UserFilterPreferences userFilterPreferences) {
