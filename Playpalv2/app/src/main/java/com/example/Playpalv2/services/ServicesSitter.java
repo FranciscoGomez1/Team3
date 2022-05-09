@@ -26,18 +26,21 @@ public class ServicesSitter extends Fragment {
     private GetSitters getSitters = new GetSitters();
     private SittersViewModel sittersViewModel = new SittersViewModel();
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = LayoutInflater.from(getContext()).inflate(R.layout.services_sitter, container, false);
 
         // Add the following lines to create RecyclerView
         recyclerView = v.findViewById(R.id.sitterRecyclerView);
+
         Log.e("TEST", "Sitter");
 
         if(sittersViewModel.getSittersLiveData().getValue() != null) {
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
             recyclerView.setAdapter(new ServiceProvidersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
         }
+
         return v;
     }
 
@@ -50,5 +53,10 @@ public class ServicesSitter extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
             recyclerView.setAdapter(new ServiceProvidersAdapter(this.getContext(), sittersViewModel.getSittersLiveData().getValue()));
         });
+
+  /*      contactSitter.setOnClickListener(View ->{
+            Log.e("does it work", "Click");
+        });*/
+
     }
 }

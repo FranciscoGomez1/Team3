@@ -1,18 +1,18 @@
 package com.example.Playpalv2.matches;
 
-import androidx.preference.PreferenceManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import androidx.preference.PreferenceManager;
+
 import com.example.Playpalv2.DrawerBase;
 import com.example.Playpalv2.R;
-import com.example.Playpalv2.services.Services;
 import com.example.Playpalv2.databinding.ActivityMessagesBinding;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.models.DogOwnerModel;
+import com.example.Playpalv2.services.Services;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ public class Messages extends DrawerBase {
         super.onCreate(savedInstanceState);
         binding = ActivityMessagesBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        allocateActivityTitle("Your Matches");
+        allocateActivityTitle("Your Connections");
         //preferenceManager = new PreferenceManager(getApplicationContext());
         /*
         testOwner.setFirst_name("TestDogOwner");

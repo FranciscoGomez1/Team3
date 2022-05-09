@@ -13,26 +13,24 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.Playpalv2.adapters.ChatAdapter;
-
 import com.example.Playpalv2.databinding.ChatRoomBinding;
 import com.example.Playpalv2.matches.Messages;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.MessageModel;
+import com.example.Playpalv2.services.SitterReviews;
+import com.example.Playpalv2.services.WalkersReviews;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -61,6 +59,8 @@ public class ChatRoom extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private EditText inputMessage;
     private ChatRoomBinding binding;
+    private Boolean goesBackToSittersReviews;
+    private Boolean goesToWalkersReviews;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,9 @@ public class ChatRoom extends AppCompatActivity {
 
         Intent intent = getIntent();
         owner = (DogOwnerModel) intent.getSerializableExtra("dogOwner");
+        goesToWalkersReviews = (Boolean) intent.getBooleanExtra("comesBackToWalkersReview", false);
+        goesBackToSittersReviews = (Boolean) intent.getBooleanExtra("comesBackToSittersReview", false);
+
         inputMessage = findViewById(R.id.newMsg);
        // String dogName = intent.getStringExtra("dogName");
         //String dogImage = intent.getStringExtra("dogImage");
@@ -93,7 +96,17 @@ public class ChatRoom extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ChatRoom.this, Messages.class);
+                Intent i;
+                if(goesBackToSittersReviews){
+                    i = new Intent(ChatRoom.this, SitterReviews.class);
+                    i.putExtra("ServiceProvider", owner);
+                } else if(goesToWalkersReviews){
+                    i = new Intent(ChatRoom.this, WalkersReviews.class);
+                    i.putExtra("walker", owner);
+                }else {
+                    i = new Intent(ChatRoom.this, Messages.class);
+
+                }
                 startActivity(i);
             }
         });

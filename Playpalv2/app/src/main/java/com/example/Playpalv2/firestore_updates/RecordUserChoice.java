@@ -1,22 +1,18 @@
 package com.example.Playpalv2.firestore_updates;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
 import com.example.Playpalv2.HashMaps.MatchHasMap;
-import com.example.Playpalv2.registration.Register3;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -31,6 +27,7 @@ public class RecordUserChoice {
     private String matchId;
 
     private List<String> users = new LinkedList<>();
+
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
@@ -83,6 +80,7 @@ public class RecordUserChoice {
                 }
                 else{
                     Log.e("get failed with", task.getException().toString());
+
                 }
 
             }
@@ -90,7 +88,7 @@ public class RecordUserChoice {
         });
     }
 
-    private void recordTheMatch(String userID, String ownerId) {
+    public void recordTheMatch(String userID, String ownerId) {
         matchId = setMatchDocumentId(userID, ownerId);
 
 
