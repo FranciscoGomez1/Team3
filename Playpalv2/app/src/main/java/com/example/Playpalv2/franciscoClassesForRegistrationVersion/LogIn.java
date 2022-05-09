@@ -1,22 +1,17 @@
 package com.example.Playpalv2.franciscoClassesForRegistrationVersion;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.Playpalv2.R;
 import com.example.Playpalv2.flipCards.MainActivity;
 import com.example.Playpalv2.registration.PlaypalRegister;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.ZoneId;
@@ -47,7 +42,7 @@ public class LogIn extends AppCompatActivity {
            /* email = inputEmail.getText().toString();
             password = inputPassword.getText().toString();*/
             //TODO TESTING
-            signIn("hope@hope.com","123456");
+            signIn("hope@hope.com","123456"); // <---- COMMENT THIS OUT
           //  signIn(email, password);
         });
 
