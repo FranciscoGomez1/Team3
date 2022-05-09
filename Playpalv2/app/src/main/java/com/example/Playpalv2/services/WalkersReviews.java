@@ -18,12 +18,10 @@ import com.example.Playpalv2.adapters.ReviewsAdapter;
 import com.example.Playpalv2.get_from_firestore.GetReviews;
 import com.example.Playpalv2.models.DogOwnerModel;
 import com.example.Playpalv2.models.MessageModel;
-import com.example.Playpalv2.models.ReviewModel;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WalkersReviews extends AppCompatActivity {
