@@ -265,11 +265,12 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
 
 
     private void intDogViewModel(View frameLayoutView, View frameLayoutView2, DogModel dogCard, DogModel dogCard1) {
-        dogViewModel.updateDog(dogCard);
-        dogViewModel.updateDog1(dogCard1);
+
+            dogViewModel.updateDog(dogCard);
+            dogViewModel.updateDog1(dogCard1);
 
 
-        initDogOwners(dogCard, dogCard1);
+            initDogOwners(dogCard, dogCard1);
         if( dogCard == null) {
 
 

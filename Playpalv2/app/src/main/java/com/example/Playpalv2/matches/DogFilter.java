@@ -2,7 +2,7 @@ package com.example.Playpalv2.matches;
 
 import com.example.Playpalv2.UserFilterPreferences;
 import com.example.Playpalv2.flipCards.DogModel;
-
+//This is done in the client side, but it should be done in the server side
 public class DogFilter {
     private Integer dogAge;
     private Integer filterMaxAge;

@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -36,26 +35,29 @@ public class CardFrontFragment1 extends Fragment {
     private void setCard(View view) {
         dogViewModel = new ViewModelProvider(requireActivity()).get(DogViewModel.class);
 
-        dogViewModel.getDog1().observe(requireActivity(), DogViewModel -> {
-            if(dogViewModel.getDog1().getValue() != null) {
-                dogName = view.findViewById(R.id.dog_name);
-                dogBio = view.findViewById(R.id.dog_bio);
-                profilePic = view.findViewById(R.id.dog_front_image_1);
+        try {
+            dogViewModel.getDog1().observe(requireActivity(), DogViewModel -> {
+                if (dogViewModel.getDog1().getValue() != null) {
+                    dogName = view.findViewById(R.id.dog_name);
+                    dogBio = view.findViewById(R.id.dog_bio);
+                    profilePic = view.findViewById(R.id.dog_front_image_1);
 
 
-                dogName.setText(dogViewModel.getDog1().getValue().getName());
-                dogBio.setText(dogViewModel.getDog1().getValue().getBio());
+                    dogName.setText(dogViewModel.getDog1().getValue().getName());
+                    dogBio.setText(dogViewModel.getDog1().getValue().getBio());
 
-                String onlineImg = Objects.requireNonNull(dogViewModel.getDog1().getValue()).getImages().get(0);
+                    String onlineImg = Objects.requireNonNull(dogViewModel.getDog1().getValue()).getImages().get(0);
 
-                if(!onlineImg.equals("")) {
-                    Glide.with(this).load(onlineImg).into(profilePic);
+                    if (!onlineImg.equals("")) {
+                        Glide.with(this).load(onlineImg).into(profilePic);
+                    } else {
+                        profilePic.setImageResource(R.drawable.card_front);
+                    }
                 }
-                else{
-                    profilePic.setImageResource(R.drawable.card_front);
-                }
-            }
-        });
+            });
+        }catch (Exception e){
+            Log.e("Error Message cardFragment1", e.getMessage());
+        }
 
     }
     @Override

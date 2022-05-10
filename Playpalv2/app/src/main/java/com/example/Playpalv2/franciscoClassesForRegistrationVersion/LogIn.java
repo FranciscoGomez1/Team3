@@ -39,11 +39,11 @@ public class LogIn extends AppCompatActivity {
 
 
         logIn.setOnClickListener(View ->{
-           /* email = inputEmail.getText().toString();
-            password = inputPassword.getText().toString();*/
+            email = inputEmail.getText().toString();
+            password = inputPassword.getText().toString();
             //TODO TESTING
-            signIn("hope@hope.com","123456"); // <---- COMMENT THIS OUT
-          //  signIn(email, password);
+            //signIn("hope@hope.com","123456"); // <---- COMMENT THIS OUT
+            signIn(email, password);
         });
 
         register.setOnClickListener(View -> {
