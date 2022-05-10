@@ -51,7 +51,7 @@ public class DogOwnerViewProfile extends Fragment {
                // adapter = new ImagePagerAdapter(DogOwnerViewProfile.this, dogOwnerModel.getImages());
                 //pager.setAdapter(adapter);
 
-                ownerName.setText(dogOwnerModel.getFirst_name() + " " +dogOwnerModel.getLast_name());
+                ownerName.setText("Name: " + dogOwnerModel.getFirst_name() + " " +dogOwnerModel.getLast_name());
                 ownerBio.setText(dogOwnerModel.getBio());
             });
 

@@ -23,6 +23,7 @@ public class CardProfileFragment extends Fragment {
     private TextView dogEnergy;
     private TextView dogWeight;
     private TextView dogAboutBio;
+    private TextView dogSex;
 
 
     private DogProfileViewModel dogProfile;
@@ -50,6 +51,7 @@ public class CardProfileFragment extends Fragment {
         nameOfDog = view.findViewById(R.id.name_of_dog_owner);
         dogAge = view.findViewById(R.id.dog_age);
         dogEnergy = view.findViewById(R.id.dog_energy);
+        dogSex = view.findViewById(R.id.dog_sex);
         dogWeight = view.findViewById(R.id.dog_weight);
         dogAboutBio = view.findViewById(R.id.dog_about_bio);
 
@@ -65,6 +67,7 @@ public class CardProfileFragment extends Fragment {
                 dogAge.setText("Age: " + dog.getAge().toString());
                 dogEnergy.setText("Energy Level: " + dog.getEnergyLevel().toString());
                 dogWeight.setText("Weight: " + dog.getWeight().toString());
+                dogSex.setText("Sex: " + dog.getSex().toString());
 
                 dogAboutBio.setText(dog.getBio());
             });

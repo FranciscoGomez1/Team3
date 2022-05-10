@@ -58,7 +58,7 @@ public class MainActivity extends DrawerBase implements View.OnTouchListener {
     private  String cont1 = "container";
     private  String cont2 = "container1";
     private  String cont = cont1;
-    private String replaceTextForShoDogProfileBtn = "Back To Dogs";
+    private String replaceTextForShoDogProfileBtn = "Back To Cards";
     private String setOriginalTextForShoDogProfileBtn = "View Profile";
 
     private int position;

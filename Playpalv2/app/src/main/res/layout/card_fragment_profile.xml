@@ -80,6 +80,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/dog_age" />
 
             <TextView
+                android:id="@+id/dog_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sex:"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.055"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dog_energy" />
+
+            <TextView
                 android:id="@+id/dog_weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -89,7 +101,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.047"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dog_energy" />
+                app:layout_constraintTop_toBottomOf="@+id/dog_sex" />
 
             <View
                 android:id="@+id/lineTop2"

@@ -42,7 +42,7 @@ public class LogIn extends AppCompatActivity {
             email = inputEmail.getText().toString();
             password = inputPassword.getText().toString();
             //TODO TESTING
-            //signIn("hope@hope.com","123456"); // <---- COMMENT THIS OUT
+            //signIn("bripriscilla@email.com","123456"); // <---- COMMENT THIS OUT
             signIn(email, password);
         });
 

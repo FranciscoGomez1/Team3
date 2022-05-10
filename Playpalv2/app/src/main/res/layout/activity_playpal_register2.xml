@@ -44,8 +44,8 @@
     <Button
         android:id="@+id/date_picker"
         style="?android:spinnerStyle"
-        android:layout_width="251dp"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginTop="20dp"
         android:text="@string/march_17_2022"
         android:textAlignment="center"
@@ -53,6 +53,7 @@
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/reg3_title"/>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -92,11 +93,11 @@
         android:id="@+id/btn_register_page_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="168dp"
+        android:layout_marginTop="28dp"
         android:text="@string/sign_up"
         android:textColor="#263238"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
+        app:layout_constraintHorizontal_bias="0.949"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dog_owner_bio_input_texfield" />
 
